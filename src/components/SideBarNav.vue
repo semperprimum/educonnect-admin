@@ -32,7 +32,7 @@
           to="/groups"
           class="nav__link"
         >
-          <Table class="icon" />
+          <Users class="icon" />
           <span>Группы</span>
         </RouterLink>
       </li>
@@ -79,6 +79,12 @@
             alt="User Profile"
           />
         </RouterLink>
+
+        <RouterLink
+          class="nav__logout-btn"
+          to="/login"
+          >Выход</RouterLink
+        >
       </li>
     </ul>
   </nav>
@@ -86,7 +92,7 @@
 
 <script setup>
 import House from "@/assets/icons/House.vue";
-import Table from "@/assets/icons/Table.vue";
+import Users from "@/assets/icons/Users.vue";
 import ListOl from "@/assets/icons/ListOl.vue";
 import UsersRectangle from "@/assets/icons/UsersRectangle.vue";
 import CalendarDays from "@/assets/icons/CalendarDays.vue";
@@ -153,6 +159,9 @@ const isNavHovered = ref(false);
 
   &__image-item {
     margin-top: auto;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
 
     img {
       border-radius: 50%;
@@ -161,8 +170,18 @@ const isNavHovered = ref(false);
     }
   }
 
+  &__logout-btn {
+    color: rgb(227, 72, 72);
+    display: none;
+  }
+
   &:hover {
     width: 15.5rem;
+
+    .nav__logout-btn {
+      display: block;
+      animation: fadeInFull 150ms ease;
+    }
 
     .nav__link,
     .logo-link {

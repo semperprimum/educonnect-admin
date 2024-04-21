@@ -35,15 +35,18 @@ const props = defineProps({
 }
 
 .container {
-  background-color: var(--clr-neutral-800);
-  border: 1px solid var(--clr-neutral-700);
-  border-radius: 1.5rem;
-  padding: 1rem;
   flex-grow: 1;
-
-  overflow-y: auto;
 
   scrollbar-color: var(--clr-neutral-600) transparent;
   scrollbar-width: thin;
+
+  @media only screen and (min-width: 48em) {
+    overflow-y: auto;
+
+    background-color: var(--clr-neutral-800);
+    border: 1px solid var(--clr-neutral-700);
+    border-radius: 1.5rem;
+    padding: 1rem;
+  }
 }
 </style>

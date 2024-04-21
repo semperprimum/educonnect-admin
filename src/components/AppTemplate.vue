@@ -23,7 +23,7 @@ const props = defineProps({
 
 <style lang="scss" scoped>
 .content-wrapper {
-  padding: 2rem 5rem;
+  padding: 2rem;
   margin-left: 6.25rem;
 
   display: flex;
@@ -32,6 +32,10 @@ const props = defineProps({
 
   &::-webkit-scrollbar {
     width: 5px;
+  }
+
+  @media only screen and (min-width: 48em) {
+    padding: 2rem 5rem;
   }
 }
 </style>
