@@ -1,0 +1,56 @@
+@import './base.css';
+@import './reset.css';
+@import './sr-only.css';
+
+body {
+  background-color : var(--clr-neutral-900);
+  color            : var(--clr-neutral-100);
+  font-family      : "Inter Variable", -apple-system, system-ui, sans-serif;
+}
+
+@keyframes appearBlur {
+  0% {
+    display : none;
+    opacity : 0;
+    filter  : blur(1.5rem);
+  }
+
+  1% {
+    display : block;
+  }
+
+  100% {
+    opacity : 1;
+    filter  : blur(0);
+  }
+}
+
+@keyframes fadeInFull {
+  0% {
+    display : none;
+    opacity : 0;
+  }
+
+  1% {
+    display : block;
+  }
+
+  100% {
+    opacity : 1;
+  }
+}
+
+@keyframes fadeInHalf {
+  0% {
+    display : none;
+    opacity : 0;
+  }
+
+  1% {
+    display : block;
+  }
+
+  100% {
+    opacity : 0.5;
+  }
+}
