@@ -16,6 +16,14 @@
         :trailing="Plus"
       />
     </div>
+
+    <div class="content">
+      <GroupTile
+        v-for="group in mockGroups"
+        :key="group.literals"
+        :group="group"
+      />
+    </div>
   </AppTemplate>
 </template>
 
@@ -26,6 +34,9 @@ import Input from "@/components/ui/Input.vue";
 import Button from "@/components/ui/Button.vue";
 import MagnifyingGlass from "@/assets/icons/MagnifyingGlass.vue";
 import Plus from "@/assets/icons/Plus.vue";
+import GroupTile from "@/views/GroupsView/components/GroupTile.vue";
+
+import mockGroups from "./mockGroups.json";
 
 const options = [
   {
@@ -54,6 +65,17 @@ const options = [
 
   button {
     margin-left: auto;
+  }
+}
+
+.content {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1rem;
+  margin-top: 1rem;
+
+  @media only screen and (min-width: 90em) {
+    grid-template-columns: repeat(4, 1fr);
   }
 }
 </style>

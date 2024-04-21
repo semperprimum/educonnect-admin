@@ -110,11 +110,15 @@ onUnmounted(() => {
     top: 3.75rem;
     left: 0;
 
+    z-index: 9999;
+
     background-color: var(--clr-neutral-700);
     max-width: fit-content;
     padding: 0.5rem;
     border-radius: 1rem;
     border: 1px solid var(--clr-neutral-600);
+
+    box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
 
     animation: appearBlur 125ms ease forwards;
   }

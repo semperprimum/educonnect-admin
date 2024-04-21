@@ -1,0 +1,101 @@
+<template>
+  <div
+    class="tile"
+    :style="{ '--accent-color': group.accentColor }"
+  >
+    <h2 class="tile__heading">{{ group.literals }}</h2>
+    <p class="tile__students">{{ group.number_of_students }} студентов</p>
+    <p class="tile__curator">
+      <component
+        aria-hidden="true"
+        class="tile__icon"
+        :is="CircleUser"
+      />
+      {{ group.curator }}
+    </p>
+  </div>
+</template>
+
+<script setup>
+import CircleUser from "@/assets/icons/CircleUser.vue";
+
+const props = defineProps({
+  accentColor: {
+    type: String,
+    required: false,
+  },
+  group: {
+    type: Object,
+    required: true,
+  },
+});
+</script>
+
+<style lang="scss" scoped>
+.tile {
+  --accent-color: var(--clr-neutral-500);
+
+  position: relative;
+  background-color: var(--clr-neutral-700);
+  border: 1px solid var(--clr-neutral-600);
+  border-radius: 1rem;
+  padding: 1rem;
+  overflow: hidden;
+  z-index: 50;
+
+  &__heading {
+    font-size: 2rem;
+    font-weight: 700;
+    line-height: 1;
+    margin-bottom: 0.5rem;
+    color: var(--clr-neutral-100);
+  }
+
+  &__students {
+    color: var(--clr-neutral-300);
+    font-weight: 500;
+  }
+
+  &__curator {
+    color: var(--clr-neutral-300);
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-weight: 500;
+
+    margin-top: 1rem;
+  }
+
+  &__icon {
+    width: 1rem;
+    aspect-ratio: 1;
+    fill: currentColor;
+  }
+
+  &::before {
+    content: "";
+    position: absolute;
+    width: 50%;
+    aspect-ratio: 1;
+    background-color: var(--accent-color);
+    opacity: 0.5;
+    border-radius: 100vmax;
+    filter: blur(100rem);
+    z-index: -1;
+
+    left: -2rem;
+    top: 50%;
+    transform: translateY(-50%);
+  }
+
+  @media only screen and (min-width: 48em) {
+    transition: filter 150ms ease, scale 150ms ease;
+    cursor: pointer;
+
+    &:hover {
+      filter: brightness(1.25);
+      scale: 1.015;
+    }
+  }
+}
+</style>

@@ -29,11 +29,11 @@
       </li>
       <li class="nav__list-item">
         <RouterLink
-          to="/"
+          to="/groups"
           class="nav__link"
         >
           <Table class="icon" />
-          <span>Успеваемость</span>
+          <span>Группы</span>
         </RouterLink>
       </li>
       <li class="nav__list-item">
@@ -73,7 +73,7 @@
         </RouterLink>
       </li>
       <li class="nav__image-item">
-        <RouterLink to="/">
+        <RouterLink to="/login">
           <img
             src="https://picsum.photos/200"
             alt="User Profile"

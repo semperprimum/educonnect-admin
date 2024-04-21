@@ -40,5 +40,10 @@ const props = defineProps({
   border-radius: 1.5rem;
   padding: 1rem;
   flex-grow: 1;
+
+  overflow-y: auto;
+
+  scrollbar-color: var(--clr-neutral-600) transparent;
+  scrollbar-width: thin;
 }
 </style>

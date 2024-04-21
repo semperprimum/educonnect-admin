@@ -29,5 +29,9 @@ const props = defineProps({
   display: flex;
   flex-direction: column;
   height: 100vh;
+
+  &::-webkit-scrollbar {
+    width: 5px;
+  }
 }
 </style>
