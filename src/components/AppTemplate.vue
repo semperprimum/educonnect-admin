@@ -2,7 +2,10 @@
   <main class="app-wrapper">
     <SideBarNav />
     <div class="content-wrapper">
-      <ContainerWithHeading :heading="heading || ''">
+      <ContainerWithHeading
+        :noContainerOverflow="noContainerOverflow"
+        :heading="heading || ''"
+      >
         <slot></slot>
       </ContainerWithHeading>
     </div>
@@ -17,6 +20,10 @@ const props = defineProps({
   heading: {
     required: false,
     type: String,
+  },
+  noContainerOverflow: {
+    required: false,
+    type: Boolean,
   },
 });
 </script>

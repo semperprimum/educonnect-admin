@@ -3,6 +3,7 @@
     <input
       :type="type || 'text'"
       :placeholder="placeholder"
+      :id="id"
     />
     <component
       class="trailing"
@@ -15,6 +16,10 @@
 <script setup>
 const props = defineProps({
   placeholder: {
+    required: false,
+    type: String,
+  },
+  id: {
     required: false,
     type: String,
   },

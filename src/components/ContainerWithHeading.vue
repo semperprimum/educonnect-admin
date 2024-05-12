@@ -12,7 +12,10 @@
     EduConnect Admin
   </h1>
 
-  <div class="container">
+  <div
+    class="container"
+    :class="noContainerOverflow && 'no-overflow'"
+  >
     <slot></slot>
   </div>
 </template>
@@ -21,6 +24,10 @@
 const props = defineProps({
   heading: {
     type: String,
+    required: false,
+  },
+  noContainerOverflow: {
+    type: Boolean,
     required: false,
   },
 });
@@ -48,5 +55,9 @@ const props = defineProps({
     border-radius: 1.5rem;
     padding: 1rem;
   }
+}
+
+.no-overflow {
+  overflow: hidden;
 }
 </style>

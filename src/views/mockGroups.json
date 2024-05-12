@@ -1,89 +1,104 @@
 [
   {
+    "id": 1,
     "literals": "П-21-57к",
     "number_of_students": 27,
     "curator": "Гульнар Нурхамитовна",
     "accentColor": "#EF4444"
   },
   {
+    "id": 2,
     "literals": "П-21-57б",
     "number_of_students": 30,
     "curator": "Айгуль Карабаспаковна",
     "accentColor": "#F97316"
   },
   {
+    "id": 3,
     "literals": "Ди-20-34гб",
     "number_of_students": 28,
     "curator": "Сауле Абдрашитовна",
     "accentColor": "#F59E0B"
   },
   {
+    "id": 4,
     "literals": "П-20-22к",
     "number_of_students": 29,
     "curator": "Дарига Алимхановна",
     "accentColor": "#EAB308"
   },
   {
+    "id": 5,
     "literals": "Ди-21-12гб",
     "number_of_students": 26,
     "curator": "Жанна Рысбековна",
     "accentColor": "#84CC16"
   },
   {
+    "id": 6,
     "literals": "П-20-42б",
     "number_of_students": 31,
     "curator": "Мадина Талгатовна",
     "accentColor": "#22C55E"
   },
   {
+    "id": 7,
     "literals": "П-21-19к",
     "number_of_students": 25,
     "curator": "Айнур Ахметовна",
     "accentColor": "#10B981"
   },
   {
+    "id": 8,
     "literals": "Ди-20-55гб",
     "number_of_students": 32,
     "curator": "Назгуль Ержановна",
     "accentColor": "#14B8A6"
   },
   {
+    "id": 9,
     "literals": "П-21-10б",
     "number_of_students": 27,
     "curator": "Сания Амангелдыевна",
     "accentColor": "#06B6D4"
   },
   {
+    "id": 10,
     "literals": "П-20-29к",
     "number_of_students": 33,
     "curator": "Айгерим Маратовна",
     "accentColor": "#0EA5E9"
   },
   {
+    "id": 11,
     "literals": "Ди-21-47гб",
     "number_of_students": 28,
     "curator": "Гульназ Тимуровна",
     "accentColor": "#3B82F6"
   },
   {
+    "id": 12,
     "literals": "П-20-18б",
     "number_of_students": 30,
     "curator": "Айзада Миргульовна",
     "accentColor": "#6366F1"
   },
   {
+    "id": 13,
     "literals": "П-21-38к",
     "number_of_students": 29,
     "curator": "Нургуль Сериковна",
     "accentColor": "#8B5CF6"
   },
   {
+    "id": 14,
     "literals": "Ди-20-31гб",
     "number_of_students": 26,
     "curator": "Меруерт Данияровна",
     "accentColor": "#D946EF"
   },
   {
+    "id": 15,
     "literals": "П-20-27б",
     "number_of_students": 31,
     "curator": "Айжан Сериковна",

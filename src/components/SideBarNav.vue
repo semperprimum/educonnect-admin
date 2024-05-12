@@ -38,7 +38,7 @@
       </li>
       <li class="nav__list-item">
         <RouterLink
-          to="/"
+          to="/timetable"
           class="nav__link"
         >
           <ListOl class="icon" />

@@ -1,6 +1,5 @@
 import { createRouter, createWebHistory } from "vue-router";
 import HomeView from "@/views/HomeView/HomeView.vue";
-import GroupsView from "@/views/GroupsView/GroupsView.vue";
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -19,6 +18,21 @@ const router = createRouter({
       path: "/groups",
       name: "groups",
       component: () => import("@/views/GroupsView/GroupsView.vue"),
+    },
+    {
+      path: "/groups/:id",
+      name: "groupInfo",
+      component: () => import("@/views/GroupInfoView/GroupInfoView.vue"),
+    },
+    {
+      path: "/timetable",
+      name: "timetable",
+      component: () => import("@/views/TimeTableView/TimeTableView.vue"),
+    },
+    {
+      path: "/timetable/:id",
+      component: () =>
+        import("@/views/TimeTableGroupView/TimeTableGroupView.vue"),
     },
   ],
 });

@@ -12,7 +12,7 @@ body {
   0% {
     display : none;
     opacity : 0;
-    filter  : blur(1.5rem);
+    filter  : blur(1.5rem) brightness(1.5);
   }
 
   1% {
@@ -21,7 +21,7 @@ body {
 
   100% {
     opacity : 1;
-    filter  : blur(0);
+    filter  : blur(0) brightness(1);
   }
 }
 

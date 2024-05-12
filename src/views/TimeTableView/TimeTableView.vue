@@ -1,5 +1,5 @@
 <template>
-  <AppTemplate heading="Группы">
+  <AppTemplate heading="Управление расписанием">
     <div class="filter-bar">
       <Input
         placeholder="Поиск"
@@ -11,10 +11,9 @@
         label="Специальность"
       />
 
-      <Button
-        label="Создать группу"
-        :trailing="Plus"
-      />
+      <Button label="Активные замены" />
+
+      <Button label="Запросы на замену" />
     </div>
 
     <div class="content">
@@ -22,7 +21,7 @@
         v-for="group in mockGroups"
         :key="group.literals"
         :group="group"
-        @click="router.push(`/groups/${group.id}`)"
+        @click="router.push(`/timetable/${group.id}`)"
       />
     </div>
   </AppTemplate>
@@ -34,13 +33,12 @@ import Dropdown from "@/components/ui/Dropdown.vue";
 import Input from "@/components/ui/Input.vue";
 import Button from "@/components/ui/Button.vue";
 import MagnifyingGlass from "@/assets/icons/MagnifyingGlass.vue";
-import Plus from "@/assets/icons/Plus.vue";
 import GroupTile from "@/components/GroupTile.vue";
 
 import mockGroups from "@/views/mockGroups.json";
 import { useRouter } from "vue-router";
 
-const router = useRouter();
+const router = useRouter()
 
 const options = [
   {
@@ -75,7 +73,7 @@ const options = [
   @media only screen and (min-width: 63rem) {
     flex-direction: row;
 
-    button {
+    button:nth-of-type(1) {
       margin-left: auto;
     }
   }

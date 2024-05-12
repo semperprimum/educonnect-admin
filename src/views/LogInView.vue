@@ -52,7 +52,7 @@ const password = ref("");
 const fakeLogin = async () => {
   await new Promise((resolve) => setTimeout(resolve, 700));
 
-  router.push("/");
+  router.replace("/");
 };
 </script>
 

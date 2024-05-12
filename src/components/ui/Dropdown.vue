@@ -2,12 +2,13 @@
   <div
     class="dropdown"
     ref="dropdown"
+    :id="id"
   >
     <button
       @click="isDropdownOpen = !isDropdownOpen"
       class="dropdown__selected"
     >
-      {{ selectedOption || label }}
+      {{ selectedOption?.name || label }}
       <ChevronDown aria-hidden="true" />
     </button>
 
@@ -17,8 +18,9 @@
     >
       <button
         v-for="option in options"
-        @click="handleOptionSelect(option.value)"
+        @click="handleOptionSelect(option)"
         class="dropdown__option"
+        :class="{ active: selectedOption?.value === option.value }"
       >
         {{ option.name }}
       </button>
@@ -28,7 +30,8 @@
 
 <script setup>
 import ChevronDown from "@/assets/icons/ChevronDown.vue";
-import { ref, onMounted, onUnmounted } from "vue";
+import { ref } from "vue";
+import { onClickOutside } from "@vueuse/core";
 
 const props = defineProps({
   options: {
@@ -39,11 +42,19 @@ const props = defineProps({
     type: String,
     required: true,
   },
+  id: {
+    type: String,
+    required: false,
+  },
+  selected: {
+    type: Object,
+    required: false,
+  },
 });
 
 const dropdown = ref(null);
 
-const selectedOption = ref("");
+const selectedOption = ref(props.selected || null);
 const isDropdownOpen = ref(false);
 
 const handleOptionSelect = (option) => {
@@ -51,18 +62,8 @@ const handleOptionSelect = (option) => {
   isDropdownOpen.value = false;
 };
 
-const handleOutsideClick = (e) => {
-  if (dropdown.value && !dropdown.value.contains(e.target)) {
-    isDropdownOpen.value = false;
-  }
-};
-
-onMounted(() => {
-  document.addEventListener("click", handleOutsideClick);
-});
-
-onUnmounted(() => {
-  document.removeEventListener("click", handleOutsideClick);
+onClickOutside(dropdown, () => {
+  isDropdownOpen.value = false;
 });
 </script>
 
@@ -120,7 +121,7 @@ onUnmounted(() => {
 
     box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
 
-    animation: appearBlur 125ms ease forwards;
+    animation: appearBlur 150ms ease forwards;
   }
 
   &__option {
@@ -135,7 +136,13 @@ onUnmounted(() => {
 
     &:hover {
       background-color: var(--clr-neutral-500);
+      color: var(--clr-neutral-100);
     }
   }
+}
+
+.active {
+  background-color: var(--clr-neutral-600);
+  color: var(--clr-neutral-100);
 }
 </style>
