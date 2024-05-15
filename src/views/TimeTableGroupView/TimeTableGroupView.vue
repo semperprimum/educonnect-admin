@@ -1,5 +1,5 @@
 <template>
-  <AppTemplate :heading="`Расписание -> ${groupName}`">
+  <ContainerWithHeading :heading="'Расписание -> ' + groupName">
     <div class="container">
       <TimeTableTile />
       <TimeTableTile />
@@ -8,11 +8,11 @@
       <TimeTableTile />
       <TimeTableTile />
     </div>
-  </AppTemplate>
+  </ContainerWithHeading>
 </template>
 
 <script setup>
-import AppTemplate from "@/components/AppTemplate.vue";
+import ContainerWithHeading from "@/components/ContainerWithHeading.vue";
 import mockGroups from "@/views/mockGroups.json";
 import { useRoute } from "vue-router";
 import TimeTableTile from "./components/TimeTableTile.vue";

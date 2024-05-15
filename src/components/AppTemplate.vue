@@ -1,31 +1,17 @@
 <template>
   <main class="app-wrapper">
-    <SideBarNav />
+    <SideBarNav v-if="route.path !== '/login'" />
     <div class="content-wrapper">
-      <ContainerWithHeading
-        :noContainerOverflow="noContainerOverflow"
-        :heading="heading || ''"
-      >
-        <slot></slot>
-      </ContainerWithHeading>
+      <slot></slot>
     </div>
   </main>
 </template>
 
 <script setup>
 import SideBarNav from "@/components/SideBarNav.vue";
-import ContainerWithHeading from "@/components/ContainerWithHeading.vue";
+import { useRoute } from "vue-router";
 
-const props = defineProps({
-  heading: {
-    required: false,
-    type: String,
-  },
-  noContainerOverflow: {
-    required: false,
-    type: Boolean,
-  },
-});
+const route = useRoute();
 </script>
 
 <style lang="scss" scoped>

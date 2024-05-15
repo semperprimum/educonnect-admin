@@ -59,10 +59,12 @@ body {
   from {
     scale   : 0;
     opacity : 0;
+    filter  : blur(1.5rem) brightness(2);
   }
 
   to {
     scale   : 1;
     opacity : 1;
+    filter  : blur(0) brightness(1);
   }
 }

@@ -1,5 +1,5 @@
 <template>
-  <AppTemplate :heading="`Группа -> ${groupName}`">
+  <ContainerWithHeading :heading="'Группы -> ' + groupName">
     <div class="container">
       <div class="info">
         <InputGroup
@@ -23,11 +23,11 @@
 
       <StudentList />
     </div>
-  </AppTemplate>
+  </ContainerWithHeading>
 </template>
 
 <script setup>
-import AppTemplate from "@/components/AppTemplate.vue";
+import ContainerWithHeading from "@/components/ContainerWithHeading.vue";
 import StudentList from "./components/StudentList.vue";
 import InputGroup from "@/components/ui/InputGroup.vue";
 import DropdownGroup from "@/components/ui/DropdownGroup.vue";

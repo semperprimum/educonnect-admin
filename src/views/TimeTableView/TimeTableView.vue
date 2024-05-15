@@ -1,5 +1,5 @@
 <template>
-  <AppTemplate heading="Управление расписанием">
+  <ContainerWithHeading heading="Расписание">
     <div class="filter-bar">
       <Input
         placeholder="Поиск"
@@ -24,11 +24,11 @@
         @click="router.push(`/timetable/${group.id}`)"
       />
     </div>
-  </AppTemplate>
+  </ContainerWithHeading>
 </template>
 
 <script setup>
-import AppTemplate from "@/components/AppTemplate.vue";
+import ContainerWithHeading from "@/components/ContainerWithHeading.vue";
 import Dropdown from "@/components/ui/Dropdown.vue";
 import Input from "@/components/ui/Input.vue";
 import Button from "@/components/ui/Button.vue";
@@ -38,7 +38,7 @@ import GroupTile from "@/components/GroupTile.vue";
 import mockGroups from "@/views/mockGroups.json";
 import { useRouter } from "vue-router";
 
-const router = useRouter()
+const router = useRouter();
 
 const options = [
   {

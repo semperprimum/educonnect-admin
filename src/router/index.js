@@ -34,6 +34,10 @@ const router = createRouter({
       component: () =>
         import("@/views/TimeTableGroupView/TimeTableGroupView.vue"),
     },
+    {
+      path: "/:catchAll(.*)",
+      redirect: "/login",
+    },
   ],
 });
 

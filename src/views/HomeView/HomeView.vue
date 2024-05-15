@@ -1,14 +1,18 @@
 <template>
-  <AppTemplate heading="Добрый день, Богдан Данилович!"
-    >Home
+  <ContainerWithHeading heading="Добрый день, Денис Валентинович!">
+    Home
     <div>
-      <button @click="openModal">Open Modal</button>
+      <Button
+        @click="openModal"
+        label="Open Modal"
+      />
     </div>
-  </AppTemplate>
+  </ContainerWithHeading>
 </template>
 
 <script setup>
-import AppTemplate from "@/components/AppTemplate.vue";
+import ContainerWithHeading from "@/components/ContainerWithHeading.vue";
+import Button from "@/components/ui/Button.vue";
 import ModalService from "@/services/ModalService";
 
 const openModal = () => {
