@@ -14,7 +14,7 @@
 
   <div
     class="container"
-    :class="noContainerOverflow && 'no-overflow'"
+    :class="{ noContainerOverflow: 'no-overflow' }"
   >
     <slot></slot>
   </div>

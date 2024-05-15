@@ -1,8 +1,5 @@
 <template>
-  <div
-    class="tile"
-    :style="{ '--clr-accent': '#EF4444' }"
-  >
+  <div class="tile">
     <div class="tile__header">
       <h3 class="tile__heading">Понедельник</h3>
       <span class="tile__date">10.05.24</span>
@@ -72,6 +69,8 @@ const mockSchedule = [
 <style lang="scss" scoped>
 .tile {
   position: relative;
+
+  --clr-accent: #ef4444;
 
   background-color: var(--clr-neutral-700);
   border: 1px solid var(--clr-neutral-600);
@@ -188,6 +187,26 @@ const mockSchedule = [
       fill: var(--clr-neutral-400);
       mix-blend-mode: color-dodge;
     }
+  }
+
+  &:nth-child(2) {
+    --clr-accent: #f97316;
+  }
+
+  &:nth-child(3) {
+    --clr-accent: #eab308;
+  }
+
+  &:nth-child(4) {
+    --clr-accent: #84cc16;
+  }
+
+  &:nth-child(5) {
+    --clr-accent: #0ea5e9;
+  }
+
+  &:nth-child(6) {
+    --clr-accent: #a855f7;
   }
 }
 </style>
