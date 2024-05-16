@@ -5,10 +5,11 @@
     :id="id"
   >
     <button
-      @click="isDropdownOpen = !isDropdownOpen"
+      @click.prevent="isDropdownOpen = !isDropdownOpen"
       class="dropdown__selected"
+      :class="{ elevated }"
     >
-      {{ selectedOption?.name || label }}
+      {{ selectedOption?.name || placeholder || label }}
       <ChevronDown aria-hidden="true" />
     </button>
 
@@ -18,7 +19,7 @@
     >
       <button
         v-for="option in options"
-        @click="handleOptionSelect(option)"
+        @click.prevent="handleOptionSelect(option)"
         class="dropdown__option"
         :class="{ active: selectedOption?.value === option.value }"
       >
@@ -42,12 +43,20 @@ const props = defineProps({
     type: String,
     required: true,
   },
+  placeholder: {
+    type: String,
+    required: false,
+  },
   id: {
     type: String,
     required: false,
   },
   selected: {
     type: Object,
+    required: false,
+  },
+  elevated: {
+    type: Boolean,
     required: false,
   },
 });
@@ -94,6 +103,11 @@ onClickOutside(dropdown, () => {
       fill: currentColor;
     }
 
+    &.elevated {
+      background-color: var(--clr-neutral-600);
+      border: 1px solid var(--clr-neutral-500);
+    }
+
     @media only screen and (min-width: 48em) {
       cursor: pointer;
       transition: filter 125ms ease;
@@ -110,6 +124,9 @@ onClickOutside(dropdown, () => {
     position: absolute;
     top: 3.75rem;
     left: 0;
+
+    max-height: 20rem;
+    overflow: auto;
 
     z-index: 9999;
 

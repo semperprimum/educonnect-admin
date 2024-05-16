@@ -14,6 +14,7 @@
       <Button
         label="Создать группу"
         :trailing="Plus"
+        @click="openCreateGroupModal"
       />
     </div>
 
@@ -39,6 +40,7 @@ import GroupTile from "@/components/GroupTile.vue";
 
 import mockGroups from "@/views/mockGroups.json";
 import { useRouter } from "vue-router";
+import ModalService from "@/services/ModalService";
 
 const router = useRouter();
 
@@ -60,6 +62,10 @@ const options = [
     value: "tourism",
   },
 ];
+
+const openCreateGroupModal = () => {
+  ModalService.open("CreateGroupModal");
+};
 </script>
 
 <style lang="scss" scoped>

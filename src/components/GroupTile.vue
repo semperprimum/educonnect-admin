@@ -78,7 +78,7 @@ const props = defineProps({
     width: 50%;
     aspect-ratio: 1;
     background-color: var(--accent-color);
-    opacity: 0.5;
+    opacity: 0.65;
     border-radius: 100vmax;
     filter: blur(100rem);
     z-index: -1;

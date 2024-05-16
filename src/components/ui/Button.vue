@@ -1,12 +1,14 @@
 <template>
-  <button>
-    {{ label }}
-    <component
-      aria-hidden="true"
-      class="trailing"
-      v-if="trailing"
-      :is="trailing"
-    />
+  <button :class="{ center, elevated, danger }">
+    <span>
+      {{ label }}
+      <component
+        aria-hidden="true"
+        class="trailing"
+        v-if="trailing"
+        :is="trailing"
+      />
+    </span>
   </button>
 </template>
 
@@ -19,6 +21,18 @@ const props = defineProps({
   trailing: {
     required: false,
     type: Object,
+  },
+  danger: {
+    required: false,
+    type: Boolean,
+  },
+  center: {
+    required: false,
+    type: Boolean,
+  },
+  elevated: {
+    required: false,
+    type: Boolean,
   },
 });
 </script>
@@ -33,9 +47,11 @@ button {
   padding: 0.75rem 1rem;
   font-weight: 500;
 
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
+  span {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
 
   @media only screen and (min-width: 48em) {
     transition: filter 150ms ease;
@@ -44,6 +60,21 @@ button {
     &:hover {
       filter: brightness(1.25);
     }
+  }
+
+  &.center {
+    display: grid;
+    place-items: center;
+  }
+
+  &.elevated {
+    background-color: var(--clr-neutral-600);
+    border: 1px solid var(--clr-neutral-500);
+  }
+  &.danger {
+    background-color: var(--clr-red-400);
+    border: 1px solid var(--clr-red-300);
+    color: var(--clr-neutral-100);
   }
 }
 

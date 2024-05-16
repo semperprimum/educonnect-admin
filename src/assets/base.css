@@ -10,5 +10,8 @@
   --clr-neutral-900 : #18181B;
 
   --clr-brand : #50AE40;
-  --clr-error : #F87171;
+
+  --clr-red-500 : #EF4444;
+  --clr-red-400 : #F87171;
+  --clr-red-300 : #FCA5A5;
 }

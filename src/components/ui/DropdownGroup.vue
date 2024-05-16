@@ -6,9 +6,7 @@
       >{{ label }}</label
     >
     <Dropdown
-      :label="label"
-      :options="options"
-      :selected="selected"
+      v-bind="{ placeholder, id, label, options, selected, elevated }"
     />
   </div>
 </template>
@@ -25,12 +23,20 @@ const props = defineProps({
     type: String,
     required: true,
   },
+  placeholder: {
+    type: String,
+    required: false,
+  },
   id: {
     type: String,
     required: true,
   },
   selected: {
     type: Object,
+    required: false,
+  },
+  elevated: {
+    type: Boolean,
     required: false,
   },
 });

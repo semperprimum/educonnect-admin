@@ -21,7 +21,7 @@
 
 <script setup>
 import Xmark from "@/assets/icons/Xmark.vue";
-import { ref, onMounted } from "vue";
+import { ref, onMounted, onBeforeUnmount } from "vue";
 
 const props = defineProps({
   onClose: {
@@ -39,6 +39,40 @@ onMounted(() => {
   dialogContent.value.addEventListener("click", (e) => {
     e.stopPropagation();
   });
+});
+
+// Следующий код добавляет `overflow: auto` на модалку,
+// если в ней слишком много контента.
+// Это нужно для того, чтобы dropdowns в модалке
+// отображались корректно, если количество
+// контента это позволяет.
+const toggleOverflowClass = () => {
+  if (!dialog.value || !dialogContent.value) return;
+
+  const dialogElement = dialog.value;
+  const contentElement = dialogContent.value;
+
+  if (contentElement.scrollHeight > dialogElement.clientHeight) {
+    contentElement.classList.add("overflow-auto");
+  } else {
+    contentElement.classList.remove("overflow-auto");
+  }
+};
+
+let resizeObserver;
+
+onMounted(() => {
+  if (dialogContent.value) {
+    resizeObserver = new ResizeObserver(toggleOverflowClass);
+    resizeObserver.observe(dialogContent.value);
+    toggleOverflowClass();
+  }
+});
+
+onBeforeUnmount(() => {
+  if (resizeObserver && dialogContent.value) {
+    resizeObserver.unobserve(dialogContent.value);
+  }
 });
 </script>
 
@@ -64,8 +98,12 @@ onMounted(() => {
 
 .dialog-content {
   padding: 1rem;
-  overflow-x: auto;
+  overflow: visible;
   max-height: calc(100dvh - 6rem);
+
+  &.overflow-auto {
+    overflow: auto;
+  }
 }
 
 .close-button {

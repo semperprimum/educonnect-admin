@@ -21,7 +21,7 @@
         />
       </div>
 
-      <StudentList />
+      <StudentList :groupName="groupName" />
     </div>
   </ContainerWithHeading>
 </template>

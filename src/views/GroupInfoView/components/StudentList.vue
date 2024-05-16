@@ -14,6 +14,7 @@
         <button
           class="students__button-remove"
           aria-label="Открепить студента"
+          @click="openUnattachStudentModal(student, groupName)"
         >
           <Xmark aria-hidden="false" />
         </button>
@@ -21,6 +22,8 @@
     </ol>
 
     <Button
+      center
+      @click="openAddStudentModal"
       class="students__button"
       label="Добавить студента"
       :trailing="Plus"
@@ -32,6 +35,14 @@
 import Button from "@/components/ui/Button.vue";
 import Plus from "@/assets/icons/Plus.vue";
 import Xmark from "@/assets/icons/Xmark.vue";
+import ModalService from "@/services/ModalService";
+
+const props = defineProps({
+  groupName: {
+    type: String,
+    required: true,
+  },
+});
 
 const students = [
   "Айбек Али",
@@ -52,6 +63,14 @@ const students = [
   "Кишибаев Нурдан",
   "Кишко Ростислав",
 ];
+
+const openAddStudentModal = () => {
+  ModalService.open("AddStudentModal");
+};
+
+const openUnattachStudentModal = (studentName, groupName) => {
+  ModalService.open("UnattachStudentModal", { studentName, groupName });
+};
 </script>
 
 <style lang="scss" scoped>
@@ -112,7 +131,6 @@ const students = [
 
   &__button {
     width: 100%;
-    justify-content: center;
   }
 
   &__button-remove {

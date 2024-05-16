@@ -5,10 +5,7 @@
       :for="id"
       >{{ label }}</label
     >
-    <Input
-      :id="id"
-      :placeholder="placeholder"
-    />
+    <Input v-bind="{ id, placeholder, elevated }" />
     <span
       v-if="error"
       class="input-group__error"
@@ -36,6 +33,10 @@ const props = defineProps({
   },
   error: {
     type: String,
+    required: false,
+  },
+  elevated: {
+    type: Boolean,
     required: false,
   },
 });

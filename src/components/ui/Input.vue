@@ -1,5 +1,8 @@
 <template>
-  <div class="input-container">
+  <div
+    class="input-container"
+    :class="{ elevated }"
+  >
     <input
       :type="type || 'text'"
       :placeholder="placeholder"
@@ -31,6 +34,10 @@ const props = defineProps({
     required: false,
     type: Object,
   },
+  elevated: {
+    required: false,
+    type: Boolean,
+  },
 });
 </script>
 
@@ -41,6 +48,11 @@ const props = defineProps({
 
   background-color: var(--clr-neutral-700);
   border: 1px solid var(--clr-neutral-600);
+
+  &.elevated {
+    background-color: var(--clr-neutral-600);
+    border: 1px solid var(--clr-neutral-500);
+  }
 
   border-radius: 1rem;
 

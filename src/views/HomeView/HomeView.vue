@@ -4,6 +4,7 @@
     <div>
       <Button
         @click="openModal"
+        danger
         label="Open Modal"
       />
     </div>
