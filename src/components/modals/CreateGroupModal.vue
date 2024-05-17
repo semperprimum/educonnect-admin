@@ -20,6 +20,7 @@
         id="curator"
         :options="[{ name: 'Гульнар Нурхамитовна', value: '1' }]"
       />
+      <ColorPicker />
       <Button
         center
         elevated
@@ -37,6 +38,7 @@ import InputGroup from "@/components/ui/InputGroup.vue";
 import DropdownGroup from "@/components/ui/DropdownGroup.vue";
 import Button from "@/components/ui/Button.vue";
 import Plus from "@/assets/icons/Plus.vue";
+import ColorPicker from "@/components/ColorPicker.vue";
 
 const props = defineProps({
   onClose: {
