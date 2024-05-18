@@ -17,7 +17,7 @@ import Button from "@/components/ui/Button.vue";
 import ModalService from "@/services/ModalService";
 
 const openModal = () => {
-  ModalService.open("TestModal", { test: "This is a text from a prop!" });
+  ModalService.open("TestModal");
 };
 </script>
 

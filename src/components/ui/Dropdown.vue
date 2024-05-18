@@ -66,9 +66,12 @@ const dropdown = ref(null);
 const selectedOption = ref(props.selected || null);
 const isDropdownOpen = ref(false);
 
+const emit = defineEmits(["onChange"]);
+
 const handleOptionSelect = (option) => {
   selectedOption.value = option;
   isDropdownOpen.value = false;
+  emit("onChange", selectedOption.value);
 };
 
 onClickOutside(dropdown, () => {
@@ -81,7 +84,7 @@ onClickOutside(dropdown, () => {
   position: relative;
 
   &__selected {
-    min-width: 12.5rem;
+    /* min-width: 12.5rem; */
     text-transform: capitalize;
     background-color: var(--clr-neutral-700);
     color: var(--clr-neutral-300);
@@ -150,6 +153,8 @@ onClickOutside(dropdown, () => {
     padding: 0.375rem 0.75rem;
     font-weight: 500;
     border-radius: 0.5rem;
+
+    white-space: nowrap;
 
     &:hover {
       background-color: var(--clr-neutral-500);

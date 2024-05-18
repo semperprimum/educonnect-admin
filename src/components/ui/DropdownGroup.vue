@@ -6,6 +6,7 @@
       >{{ label }}</label
     >
     <Dropdown
+      @onChange="(value) => emit('onChange', value)"
       v-bind="{ placeholder, id, label, options, selected, elevated }"
     />
   </div>
@@ -13,6 +14,8 @@
 
 <script setup>
 import Dropdown from "@/components/ui/Dropdown.vue";
+
+const emit = defineEmits(["onChange"]);
 
 const props = defineProps({
   options: {

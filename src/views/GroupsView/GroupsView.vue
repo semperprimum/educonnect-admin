@@ -1,15 +1,9 @@
 <template>
   <ContainerWithHeading heading="Группы">
     <div class="filter-bar">
-      <Input
-        placeholder="Поиск"
-        :trailing="MagnifyingGlass"
-      />
+      <Input placeholder="Поиск" :trailing="MagnifyingGlass" />
 
-      <Dropdown
-        :options="options"
-        label="Специальность"
-      />
+      <Dropdown :options="options" label="Специальность" />
 
       <Button
         label="Создать группу"

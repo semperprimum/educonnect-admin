@@ -7,6 +7,7 @@
       :type="type || 'text'"
       :placeholder="placeholder"
       :id="id"
+      @change="(event) => emit('onChange', event.target.value)"
     />
     <component
       class="trailing"
@@ -17,6 +18,8 @@
 </template>
 
 <script setup>
+const emit = defineEmits(["onChange"]);
+
 const props = defineProps({
   placeholder: {
     required: false,

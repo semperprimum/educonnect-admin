@@ -5,7 +5,10 @@
       :for="id"
       >{{ label }}</label
     >
-    <Input v-bind="{ id, placeholder, elevated }" />
+    <Input
+      @onChange="(value) => emit('onChange', value)"
+      v-bind="{ id, placeholder, elevated }"
+    />
     <span
       v-if="error"
       class="input-group__error"
@@ -17,6 +20,8 @@
 
 <script setup>
 import Input from "@/components/ui/Input.vue";
+
+const emit = defineEmits(["onChange"]);
 
 const props = defineProps({
   label: {

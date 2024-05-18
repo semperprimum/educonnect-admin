@@ -47,11 +47,11 @@
       </li>
       <li class="nav__list-item">
         <RouterLink
-          to="/"
+          to="/users"
           class="nav__link"
         >
-          <UsersRectangle class="icon" />
-          <span>Класс</span>
+          <User class="icon" />
+          <span>Пользователи</span>
         </RouterLink>
       </li>
       <li class="nav__list-item">
@@ -100,6 +100,7 @@ import Book from "@/assets/icons/Book.vue";
 import Logo from "@/assets/icons/Logo.vue";
 
 import { ref } from "vue";
+import User from "@/assets/icons/User.vue";
 const isNavHovered = ref(false);
 </script>
 
