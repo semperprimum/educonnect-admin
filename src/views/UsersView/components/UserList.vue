@@ -7,15 +7,24 @@
       <span class="item__name">{{ user.name }}</span>
       <span>{{ user.role }}</span>
       <span>{{ user.group }}</span>
-      <button class="elipsis-button">
-        <ElipsisVertical aria-hidden="true" />
-      </button>
+      <ElipsisMenu :options="mockOptions" />
     </li>
   </ol>
 </template>
 
 <script setup>
-import ElipsisVertical from "@/assets/icons/ElipsisVertical.vue";
+import ElipsisMenu from "@/components/ui/ElipsisMenu.vue";
+
+const mockOptions = [
+  {
+    name: "Copy",
+    action: () => console.log("Copy"),
+  },
+  {
+    name: "Delete",
+    action: () => console.log("Delete"),
+  },
+];
 
 const props = defineProps({
   users: {
