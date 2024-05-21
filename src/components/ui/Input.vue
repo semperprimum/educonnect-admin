@@ -75,13 +75,13 @@ input {
   line-height: auto;
   color: var(--clr-neutral-100);
   caret-color: var(--clr-brand);
-  font-weight: 500;
+  font-weight: var(--fw-medium);
 
   outline: none;
 }
 
 .trailing {
-  height: 1.25rem;
+  height: var(--fs-300);
   aspect-ratio: 1;
   margin-right: 1rem;
   fill: var(--clr-neutral-300);

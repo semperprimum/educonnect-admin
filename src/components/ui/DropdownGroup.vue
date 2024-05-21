@@ -52,8 +52,8 @@ const props = defineProps({
 
   &__label {
     color: var(--clr-neutral-300);
-    font-weight: 500;
-    font-size: 1.25rem;
+    font-weight: var(--fw-medium);
+    font-size: var(--fs-300);
   }
 }
 </style>

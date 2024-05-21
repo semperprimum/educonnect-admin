@@ -77,8 +77,8 @@ const openUnattachStudentModal = (studentName, groupName) => {
 .students {
   &__label {
     color: var(--clr-neutral-300);
-    font-weight: 500;
-    font-size: 1.25rem;
+    font-weight: var(--fw-medium);
+    font-size: var(--fs-300);
 
     margin-bottom: 0.25rem;
   }
@@ -121,7 +121,6 @@ const openUnattachStudentModal = (studentName, groupName) => {
   }
 
   &__name {
-    font-size: 1.15rem;
     counter-increment: student;
 
     &::before {

@@ -21,16 +21,14 @@
           </div>
         </div>
 
-        <button class="tile__button">
-          <ElipsisVertical />
-        </button>
+        <ElipsisMenu :options="[{ name: 'Test', action: () => {} }]" />
       </li>
     </ol>
   </div>
 </template>
 
 <script setup>
-import ElipsisVertical from "@/assets/icons/ElipsisVertical.vue";
+import ElipsisMenu from "@/components/ui/ElipsisMenu.vue";
 
 const mockSchedule = [
   {
@@ -102,11 +100,12 @@ const mockSchedule = [
   }
 
   &__heading {
-    font-size: 1.75rem;
+    font-size: calc(var(--fs-500) * 1.25);
   }
 
   &__date {
     color: var(--clr-neutral-300);
+    font-weight: var(--fw-medium);
   }
 
   &__list {
@@ -114,6 +113,7 @@ const mockSchedule = [
     padding: 0;
     margin: 0;
     counter-reset: schedule;
+
     & > *:not(:last-child) {
       position: relative;
 
@@ -148,12 +148,8 @@ const mockSchedule = [
     }
 
     &-title {
-      font-weight: 500;
-      /* width: 100%;
-      white-space: nowrap;
-      text-overflow: ellipsis;
-      overflow: hidden; */
-      font-size: 1.25rem;
+      font-weight: var(--fw-medium);
+      font-size: var(--fs-400);
 
       &::before {
         counter-increment: schedule;
@@ -163,7 +159,7 @@ const mockSchedule = [
 
     &-classroom {
       display: block;
-      font-size: 0.875rem;
+      font-size: var(--fs-100);
       width: 3.5rem;
       height: 1.75rem;
       background-color: var(--clr-neutral-600);

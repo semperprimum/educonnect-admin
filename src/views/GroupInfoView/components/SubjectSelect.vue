@@ -36,7 +36,7 @@ const optionChange = (event) => {
 
 <style lang="scss" scoped>
 select {
-  font-size: 0.9rem;
+  font-size: var(--fs-100);
   appearance: none;
   background-color: var(--clr-neutral-600);
   border: 1px solid var(--clr-neutral-500);

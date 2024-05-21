@@ -44,7 +44,7 @@ const props = defineProps({
   z-index: 50;
 
   &__heading {
-    font-size: 2rem;
+    font-size: var(--fs-600);
     font-weight: 700;
     line-height: 1;
     margin-bottom: 0.5rem;
@@ -53,7 +53,7 @@ const props = defineProps({
 
   &__students {
     color: var(--clr-neutral-300);
-    font-weight: 500;
+    font-weight: var(--fw-medium);
   }
 
   &__curator {
@@ -61,7 +61,7 @@ const props = defineProps({
     display: flex;
     align-items: center;
     gap: 0.5rem;
-    font-weight: 500;
+    font-weight: var(--fw-medium);
 
     margin-top: 1rem;
   }

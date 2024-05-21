@@ -1,11 +1,14 @@
 <template>
-  <div class="accordion">
+  <div
+    class="accordion"
+    :class="{ elevated }"
+  >
     <button
       @click.prevent="toggleIsOpen"
       class="accordion__button"
     >
       <span>
-        Управление предметами
+        {{ name }}
         <ChevronUp
           v-if="isOpen"
           aria-hidden="true"
@@ -31,6 +34,17 @@ import ChevronDown from "@/assets/icons/ChevronDown.vue";
 import ChevronUp from "@/assets/icons/ChevronUp.vue";
 import { ref } from "vue";
 
+const props = defineProps({
+  name: {
+    type: String,
+    required: true,
+  },
+  elevated: {
+    type: Boolean,
+    required: false,
+  },
+});
+
 const isOpen = ref(false);
 
 const toggleIsOpen = () => {
@@ -44,13 +58,18 @@ const toggleIsOpen = () => {
   border: 1px solid var(--clr-neutral-600);
   border-radius: 1rem;
 
+  &.elevated {
+    background-color: var(--clr-neutral-600);
+    border: 1px solid var(--clr-neutral-500);
+  }
+
   &__button {
     color: var(--clr-neutral-300);
     background: none;
     padding: 0.75rem 1rem;
     border: none;
-    /* outline: 1px solid lime; */
     width: 100%;
+    font-weight: var(--fw-medium);
 
     span {
       display: flex;

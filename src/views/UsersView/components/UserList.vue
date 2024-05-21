@@ -60,6 +60,8 @@ const props = defineProps({
   border-bottom: 1px solid var(--clr-neutral-700);
 
   &__name {
+    font-weight: var(--fw-medium);
+
     &::before {
       content: counter(userList) ". ";
     }

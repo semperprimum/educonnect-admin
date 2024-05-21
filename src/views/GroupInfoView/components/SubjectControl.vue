@@ -88,7 +88,7 @@ const classes = [
     list-style: none;
 
     display: grid;
-    gap: 1rem;
+    gap: 0.875rem;
   }
 
   &__item {

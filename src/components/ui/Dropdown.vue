@@ -19,6 +19,7 @@
     >
       <button
         v-for="option in options"
+        :key="option.value"
         @click.prevent="handleOptionSelect(option)"
         class="dropdown__option"
         :class="{ active: selectedOption?.value === option.value }"
@@ -30,9 +31,9 @@
 </template>
 
 <script setup>
-import ChevronDown from "@/assets/icons/ChevronDown.vue";
 import { ref } from "vue";
 import { onClickOutside } from "@vueuse/core";
+import ChevronDown from "@/assets/icons/ChevronDown.vue";
 
 const props = defineProps({
   options: {
@@ -71,6 +72,7 @@ const emit = defineEmits(["onChange"]);
 const handleOptionSelect = (option) => {
   selectedOption.value = option;
   isDropdownOpen.value = false;
+
   emit("onChange", selectedOption.value);
 };
 
@@ -84,14 +86,12 @@ onClickOutside(dropdown, () => {
   position: relative;
 
   &__selected {
-    /* min-width: 12.5rem; */
     text-transform: capitalize;
     background-color: var(--clr-neutral-700);
     color: var(--clr-neutral-300);
     border: 1px solid var(--clr-neutral-600);
     padding: 0.75rem 1rem;
-    /* font-size: 1.15rem; */
-    font-weight: 500;
+    font-weight: var(--fw-medium);
     border-radius: 1rem;
     line-height: auto;
 
@@ -151,7 +151,7 @@ onClickOutside(dropdown, () => {
     background: none;
     color: var(--clr-neutral-300);
     padding: 0.375rem 0.75rem;
-    font-weight: 500;
+    font-weight: var(--fw-medium);
     border-radius: 0.5rem;
 
     white-space: nowrap;

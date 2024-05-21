@@ -11,7 +11,10 @@
         label="Специальность"
       />
 
-      <Button label="Активные замены" />
+      <Button
+        @click="openActiveSubstitutionsModal"
+        label="Активные замены"
+      />
 
       <Button label="Запросы на замену" />
     </div>
@@ -37,8 +40,13 @@ import GroupTile from "@/components/GroupTile.vue";
 
 import mockGroups from "@/views/mockGroups.json";
 import { useRouter } from "vue-router";
+import ModalService from "@/services/ModalService";
 
 const router = useRouter();
+
+const openActiveSubstitutionsModal = () => {
+  ModalService.open("ActiveSubstitutionsModal");
+};
 
 const options = [
   {

@@ -75,7 +75,7 @@ const roles = [
 
 <style lang="scss" scoped>
 .heading {
-  font-size: 2rem;
+  font-size: var(--fs-600);
 }
 
 .form {

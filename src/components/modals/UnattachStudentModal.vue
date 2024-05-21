@@ -45,15 +45,18 @@ const props = defineProps({
 
 <style lang="scss" scoped>
 .heading {
-  font-size: 2rem;
+  font-size: var(--fs-600);
 }
 
 .confirmation {
   margin-top: 1rem;
   margin-bottom: 2rem;
+
+  font-size: var(--fs-300);
+
   span {
     color: var(--clr-red-400);
-    font-weight: 600;
+    font-weight: var(--fw-bold);
   }
 }
 

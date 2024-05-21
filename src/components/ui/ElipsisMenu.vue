@@ -51,7 +51,7 @@ const toggleMenu = () => {
   isMenuVisible.value = !isMenuVisible.value;
 
   if (isMenuVisible.value) {
-    // nextTick() нужен из-за v-if
+    // nextTick() нужен из-за v-if, иначе menu.value будет null
     nextTick(() => {
       createPopperInstance();
     });
@@ -94,11 +94,14 @@ onBeforeUnmount(() => {
     color: var(--clr-neutral-300);
     padding: 0;
 
+    display: grid;
+    place-items: center;
+
     svg {
+      display: block;
       height: 1.25rem;
       width: 1.25rem;
       fill: currentColor;
-      display: block;
     }
   }
 
@@ -121,15 +124,10 @@ onBeforeUnmount(() => {
     text-align: start;
     border-radius: 0.5rem;
     padding: 0.25rem 0.75rem;
-
-    transition: background-color 150ms ease;
+    cursor: pointer;
 
     &:hover {
       background-color: var(--clr-neutral-600);
-    }
-
-    @media only screen and (min-width: 90em) {
-      cursor: pointer;
     }
   }
 }

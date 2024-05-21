@@ -14,4 +14,19 @@
   --clr-red-500 : #EF4444;
   --clr-red-400 : #F87171;
   --clr-red-300 : #FCA5A5;
+
+  --fw-regular   : 400;
+  --fw-medium    : 500;
+  --fw-bold      : 600;
+  --fw-extrabold : 700;
+
+  --fs-100 : .875rem;
+  --fs-200 : 1rem;
+  --fs-300 : 1.125rem;
+  --fs-400 : 1.25rem;
+  --fs-500 : 1.5rem;
+  --fs-600 : 2rem;
+  --fs-700 : 2.5rem;
+  --fs-800 : 3rem;
+  --fs-900 : 3.5rem;
 }

@@ -35,8 +35,8 @@ const props = defineProps({
 
 <style lang="scss" scoped>
 .heading {
-  font-size: 3rem;
-  font-weight: 700;
+  font-size: var(--fs-800);
+  font-weight: var(--fw-extrabold);
   margin-bottom: 1rem;
   line-height: 1;
 }
