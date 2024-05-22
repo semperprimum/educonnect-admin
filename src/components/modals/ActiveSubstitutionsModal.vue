@@ -1,27 +1,41 @@
 <template>
   <ModalBase :onClose="onClose">
-    <h2 class="heading">Запросы на замену</h2>
+    <div class="header">
+      <div class="header__pair">
+        <h2 class="header__heading">Активные замены</h2>
+        <span class="header__date">02.09.24</span>
+      </div>
 
-    <div class="substitutions">
+      <div class="header__buttons">
+        <button class="header__button">
+          <ArrowLeft />
+        </button>
+        <button class="header__button">
+          <ArrowRight />
+        </button>
+      </div>
+    </div>
+
+    <div class="accordions-container">
       <Accordion
         elevated
-        name="Әбішев Асылжан Сабыржанович (1)"
+        name="П-21-55гб (1)"
       ></Accordion>
       <Accordion
         elevated
-        name="Төлегенова Айнұр Бауыржанқызы (3)"
+        name="П-21-56б (3)"
       ></Accordion>
       <Accordion
         elevated
-        name="Попов Денис Валентинович (2)"
+        name="П-21-57к (2)"
       >
         <div class="substitution">
-          <p class="substitution__info">
-            <span>Основы Front-End</span>
-            <span>П-22-59к, 3 пара, понедельник, 02.09.24</span>
-          </p>
-
-          <button class="substitution__button">Посмотреть в раписании</button>
+          <span>Разработка мобильных приложений</span>
+          <span>4 пара, понедельник, 02.09.24</span>
+        </div>
+        <div class="substitution">
+          <span>Основы Front-End</span>
+          <span>3 пара, понедельник, 02.09.24</span>
         </div>
       </Accordion>
     </div>
@@ -30,7 +44,9 @@
 
 <script setup>
 import ModalBase from "@/components/ModalBase.vue";
-import Accordion from "@/components/Accordion.vue";
+import ArrowLeft from "@/assets/icons/ArrowLeft.vue";
+import ArrowRight from "@/assets/icons/ArrowRight.vue";
+import Accordion from "../Accordion.vue";
 
 const props = defineProps({
   onClose: {
@@ -41,41 +57,66 @@ const props = defineProps({
 </script>
 
 <style lang="scss" scoped>
-.heading {
-  font-size: var(--fs-600);
-}
-
-.substitutions {
-  display: grid;
-  gap: 1rem;
-  margin-top: 1rem;
-}
-
-.substitution {
+.header {
   display: flex;
   align-items: center;
   justify-content: space-between;
 
-  &__info {
-    display: grid;
+  &__heading {
+    font-size: var(--fs-600);
+  }
 
-    span:nth-child(1) {
-      font-weight: var(--fw-bold);
-    }
-    span:nth-child(2) {
-      font-size: var(--fs-100);
-      color: var(--clr-neutral-300);
-    }
+  &__date {
+    color: var(--clr-neutral-300);
+    font-weight: var(--fw-medium);
+  }
+
+  &__buttons {
+    display: flex;
+    gap: 0.5rem;
   }
 
   &__button {
-    background-color: var(--clr-neutral-500);
-    border: none;
-    border-radius: 1vmax;
-    padding: 0.5rem 1rem;
-    font-size: var(--fs-100);
-    font-weight: var(--fw-medium);
-    color: var(--clr-neutral-100);
+    border: 1px solid var(--clr-neutral-500);
+    background-color: var(--clr-neutral-600);
+    margin: 0;
+    padding: 0.5rem;
+    border-radius: 0.5rem;
+    aspect-ratio: 1;
+
+    svg {
+      display: block;
+      height: 1.5rem;
+      width: 100%;
+      aspect-ratio: 1;
+
+      fill: var(--clr-neutral-300);
+    }
+  }
+}
+
+.accordions-container {
+  margin-top: 1.5rem;
+  display: grid;
+  gap: 1rem;
+}
+
+.substitution {
+  span {
+    display: block;
+
+    &:nth-child(1) {
+      font-weight: var(--fw-bold);
+    }
+
+    &:nth-child(2) {
+      color: var(--clr-neutral-300);
+      font-size: var(--fs-100);
+    }
+  }
+
+  & + & {
+    margin-top: 1rem;
   }
 }
 </style>

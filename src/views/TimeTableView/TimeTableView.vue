@@ -16,7 +16,10 @@
         label="Активные замены"
       />
 
-      <Button label="Запросы на замену" />
+      <Button
+        @click="openSubstitutionRequestsModal"
+        label="Запросы на замену"
+      />
     </div>
 
     <div class="content">
@@ -43,6 +46,10 @@ import { useRouter } from "vue-router";
 import ModalService from "@/services/ModalService";
 
 const router = useRouter();
+
+const openSubstitutionRequestsModal = () => {
+  ModalService.open("SubstitutionRequestsModal");
+};
 
 const openActiveSubstitutionsModal = () => {
   ModalService.open("ActiveSubstitutionsModal");
