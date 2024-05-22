@@ -21,7 +21,16 @@
           </div>
         </div>
 
-        <ElipsisMenu :options="[{ name: 'Test', action: () => {} }]" />
+        <ElipsisMenu
+          :options="[
+            {
+              name: 'Рассмотреть замены',
+              action: () => {
+                openMakeSubstitutionModal();
+              },
+            },
+          ]"
+        />
       </li>
     </ol>
   </div>
@@ -29,6 +38,11 @@
 
 <script setup>
 import ElipsisMenu from "@/components/ui/ElipsisMenu.vue";
+import ModalService from "@/services/ModalService.js";
+
+const openMakeSubstitutionModal = () => {
+  ModalService.open("MakeSubstitutionModal");
+};
 
 const mockSchedule = [
   {

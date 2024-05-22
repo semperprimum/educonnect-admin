@@ -112,6 +112,8 @@ onBeforeUnmount(() => {
     padding: 0.5rem;
     box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
 
+    z-index: 999;
+
     display: grid;
 
     animation: scaleAppear 150ms ease forwards;

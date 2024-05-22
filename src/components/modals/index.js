@@ -5,6 +5,7 @@ import UnattachStudentModal from "@/components/modals/UnattachStudentModal.vue";
 import CreateUserModal from "@/components/modals/CreateUserModal.vue";
 import SubstitutionRequestsModal from "@/components/modals/SubstitutionRequestsModal.vue";
 import ActiveSubstitutionsModal from "@/components/modals/ActiveSubstitutionsModal.vue";
+import MakeSubstitutionModal from "@/components/modals/MakeSubstitutionModal.vue";
 
 export {
   TestModal,
@@ -14,4 +15,5 @@ export {
   CreateUserModal,
   SubstitutionRequestsModal,
   ActiveSubstitutionsModal,
+  MakeSubstitutionModal,
 };
