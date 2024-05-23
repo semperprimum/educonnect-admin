@@ -56,7 +56,7 @@
       </li>
       <li class="nav__list-item">
         <RouterLink
-          to="/"
+          to="/calendar"
           class="nav__link"
         >
           <CalendarDays class="icon" />

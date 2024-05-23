@@ -36,7 +36,11 @@ const router = createRouter({
     },
     {
       path: "/users",
-      component: () => import("@/views/UsersView/UsersView.vue")
+      component: () => import("@/views/UsersView/UsersView.vue"),
+    },
+    {
+      path: "/calendar",
+      component: () => import("@/views/CalendarView/CalendarView.vue"),
     },
     {
       path: "/:catchAll(.*)",
