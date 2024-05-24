@@ -17,7 +17,8 @@ const route = useRoute();
 <style lang="scss" scoped>
 .content-wrapper {
   padding: 2rem;
-  margin-left: 6.25rem;
+  // margin-left: 6.25rem;
+  margin-top: 5.25rem;
 
   display: flex;
   flex-direction: column;
@@ -29,6 +30,8 @@ const route = useRoute();
 
   @media only screen and (min-width: 48em) {
     padding: 2rem 5rem;
+    margin-top: 0;
+    margin-left: 6.25rem;
   }
 }
 </style>
