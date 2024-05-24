@@ -13,6 +13,7 @@
         />
 
         <Button
+          @click="openCreateEventModal"
           label="Создать событие"
           :trailing="Plus"
           center
@@ -30,8 +31,13 @@ import Button from "@/components/ui/Button.vue";
 import Plus from "@/assets/icons/Plus.vue";
 import EventList from "@/views/CalendarView/components/EventList.vue";
 import { ref } from "vue";
+import ModalService from "@/services/ModalService";
 
 const date = ref(new Date());
+
+const openCreateEventModal = () => {
+  ModalService.open("CreateEventModal");
+};
 
 const attributes = [
   {
@@ -71,6 +77,10 @@ const attributes = [
   &:deep(.vc-nav-title),
   &:deep(.vc-nav-arrow) {
     background: transparent;
+  }
+
+  &:deep(.vc-title) {
+    text-transform: capitalize;
   }
 
   &:deep(.vc-nav-item),
