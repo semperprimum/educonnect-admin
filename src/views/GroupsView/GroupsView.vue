@@ -14,7 +14,7 @@
 
     <div class="content">
       <GroupTile
-        v-for="group in mockGroups"
+        v-for="group in groups"
         :key="group.literals"
         :group="group"
         @click="router.push(`/groups/${group.id}`)"
@@ -23,7 +23,7 @@
   </ContainerWithHeading>
 </template>
 
-<script setup>
+<script setup lang="ts">
 import ContainerWithHeading from "@/components/ContainerWithHeading.vue";
 import Dropdown from "@/components/ui/Dropdown.vue";
 import Input from "@/components/ui/Input.vue";
@@ -35,6 +35,9 @@ import GroupTile from "@/components/GroupTile.vue";
 import mockGroups from "@/views/mockGroups.json";
 import { useRouter } from "vue-router";
 import ModalService from "@/services/ModalService";
+import type { Group } from "@/types";
+
+const groups = mockGroups as Group[];
 
 const router = useRouter();
 

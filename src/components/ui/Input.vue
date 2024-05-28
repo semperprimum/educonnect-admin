@@ -1,47 +1,31 @@
 <template>
-  <div
-    class="input-container"
-    :class="{ elevated }"
-  >
+  <div class="input-container" :class="{ elevated }">
     <input
       :type="type || 'text'"
       :placeholder="placeholder"
       :id="id"
-      @change="(event) => emit('onChange', event.target.value)"
+      @change="onChange"
     />
-    <component
-      class="trailing"
-      v-if="trailing"
-      :is="trailing"
-    />
+    <component class="trailing" v-if="trailing" :is="trailing" />
   </div>
 </template>
 
-<script setup>
+<script lang="ts" setup>
+import type { Component } from "vue";
+
 const emit = defineEmits(["onChange"]);
 
-const props = defineProps({
-  placeholder: {
-    required: false,
-    type: String,
-  },
-  id: {
-    required: false,
-    type: String,
-  },
-  type: {
-    required: false,
-    type: String,
-  },
-  trailing: {
-    required: false,
-    type: Object,
-  },
-  elevated: {
-    required: false,
-    type: Boolean,
-  },
-});
+const onChange = (e: Event) => {
+  emit("onChange", (e.target as HTMLInputElement).value);
+};
+
+defineProps<{
+  placeholder?: string;
+  id?: string;
+  type?: string;
+  trailing?: Component;
+  elevated?: boolean;
+}>();
 </script>
 
 <style lang="scss" scoped>

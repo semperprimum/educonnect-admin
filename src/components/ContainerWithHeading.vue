@@ -1,36 +1,19 @@
 <template>
-  <h1
-    v-if="heading"
-    class="heading"
-  >
+  <h1 v-if="heading" class="heading">
     {{ heading }}
   </h1>
-  <h1
-    v-else
-    class="sr-only"
-  >
-    EduConnect Admin
-  </h1>
+  <h1 v-else class="sr-only">EduConnect Admin</h1>
 
-  <div
-    class="container"
-    :class="{ noContainerOverflow: 'no-overflow' }"
-  >
+  <div class="container" :class="{ noContainerOverflow: 'no-overflow' }">
     <slot></slot>
   </div>
 </template>
 
-<script setup>
-const props = defineProps({
-  heading: {
-    type: String,
-    required: false,
-  },
-  noContainerOverflow: {
-    type: Boolean,
-    required: false,
-  },
-});
+<script lang="ts" setup>
+defineProps<{
+  heading?: string;
+  noContainerOverflow?: boolean;
+}>();
 </script>
 
 <style lang="scss" scoped>

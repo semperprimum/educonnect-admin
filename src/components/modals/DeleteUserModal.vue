@@ -8,13 +8,13 @@
     </p>
 
     <div class="button-pair">
-      <Button @click="onClose" center elevated label="Отмена" />
+      <Button @click="() => onClose()" center elevated label="Отмена" />
       <Button center danger label="Удалить" />
     </div>
   </ModalBase>
 </template>
 
-<script setup>
+<script lang="ts" setup>
 import ModalBase from "@/components/ModalBase.vue";
 import Button from "@/components/ui/Button.vue";
 

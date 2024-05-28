@@ -44,16 +44,11 @@
       />
     </div>
 
-    <Button
-      class="approve-button"
-      elevated
-      center
-      label="Одобрить замену"
-    />
+    <Button class="approve-button" elevated center label="Одобрить замену" />
   </ModalBase>
 </template>
 
-<script setup>
+<script lang="ts" setup>
 import ModalBase from "@/components/ModalBase.vue";
 import Dropdown from "@/components/ui/Dropdown.vue";
 import Button from "@/components/ui/Button.vue";

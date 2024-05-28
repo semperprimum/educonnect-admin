@@ -22,7 +22,7 @@
   </ContainerWithHeading>
 </template>
 
-<script setup>
+<script lang="ts" setup>
 import ContainerWithHeading from "@/components/ContainerWithHeading.vue";
 import Dropdown from "@/components/ui/Dropdown.vue";
 import Input from "@/components/ui/Input.vue";

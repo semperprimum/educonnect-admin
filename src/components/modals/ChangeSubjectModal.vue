@@ -28,7 +28,7 @@
   </ModalBase>
 </template>
 
-<script setup>
+<script lang="ts" setup>
 import ModalBase from "@/components/ModalBase.vue";
 import DropdownGroup from "@/components/ui/DropdownGroup.vue";
 import Input from "@/components/ui/Input.vue";

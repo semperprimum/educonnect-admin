@@ -22,24 +22,23 @@
   </div>
 </template>
 
-<script setup>
+<script lang="ts" setup>
 import ElipsisVertical from "@/assets/icons/ElipsisVertical.vue";
 import { ref, onBeforeUnmount, nextTick } from "vue";
 import { createPopper } from "@popperjs/core";
+import { type Instance } from "@popperjs/core";
 import { onClickOutside } from "@vueuse/core";
+import { type ElipsisMenuOption } from "@/types";
 
-const props = defineProps({
-  options: {
-    type: Array,
-    required: true,
-  },
-});
+defineProps<{
+  options: ElipsisMenuOption[];
+}>();
 
 const isMenuVisible = ref(false);
 const menuContainer = ref(null);
 const menu = ref(null);
 const button = ref(null);
-let popperInstance = null;
+let popperInstance: Instance | null = null;
 
 const toggleMenu = () => {
   isMenuVisible.value = !isMenuVisible.value;

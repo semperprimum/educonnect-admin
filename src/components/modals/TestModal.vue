@@ -4,7 +4,7 @@
   </ModalBase>
 </template>
 
-<script setup>
+<script lang="ts" setup>
 import ModalBase from "@/components/ModalBase.vue";
 
 const props = defineProps({

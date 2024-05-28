@@ -10,24 +10,23 @@
   </dialog>
 </template>
 
-<script setup>
+<script lang="ts" setup>
 import Xmark from "@/assets/icons/Xmark.vue";
 import { ref, onMounted, onBeforeUnmount } from "vue";
 
-const props = defineProps({
-  onClose: {
-    type: Function,
-    required: true,
-  },
-});
+defineProps<{
+  onClose: () => void;
+}>();
 
-const dialog = ref(null);
-const dialogContent = ref(null);
+const dialog = ref<InstanceType<typeof HTMLDialogElement> | null>(null);
+const dialogContent = ref<InstanceType<typeof HTMLDivElement> | null>(null);
 
 onMounted(() => {
-  dialog.value.showModal();
+  if (!dialog || !dialogContent) return;
 
-  dialogContent.value.addEventListener("click", (e) => {
+  dialog.value?.showModal();
+
+  dialogContent.value?.addEventListener("click", (e) => {
     e.stopPropagation();
   });
 });
@@ -50,7 +49,7 @@ const toggleOverflowClass = () => {
   }
 };
 
-let resizeObserver;
+let resizeObserver: ResizeObserver | null = null;
 
 onMounted(() => {
   if (dialogContent.value) {

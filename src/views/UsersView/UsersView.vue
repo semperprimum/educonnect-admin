@@ -2,18 +2,9 @@
   <ContainerWithHeading heading="Пользователи">
     <header class="header">
       <div class="header__left">
-        <Input
-          placeholder="Поиск"
-          :trailing="MagnifyingGlass"
-        />
-        <Dropdown
-          label="Роль"
-          :options="roleOptions"
-        />
-        <Dropdown
-          label="Группа"
-          :options="groupOptions"
-        />
+        <Input placeholder="Поиск" :trailing="MagnifyingGlass" />
+        <Dropdown label="Роль" :options="roleOptions" />
+        <Dropdown label="Группа" :options="groupOptions" />
       </div>
 
       <div class="header__right">
@@ -25,14 +16,11 @@
       </div>
     </header>
 
-    <UserList
-      :users="mockUsers"
-      class="user-list"
-    />
+    <UserList :users="mockUsers" class="user-list" />
   </ContainerWithHeading>
 </template>
 
-<script setup>
+<script lang="ts" setup>
 import ContainerWithHeading from "@/components/ContainerWithHeading.vue";
 import Input from "@/components/ui/Input.vue";
 import Dropdown from "@/components/ui/Dropdown.vue";
@@ -41,6 +29,7 @@ import Button from "@/components/ui/Button.vue";
 import Plus from "@/assets/icons/Plus.vue";
 import UserList from "./components/UserList.vue";
 import ModalService from "@/services/ModalService";
+import type { User } from "@/types";
 
 const openCreateUserModal = () => {
   ModalService.open("CreateUserModal");
@@ -58,7 +47,7 @@ const groupOptions = [
   { name: "П-21-57б", value: "2" },
 ];
 
-const mockUsers = [
+const mockUsers: User[] = [
   { name: "Ульданов Мансур Азатович", role: "Гл. Администратор", group: null },
   { name: "Кишибаев Нуржан Еркешович", role: "Гл. Администратор", group: null },
   { name: "Ким Богдан Данилович", role: "Администратор", group: null },

@@ -11,7 +11,7 @@
   </ContainerWithHeading>
 </template>
 
-<script setup>
+<script lang="ts" setup>
 import ContainerWithHeading from "@/components/ContainerWithHeading.vue";
 import mockGroups from "@/views/mockGroups.json";
 import { useRoute } from "vue-router";
@@ -20,7 +20,7 @@ import TimeTableTile from "./components/TimeTableTile.vue";
 const currentRoute = useRoute();
 
 const groupName = mockGroups.filter(
-  (group) => group.id == currentRoute.params.id,
+  (group) => group.id.toString() == currentRoute.params.id,
 )[0].literals;
 </script>
 

@@ -20,10 +20,7 @@
           :options="curatorOptions"
           :selected="curatorOptions[0]"
         />
-        <Accordion
-          name="Управление предметами"
-          class="accordion"
-        >
+        <Accordion name="Управление предметами" class="accordion">
           <SubjectControl
             @changeSubject="handleChangeSubject"
             @addSubject="handleAddSubject"
@@ -38,7 +35,7 @@
   </ContainerWithHeading>
 </template>
 
-<script setup>
+<script lang="ts" setup>
 import ContainerWithHeading from "@/components/ContainerWithHeading.vue";
 import StudentList from "./components/StudentList.vue";
 import SubjectControl from "./components/SubjectControl.vue";
@@ -52,7 +49,7 @@ import { ref } from "vue";
 const currentRoute = useRoute();
 
 const groupName = mockGroups.filter(
-  (group) => group.id == currentRoute.params.id
+  (group) => group.id.toString() === currentRoute.params.id,
 )[0].literals;
 
 const subjects = ref([
@@ -83,16 +80,25 @@ const handleAddSubject = () => {
   subjects.value.push(newSubject);
 };
 
-const handleDeleteSubject = (id) => {
+const handleDeleteSubject = (id: string) => {
   subjects.value = subjects.value.filter((subject) => subject.id !== id);
 };
 
-const handleChangeSubject = ({ id, field, value }) => {
+const handleChangeSubject = ({
+  id,
+  field,
+  value,
+}: {
+  id: string;
+  field: keyof (typeof subjects.value)[0];
+  value: string;
+}) => {
   const subject = subjects.value.find((subject) => subject.id === id);
 
   if (subject) {
     subject[field] = value;
   }
+  console.log(subjects);
 };
 
 const options = [

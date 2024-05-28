@@ -17,18 +17,9 @@
     </div>
 
     <div class="accordions-container">
-      <Accordion
-        elevated
-        name="П-21-55гб (1)"
-      ></Accordion>
-      <Accordion
-        elevated
-        name="П-21-56б (3)"
-      ></Accordion>
-      <Accordion
-        elevated
-        name="П-21-57к (2)"
-      >
+      <Accordion elevated name="П-21-55гб (1)"></Accordion>
+      <Accordion elevated name="П-21-56б (3)"></Accordion>
+      <Accordion elevated name="П-21-57к (2)">
         <div class="substitution">
           <span>Разработка мобильных приложений</span>
           <span>4 пара, понедельник, 02.09.24</span>
@@ -42,7 +33,7 @@
   </ModalBase>
 </template>
 
-<script setup>
+<script lang="ts" setup>
 import ModalBase from "@/components/ModalBase.vue";
 import ArrowLeft from "@/assets/icons/ArrowLeft.vue";
 import ArrowRight from "@/assets/icons/ArrowRight.vue";

@@ -15,12 +15,12 @@
   </div>
 </template>
 
-<script setup>
+<script lang="ts" setup>
 import { ref, onMounted } from "vue";
 
 const selectedColor = ref("");
 
-const handleColorSelect = (color) => {
+const handleColorSelect = (color: string) => {
   selectedColor.value = color;
 };
 

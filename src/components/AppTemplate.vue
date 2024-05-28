@@ -7,7 +7,7 @@
   </main>
 </template>
 
-<script setup>
+<script lang="ts" setup>
 import SideBarNav from "@/components/SideBarNav.vue";
 import { useRoute } from "vue-router";
 

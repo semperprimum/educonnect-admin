@@ -1,12 +1,12 @@
 import { reactive } from "vue";
 
-const state = reactive({
+const state = reactive<{ currentModal: string | null, modalProps: {} }>({
   currentModal: null,
   modalProps: {},
 });
 
 const ModalService = {
-  open(modalName, props = {}) {
+  open(modalName: string, props = {}) {
     state.currentModal = modalName;
     state.modalProps = props;
   },

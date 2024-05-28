@@ -3,39 +3,23 @@
     <div class="container">
       <h1 class="heading">
         <span class="heading__pair">
-          <Logo
-            aria-hidden="true"
-            class="heading__logo"
-          />
+          <Logo aria-hidden="true" class="heading__logo" />
           <span class="heading__span-edu">Edu</span>Connect
         </span>
         <span class="heading__span-admin">Admin</span>
       </h1>
 
-      <form
-        @submit.prevent="fakeLogin"
-        class="form"
-      >
-        <Input
-          placeholder="Логин"
-          v-model="login"
-        />
-        <Input
-          placeholder="Пароль"
-          v-model="password"
-          type="password"
-        />
+      <form @submit.prevent="fakeLogin" class="form">
+        <Input placeholder="Логин" v-model="login" />
+        <Input placeholder="Пароль" v-model="password" type="password" />
 
-        <GradientButton
-          class="button"
-          label="Войти"
-        />
+        <GradientButton class="button" label="Войти" />
       </form>
     </div>
   </main>
 </template>
 
-<script setup>
+<script lang="ts" setup>
 import Logo from "@/assets/icons/Logo.vue";
 import Input from "@/components/ui/Input.vue";
 import GradientButton from "@/components/GradientButton.vue";

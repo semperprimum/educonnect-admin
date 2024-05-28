@@ -3,7 +3,11 @@
     <p class="students__label">Список группы</p>
 
     <ol class="students__list">
-      <li v-for="student in students" :key="student" class="students__item">
+      <li
+        v-for="student in students"
+        :key="student.name"
+        class="students__item"
+      >
         <span class="students__name">
           {{ student.name }}
         </span>
@@ -16,7 +20,7 @@
         <button
           class="students__button-remove"
           aria-label="Открепить студента"
-          @click="openUnattachStudentModal(student, groupName)"
+          @click="openUnattachStudentModal(student.name, groupName)"
         >
           <Xmark aria-hidden="false" />
         </button>
@@ -33,18 +37,15 @@
   </div>
 </template>
 
-<script setup>
+<script lang="ts" setup>
 import Button from "@/components/ui/Button.vue";
 import Plus from "@/assets/icons/Plus.vue";
 import Xmark from "@/assets/icons/Xmark.vue";
 import ModalService from "@/services/ModalService";
 
-const props = defineProps({
-  groupName: {
-    type: String,
-    required: true,
-  },
-});
+defineProps<{
+  groupName: string;
+}>();
 
 const students = [
   { name: "Айбек Али", subgroup: "a" },
@@ -70,7 +71,7 @@ const openAddStudentModal = () => {
   ModalService.open("AddStudentModal");
 };
 
-const openUnattachStudentModal = (studentName, groupName) => {
+const openUnattachStudentModal = (studentName: string, groupName: string) => {
   ModalService.open("UnattachStudentModal", { studentName, groupName });
 };
 </script>

@@ -33,7 +33,7 @@
   </div>
 </template>
 
-<script setup>
+<script lang="ts" setup>
 import ElipsisMenu from "@/components/ui/ElipsisMenu.vue";
 import ModalService from "@/services/ModalService.js";
 

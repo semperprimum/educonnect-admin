@@ -4,13 +4,10 @@
   </button>
 </template>
 
-<script setup>
-const props = defineProps({
-  label: {
-    required: true,
-    type: String,
-  },
-});
+<script lang="ts" setup>
+defineProps<{
+  label: string;
+}>();
 </script>
 
 <style lang="scss" scoped>

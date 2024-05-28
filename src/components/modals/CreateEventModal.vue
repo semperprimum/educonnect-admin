@@ -63,7 +63,7 @@
   </ModalBase>
 </template>
 
-<script setup>
+<script lang="ts" setup>
 import ModalBase from "@/components/ModalBase.vue";
 import Dropdown from "@/components/ui/Dropdown.vue";
 import InputGroup from "@/components/ui/InputGroup.vue";

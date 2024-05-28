@@ -24,7 +24,7 @@
   </ContainerWithHeading>
 </template>
 
-<script setup>
+<script lang="ts" setup>
 import ContainerWithHeading from "@/components/ContainerWithHeading.vue";
 import { DatePicker } from "v-calendar";
 import Button from "@/components/ui/Button.vue";

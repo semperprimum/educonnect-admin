@@ -1,19 +1,18 @@
 <template>
   <div class="subjects">
     <ul class="subjects__list">
-      <li
-        v-for="subject in subjects"
-        class="subjects__item"
-      >
+      <li v-for="subject in subjects" class="subjects__item">
         <SubjectSelect
-          @optionChange="(value) => changeSubject(subject.id, 'name', value)"
+          @optionChange="
+            (value: string) => changeSubject(subject.id, 'name', value)
+          "
           :options="classes"
           :selected="subject.name"
           placeholder="Предмет"
         />
         <SubjectSelect
           @optionChange="
-            (value) => changeSubject(subject.id, 'professor', value)
+            (value: string) => changeSubject(subject.id, 'professor', value)
           "
           :selected="subject.professor"
           placeholder="Преподаватель"
@@ -38,18 +37,15 @@
   </div>
 </template>
 
-<script setup>
+<script lang="ts" setup>
 import SubjectSelect from "./SubjectSelect.vue";
 import Button from "@/components/ui/Button.vue";
 import Plus from "@/assets/icons/Plus.vue";
 import Xmark from "@/assets/icons/Xmark.vue";
 
-const props = defineProps({
-  subjects: {
-    type: Array,
-    required: true,
-  },
-});
+defineProps<{
+  subjects: { id: string; name: string; professor: string }[];
+}>();
 
 const emit = defineEmits(["addSubject", "deleteSubject", "changeSubject"]);
 
@@ -57,11 +53,11 @@ const addSubject = () => {
   emit("addSubject");
 };
 
-const deleteSubject = (id) => {
+const deleteSubject = (id: string) => {
   emit("deleteSubject", id);
 };
 
-const changeSubject = (id, field, value) => {
+const changeSubject = (id: string, field: string, value: string) => {
   emit("changeSubject", { id, field, value });
 };
 

@@ -1,49 +1,28 @@
 <template>
-  <div
-    class="accordion"
-    :class="{ elevated }"
-  >
-    <button
-      @click.prevent="toggleIsOpen"
-      class="accordion__button"
-    >
+  <div class="accordion" :class="{ elevated }">
+    <button @click.prevent="toggleIsOpen" class="accordion__button">
       <span>
         {{ name }}
-        <ChevronUp
-          v-if="isOpen"
-          aria-hidden="true"
-        />
-        <ChevronDown
-          v-else
-          aria-hidden="true"
-        />
+        <ChevronUp v-if="isOpen" aria-hidden="true" />
+        <ChevronDown v-else aria-hidden="true" />
       </span>
     </button>
 
-    <div
-      v-if="isOpen"
-      class="accordion__content"
-    >
+    <div v-if="isOpen" class="accordion__content">
       <slot></slot>
     </div>
   </div>
 </template>
 
-<script setup>
+<script lang="ts" setup>
 import ChevronDown from "@/assets/icons/ChevronDown.vue";
 import ChevronUp from "@/assets/icons/ChevronUp.vue";
 import { ref } from "vue";
 
-const props = defineProps({
-  name: {
-    type: String,
-    required: true,
-  },
-  elevated: {
-    type: Boolean,
-    required: false,
-  },
-});
+defineProps<{
+  name: string;
+  elevated?: boolean;
+}>();
 
 const isOpen = ref(false);
 

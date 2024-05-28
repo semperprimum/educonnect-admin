@@ -3,18 +3,9 @@
     <h2 class="heading">Запросы на замену</h2>
 
     <div class="substitutions">
-      <Accordion
-        elevated
-        name="Әбішев Асылжан Сабыржанович (1)"
-      ></Accordion>
-      <Accordion
-        elevated
-        name="Төлегенова Айнұр Бауыржанқызы (3)"
-      ></Accordion>
-      <Accordion
-        elevated
-        name="Попов Денис Валентинович (2)"
-      >
+      <Accordion elevated name="Әбішев Асылжан Сабыржанович (1)"></Accordion>
+      <Accordion elevated name="Төлегенова Айнұр Бауыржанқызы (3)"></Accordion>
+      <Accordion elevated name="Попов Денис Валентинович (2)">
         <div class="substitution">
           <p class="substitution__info">
             <span>Основы Front-End</span>
@@ -28,7 +19,7 @@
   </ModalBase>
 </template>
 
-<script setup>
+<script lang="ts" setup>
 import ModalBase from "@/components/ModalBase.vue";
 import Accordion from "@/components/Accordion.vue";
 

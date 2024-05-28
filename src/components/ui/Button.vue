@@ -12,29 +12,16 @@
   </button>
 </template>
 
-<script setup>
-const props = defineProps({
-  label: {
-    required: true,
-    type: String,
-  },
-  trailing: {
-    required: false,
-    type: Object,
-  },
-  danger: {
-    required: false,
-    type: Boolean,
-  },
-  center: {
-    required: false,
-    type: Boolean,
-  },
-  elevated: {
-    required: false,
-    type: Boolean,
-  },
-});
+<script lang="ts" setup>
+import { type Component } from "vue";
+
+defineProps<{
+  label: string;
+  trailing?: Component;
+  danger?: boolean;
+  center?: boolean;
+  elevated?: boolean;
+}>();
 </script>
 
 <style lang="scss" scoped>

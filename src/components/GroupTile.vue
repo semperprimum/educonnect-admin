@@ -1,34 +1,22 @@
 <template>
-  <div
-    class="tile"
-    :style="{ '--accent-color': group.accentColor }"
-  >
+  <div class="tile" :style="{ '--accent-color': group.accentColor }">
     <h2 class="tile__heading">{{ group.literals }}</h2>
     <p class="tile__students">{{ group.number_of_students }} студентов</p>
     <p class="tile__curator">
-      <component
-        aria-hidden="true"
-        class="tile__icon"
-        :is="CircleUser"
-      />
+      <component aria-hidden="true" class="tile__icon" :is="CircleUser" />
       {{ group.curator }}
     </p>
   </div>
 </template>
 
-<script setup>
+<script lang="ts" setup>
 import CircleUser from "@/assets/icons/CircleUser.vue";
+import type { Group } from "@/types";
 
-const props = defineProps({
-  accentColor: {
-    type: String,
-    required: false,
-  },
-  group: {
-    type: Object,
-    required: true,
-  },
-});
+defineProps<{
+  accentColor?: string;
+  group: Group;
+}>();
 </script>
 
 <style lang="scss" scoped>
@@ -89,7 +77,9 @@ const props = defineProps({
   }
 
   @media only screen and (min-width: 48em) {
-    transition: filter 150ms ease, scale 150ms ease;
+    transition:
+      filter 150ms ease,
+      scale 150ms ease;
     cursor: pointer;
 
     &:hover {

@@ -15,17 +15,12 @@
         ]"
       />
 
-      <Button
-        center
-        elevated
-        label="Добавить"
-        :trailing="Plus"
-      />
+      <Button center elevated label="Добавить" :trailing="Plus" />
     </form>
   </ModalBase>
 </template>
 
-<script setup>
+<script lang="ts" setup>
 import Button from "@/components/ui/Button.vue";
 import Plus from "@/assets/icons/Plus.vue";
 import ModalBase from "@/components/ModalBase.vue";

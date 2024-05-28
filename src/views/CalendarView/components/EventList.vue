@@ -1,13 +1,7 @@
 <template>
   <div class="events">
-    <div
-      v-for="event in mockEvents"
-      class="events__item"
-    >
-      <Checkbox
-        class="events__checkbox"
-        :checked="event.isCompleted"
-      />
+    <div v-for="event in mockEvents" class="events__item">
+      <Checkbox class="events__checkbox" :checked="event.isCompleted" />
 
       <div class="events__info">
         <span class="events__date">{{ event.info }}</span>
@@ -19,7 +13,7 @@
   </div>
 </template>
 
-<script setup>
+<script lang="ts" setup>
 import Checkbox from "@/components/ui/Checkbox.vue";
 
 const mockEvents = [

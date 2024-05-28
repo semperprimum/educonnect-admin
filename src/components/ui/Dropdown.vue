@@ -1,9 +1,5 @@
 <template>
-  <div
-    class="dropdown"
-    ref="dropdown"
-    :id="id"
-  >
+  <div class="dropdown" ref="dropdown" :id="id">
     <button
       @click.prevent="isDropdownOpen = !isDropdownOpen"
       class="dropdown__selected"
@@ -13,10 +9,7 @@
       <ChevronDown aria-hidden="true" />
     </button>
 
-    <div
-      v-if="isDropdownOpen"
-      class="dropdown__options"
-    >
+    <div v-if="isDropdownOpen" class="dropdown__options">
       <button
         v-for="option in options"
         :key="option.value"
@@ -30,37 +23,20 @@
   </div>
 </template>
 
-<script setup>
+<script lang="ts" setup>
 import { ref } from "vue";
 import { onClickOutside } from "@vueuse/core";
 import ChevronDown from "@/assets/icons/ChevronDown.vue";
+import { type DropdownOption } from "@/types";
 
-const props = defineProps({
-  options: {
-    type: Array,
-    required: true,
-  },
-  label: {
-    type: String,
-    required: true,
-  },
-  placeholder: {
-    type: String,
-    required: false,
-  },
-  id: {
-    type: String,
-    required: false,
-  },
-  selected: {
-    type: Object,
-    required: false,
-  },
-  elevated: {
-    type: Boolean,
-    required: false,
-  },
-});
+const props = defineProps<{
+  options: DropdownOption[];
+  label: string;
+  placeholder?: string;
+  id?: string;
+  selected?: DropdownOption;
+  elevated?: boolean;
+}>();
 
 const dropdown = ref(null);
 
@@ -69,7 +45,7 @@ const isDropdownOpen = ref(false);
 
 const emit = defineEmits(["onChange"]);
 
-const handleOptionSelect = (option) => {
+const handleOptionSelect = (option: DropdownOption) => {
   selectedOption.value = option;
   isDropdownOpen.value = false;
 

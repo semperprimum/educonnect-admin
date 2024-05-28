@@ -24,20 +24,18 @@
   </ol>
 </template>
 
-<script setup>
+<script lang="ts" setup>
 import ElipsisMenu from "@/components/ui/ElipsisMenu.vue";
 import ModalService from "@/services/ModalService";
+import type { User } from "@/types";
 
-const openDeleteUserModal = (name) => {
+const openDeleteUserModal = (name: string) => {
   ModalService.open("DeleteUserModal", { name });
 };
 
-const props = defineProps({
-  users: {
-    type: Array,
-    required: true,
-  },
-});
+defineProps<{
+  users: User[];
+}>();
 </script>
 
 <style lang="scss" scoped>

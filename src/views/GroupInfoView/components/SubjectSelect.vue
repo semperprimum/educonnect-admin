@@ -11,26 +11,17 @@
   </select>
 </template>
 
-<script setup>
-const props = defineProps({
-  options: {
-    type: Array,
-    required: true,
-  },
-  placeholder: {
-    type: String,
-    required: true,
-  },
-  selected: {
-    type: String,
-    required: false,
-  },
-});
+<script lang="ts" setup>
+defineProps<{
+  options: string[];
+  placeholder: string;
+  selected: string;
+}>();
 
 const emit = defineEmits(["optionChange"]);
 
-const optionChange = (event) => {
-  emit("optionChange", event.target.value);
+const optionChange = (event: Event) => {
+  emit("optionChange", (event.target as HTMLSelectElement).value);
 };
 </script>
 

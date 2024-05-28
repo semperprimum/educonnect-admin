@@ -1,35 +1,23 @@
 <template>
-  <div
-    class="overlay"
-    :class="{ 'overlay-active': isNavOpen }"
-  ></div>
+  <div class="overlay" :class="{ 'overlay-active': isNavOpen }"></div>
   <nav
     class="nav"
     @mouseenter="if (!isMobile) isNavOpen = true;"
     @mouseleave="if (!isMobile) isNavOpen = false;"
   >
     <div class="mobile-nav-header">
-      <RouterLink
-        to="/"
-        class="logo-link"
-      >
+      <RouterLink to="/" class="logo-link">
         <Logo />
         <span>EduConnect <span>Admin</span></span>
       </RouterLink>
 
-      <button
-        @click="isNavOpen = !isNavOpen"
-        class="mobile-nav-toggle"
-      >
+      <button @click="isNavOpen = !isNavOpen" class="mobile-nav-toggle">
         <Xmark v-if="isNavOpen" />
         <Bars v-else />
       </button>
     </div>
 
-    <ul
-      v-if="isMobile ? isNavOpen : true"
-      class="nav__list"
-    >
+    <ul v-if="isMobile ? isNavOpen : true" class="nav__list">
       <li>
         <RouterLink
           @click="if (isMobile) isNavOpen = false;"
@@ -40,88 +28,48 @@
           <span>EduConnect <span>Admin</span></span>
         </RouterLink>
       </li>
-      <li
-        @click="if (isMobile) isNavOpen = false;"
-        class="nav__list-item"
-      >
-        <RouterLink
-          to="/"
-          class="nav__link"
-        >
+      <li @click="if (isMobile) isNavOpen = false;" class="nav__list-item">
+        <RouterLink to="/" class="nav__link">
           <House class="icon" />
           <span>Главная</span>
         </RouterLink>
       </li>
-      <li
-        @click="if (isMobile) isNavOpen = false;"
-        class="nav__list-item"
-      >
-        <RouterLink
-          to="/groups"
-          class="nav__link"
-        >
+      <li @click="if (isMobile) isNavOpen = false;" class="nav__list-item">
+        <RouterLink to="/groups" class="nav__link">
           <Users class="icon" />
           <span>Группы</span>
         </RouterLink>
       </li>
-      <li
-        @click="if (isMobile) isNavOpen = false;"
-        class="nav__list-item"
-      >
-        <RouterLink
-          to="/timetable"
-          class="nav__link"
-        >
+      <li @click="if (isMobile) isNavOpen = false;" class="nav__list-item">
+        <RouterLink to="/timetable" class="nav__link">
           <ListOl class="icon" />
           <span>Расписание</span>
         </RouterLink>
       </li>
-      <li
-        @click="if (isMobile) isNavOpen = false;"
-        class="nav__list-item"
-      >
-        <RouterLink
-          to="/users"
-          class="nav__link"
-        >
+      <li @click="if (isMobile) isNavOpen = false;" class="nav__list-item">
+        <RouterLink to="/users" class="nav__link">
           <User class="icon" />
           <span>Пользователи</span>
         </RouterLink>
       </li>
-      <li
-        @click="if (isMobile) isNavOpen = false;"
-        class="nav__list-item"
-      >
-        <RouterLink
-          to="/calendar"
-          class="nav__link"
-        >
+      <li @click="if (isMobile) isNavOpen = false;" class="nav__list-item">
+        <RouterLink to="/calendar" class="nav__link">
           <CalendarDays class="icon" />
           <span>Календарь</span>
         </RouterLink>
       </li>
-      <li
-        @click="if (isMobile) isNavOpen = false;"
-        class="nav__image-item"
-      >
+      <li @click="if (isMobile) isNavOpen = false;" class="nav__image-item">
         <RouterLink to="/login">
-          <img
-            src="https://picsum.photos/200"
-            alt="User Profile"
-          />
+          <img src="https://picsum.photos/200" alt="User Profile" />
         </RouterLink>
 
-        <RouterLink
-          class="nav__logout-btn"
-          to="/login"
-          >Выход</RouterLink
-        >
+        <RouterLink class="nav__logout-btn" to="/login">Выход</RouterLink>
       </li>
     </ul>
   </nav>
 </template>
 
-<script setup>
+<script lang="ts" setup>
 import {
   House,
   Users,
@@ -131,7 +79,7 @@ import {
   User,
   Bars,
   Xmark,
-} from "@/assets/icons";
+} from "@/assets/icons/";
 import { ref } from "vue";
 import { useMediaQuery } from "@vueuse/core";
 

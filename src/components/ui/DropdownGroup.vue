@@ -1,10 +1,6 @@
 <template>
   <div class="dropdown-group">
-    <label
-      class="dropdown-group__label"
-      :for="id"
-      >{{ label }}</label
-    >
+    <label class="dropdown-group__label" :for="id">{{ label }}</label>
     <Dropdown
       @onChange="(value) => emit('onChange', value)"
       v-bind="{ placeholder, id, label, options, selected, elevated }"
@@ -12,37 +8,20 @@
   </div>
 </template>
 
-<script setup>
+<script lang="ts" setup>
 import Dropdown from "@/components/ui/Dropdown.vue";
+import { type DropdownOption } from "@/types";
 
 const emit = defineEmits(["onChange"]);
 
-const props = defineProps({
-  options: {
-    type: Array,
-    required: true,
-  },
-  label: {
-    type: String,
-    required: true,
-  },
-  placeholder: {
-    type: String,
-    required: false,
-  },
-  id: {
-    type: String,
-    required: true,
-  },
-  selected: {
-    type: Object,
-    required: false,
-  },
-  elevated: {
-    type: Boolean,
-    required: false,
-  },
-});
+defineProps<{
+  options: DropdownOption[];
+  label: string;
+  id: string;
+  selected: DropdownOption;
+  elevated?: boolean;
+  placeholder?: string;
+}>();
 </script>
 
 <style lang="scss" scoped>

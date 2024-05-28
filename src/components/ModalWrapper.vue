@@ -7,15 +7,17 @@
   />
 </template>
 
-<script setup>
+<script lang="ts" setup>
 import ModalService from "@/services/ModalService";
 import { computed } from "vue";
-import * as modals from "@/components/modals";
+import * as allModals from "@/components/modals";
+import type { Modals } from "@/types";
+
+const modals = allModals as Modals;
 
 const currentModal = computed(() => {
-  return ModalService.getCurrentModal()
-    ? modals[ModalService.getCurrentModal()]
-    : null;
+  const modalName = ModalService.getCurrentModal();
+  return modalName ? modals[modalName] : null;
 });
 
 const modalProps = computed(() => ModalService.getModalProps());

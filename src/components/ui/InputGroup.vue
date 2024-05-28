@@ -1,50 +1,28 @@
 <template>
   <div class="input-group">
-    <label
-      class="input-group__label"
-      :for="id"
-      >{{ label }}</label
-    >
+    <label class="input-group__label" :for="id">{{ label }}</label>
     <Input
       @onChange="(value) => emit('onChange', value)"
       v-bind="{ id, placeholder, elevated }"
     />
-    <span
-      v-if="error"
-      class="input-group__error"
-    >
+    <span v-if="error" class="input-group__error">
       {{ error }}
     </span>
   </div>
 </template>
 
-<script setup>
+<script lang="ts" setup>
 import Input from "@/components/ui/Input.vue";
 
 const emit = defineEmits(["onChange"]);
 
-const props = defineProps({
-  label: {
-    type: String,
-    required: true,
-  },
-  placeholder: {
-    type: String,
-    required: false,
-  },
-  id: {
-    type: String,
-    required: true,
-  },
-  error: {
-    type: String,
-    required: false,
-  },
-  elevated: {
-    type: Boolean,
-    required: false,
-  },
-});
+defineProps<{
+  label: string;
+  id: string;
+  placeholder?: string;
+  error?: string;
+  elevated?: boolean;
+}>();
 </script>
 
 <style lang="scss" scoped>
