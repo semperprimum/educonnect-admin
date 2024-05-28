@@ -62,7 +62,7 @@ const students = [
   { name: "Камышанская Екатерина", subgroup: "b" },
   { name: "Кенжебаев Руслан", subgroup: "b" },
   { name: "Ким Богдан", subgroup: "b" },
-  { name: "Кишибаев Нурдан", subgroup: "b" },
+  { name: "Кишибаев Нуржан", subgroup: "b" },
   { name: "Кишко Ростислав", subgroup: "b" },
 ];
 
@@ -101,6 +101,8 @@ const openUnattachStudentModal = (studentName, groupName) => {
 
     display: grid;
     grid-template-columns: 1fr auto auto;
+
+    width: 25rem;
   }
 
   &__item {

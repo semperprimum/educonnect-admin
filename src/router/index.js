@@ -1,5 +1,6 @@
 import { createRouter, createWebHistory } from "vue-router";
 import HomeView from "@/views/HomeView/HomeView.vue";
+import Plus from "@/assets/icons/Plus.vue";
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -41,6 +42,10 @@ const router = createRouter({
     {
       path: "/calendar",
       component: () => import("@/views/CalendarView/CalendarView.vue"),
+    },
+    {
+      path: "/substitutions",
+      component: () => import("@/views/SubstitutionsView/SubstitutionsView.vue")
     },
     {
       path: "/:catchAll(.*)",

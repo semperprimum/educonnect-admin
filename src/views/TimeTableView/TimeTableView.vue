@@ -5,14 +5,19 @@
 
       <Dropdown :options="options" label="Специальность" />
 
-      <Button @click="openActiveSubstitutionsModal" label="Активные замены" />
-
-      <Button @click="openSubstitutionRequestsModal" label="Запросы на замену" />
+      <Button
+        @click="router.push('/substitutions')"
+        label="Управление заменами"
+      />
     </div>
 
     <div class="content">
-      <GroupTile v-for="group in mockGroups" :key="group.literals" :group="group"
-        @click="router.push(`/timetable/${group.id}`)" />
+      <GroupTile
+        v-for="group in mockGroups"
+        :key="group.literals"
+        :group="group"
+        @click="router.push(`/timetable/${group.id}`)"
+      />
     </div>
   </ContainerWithHeading>
 </template>
@@ -27,17 +32,8 @@ import GroupTile from "@/components/GroupTile.vue";
 
 import mockGroups from "@/views/mockGroups.json";
 import { useRouter } from "vue-router";
-import ModalService from "@/services/ModalService";
 
 const router = useRouter();
-
-const openSubstitutionRequestsModal = () => {
-  ModalService.open("SubstitutionRequestsModal");
-};
-
-const openActiveSubstitutionsModal = () => {
-  ModalService.open("ActiveSubstitutionsModal");
-};
 
 const options = [
   {

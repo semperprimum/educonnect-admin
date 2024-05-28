@@ -21,12 +21,6 @@
         <ElipsisMenu
           :options="[
             {
-              name: 'Рассмотреть замены',
-              action: () => {
-                openMakeSubstitutionModal();
-              },
-            },
-            {
               name: 'Изменить предмет',
               action: () => {
                 openChangeSubjectModal();
@@ -42,10 +36,6 @@
 <script setup>
 import ElipsisMenu from "@/components/ui/ElipsisMenu.vue";
 import ModalService from "@/services/ModalService.js";
-
-const openMakeSubstitutionModal = () => {
-  ModalService.open("MakeSubstitutionModal");
-};
 
 const openChangeSubjectModal = () => {
   ModalService.open("ChangeSubjectModal");
