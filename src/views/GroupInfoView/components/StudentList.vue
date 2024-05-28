@@ -3,14 +3,16 @@
     <p class="students__label">Список группы</p>
 
     <ol class="students__list">
-      <li
-        v-for="student in students"
-        :key="student"
-        class="students__item"
-      >
+      <li v-for="student in students" :key="student" class="students__item">
         <span class="students__name">
-          {{ student }}
+          {{ student.name }}
         </span>
+
+        <select class="students__subgroup-select" name="subgroup" id="subgroup">
+          <option :selected="student.subgroup === 'a'" value="a">A</option>
+          <option :selected="student.subgroup === 'b'" value="b">Б</option>
+        </select>
+
         <button
           class="students__button-remove"
           aria-label="Открепить студента"
@@ -45,23 +47,23 @@ const props = defineProps({
 });
 
 const students = [
-  "Айбек Али",
-  "Айрих Алексей",
-  "Алькенов Аян",
-  "Атамбозова Акерке",
-  "Атамурат Темирлан",
-  "Байбурин Марлен",
-  "Башарин Глеб",
-  "Бельц Никита",
-  "Бисен Алмас",
-  "Есеркепов Азамат",
-  "Жукасаев Тамирлан",
-  "Ибраев Альжан",
-  "Камышанская Екатерина",
-  "Кенжебаев Руслан",
-  "Ким Богдан",
-  "Кишибаев Нурдан",
-  "Кишко Ростислав",
+  { name: "Айбек Али", subgroup: "a" },
+  { name: "Айрих Алексей", subgroup: "a" },
+  { name: "Алькенов Аян", subgroup: "a" },
+  { name: "Атамбозова Акерке", subgroup: "a" },
+  { name: "Атамурат Темирлан", subgroup: "a" },
+  { name: "Байбурин Марлен", subgroup: "a" },
+  { name: "Башарин Глеб", subgroup: "a" },
+  { name: "Бельц Никита", subgroup: "a" },
+  { name: "Бисен Алмас", subgroup: "b" },
+  { name: "Есеркепов Азамат", subgroup: "b" },
+  { name: "Жукасаев Тамирлан", subgroup: "b" },
+  { name: "Ибраев Альжан", subgroup: "b" },
+  { name: "Камышанская Екатерина", subgroup: "b" },
+  { name: "Кенжебаев Руслан", subgroup: "b" },
+  { name: "Ким Богдан", subgroup: "b" },
+  { name: "Кишибаев Нурдан", subgroup: "b" },
+  { name: "Кишко Ростислав", subgroup: "b" },
 ];
 
 const openAddStudentModal = () => {
@@ -96,13 +98,16 @@ const openUnattachStudentModal = (studentName, groupName) => {
     counter-reset: student;
 
     background-color: var(--clr-neutral-700);
+
+    display: grid;
+    grid-template-columns: 1fr auto auto;
   }
 
   &__item {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    gap: 1rem;
+    display: grid;
+    grid-template-columns: subgrid;
+    grid-column: span 3;
+    gap: 0.5rem;
 
     & + & {
       padding-top: 0.5rem;
@@ -130,6 +135,20 @@ const openUnattachStudentModal = (studentName, groupName) => {
 
   &__button {
     width: 100%;
+  }
+
+  &__subgroup-select {
+    appearance: none;
+    border: none;
+    color: var(--clr-neutral-300);
+    background-color: var(--clr-neutral-500);
+    font-weight: var(--fw-bold);
+
+    width: 1.625rem;
+    aspect-ratio: 1;
+    text-align: center;
+
+    border-radius: 0.3125rem;
   }
 
   &__button-remove {

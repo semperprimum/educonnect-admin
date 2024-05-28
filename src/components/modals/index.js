@@ -7,6 +7,8 @@ import SubstitutionRequestsModal from "@/components/modals/SubstitutionRequestsM
 import ActiveSubstitutionsModal from "@/components/modals/ActiveSubstitutionsModal.vue";
 import MakeSubstitutionModal from "@/components/modals/MakeSubstitutionModal.vue";
 import CreateEventModal from "@/components/modals/CreateEventModal.vue";
+import ChangeSubjectModal from "@/components/modals/ChangeSubjectModal.vue";
+import DeleteUserModal from "@/components/modals/DeleteUserModal.vue";
 
 export {
   TestModal,
@@ -18,4 +20,6 @@ export {
   ActiveSubstitutionsModal,
   MakeSubstitutionModal,
   CreateEventModal,
+  ChangeSubjectModal,
+  DeleteUserModal,
 };

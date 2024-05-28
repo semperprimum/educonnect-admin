@@ -1,34 +1,18 @@
 <template>
   <ContainerWithHeading heading="Расписание">
     <div class="filter-bar">
-      <Input
-        placeholder="Поиск"
-        :trailing="MagnifyingGlass"
-      />
+      <Input placeholder="Поиск" :trailing="MagnifyingGlass" />
 
-      <Dropdown
-        :options="options"
-        label="Специальность"
-      />
+      <Dropdown :options="options" label="Специальность" />
 
-      <Button
-        @click="openActiveSubstitutionsModal"
-        label="Активные замены"
-      />
+      <Button @click="openActiveSubstitutionsModal" label="Активные замены" />
 
-      <Button
-        @click="openSubstitutionRequestsModal"
-        label="Запросы на замену"
-      />
+      <Button @click="openSubstitutionRequestsModal" label="Запросы на замену" />
     </div>
 
     <div class="content">
-      <GroupTile
-        v-for="group in mockGroups"
-        :key="group.literals"
-        :group="group"
-        @click="router.push(`/timetable/${group.id}`)"
-      />
+      <GroupTile v-for="group in mockGroups" :key="group.literals" :group="group"
+        @click="router.push(`/timetable/${group.id}`)" />
     </div>
   </ContainerWithHeading>
 </template>

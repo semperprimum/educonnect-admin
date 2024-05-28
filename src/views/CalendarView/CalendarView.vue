@@ -68,7 +68,11 @@ const attributes = [
     background-color: var(--clr-neutral-700);
     border: 1px solid var(--clr-neutral-600);
     border-radius: 1rem;
-    font-family: "Inter Variable", -apple-system, system-ui, sans-serif;
+    font-family:
+      "Inter Variable",
+      -apple-system,
+      system-ui,
+      sans-serif;
   }
 
   &:deep(.vc-title),

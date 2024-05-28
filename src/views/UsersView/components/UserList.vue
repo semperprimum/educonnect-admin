@@ -1,30 +1,36 @@
 <template>
   <ol class="list">
-    <li
-      v-for="user in users"
-      class="item"
-    >
+    <li v-for="user in users" class="item">
       <span class="item__name">{{ user.name }}</span>
       <span>{{ user.role }}</span>
       <span>{{ user.group }}</span>
-      <ElipsisMenu :options="mockOptions" />
+      <ElipsisMenu
+        :options="[
+          {
+            name: 'Изменить пользователя',
+            action: () => console.log('change user'),
+          },
+          {
+            name: 'Скопировать логин',
+            action: () => console.log('copy login'),
+          },
+          {
+            name: 'Удалить пользователя',
+            action: () => openDeleteUserModal(user.name),
+          },
+        ]"
+      />
     </li>
   </ol>
 </template>
 
 <script setup>
 import ElipsisMenu from "@/components/ui/ElipsisMenu.vue";
+import ModalService from "@/services/ModalService";
 
-const mockOptions = [
-  {
-    name: "Copy",
-    action: () => console.log("Copy"),
-  },
-  {
-    name: "Delete",
-    action: () => console.log("Delete"),
-  },
-];
+const openDeleteUserModal = (name) => {
+  ModalService.open("DeleteUserModal", { name });
+};
 
 const props = defineProps({
   users: {

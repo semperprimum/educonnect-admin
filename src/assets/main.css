@@ -8,6 +8,7 @@ body {
   font-family      : "Inter Variable", -apple-system, system-ui, sans-serif;
   font-size        : var(--fs-200);
   font-weight      : var(--fw-regular);
+  overflow-x: hidden;
 }
 
 @keyframes appearBlur {

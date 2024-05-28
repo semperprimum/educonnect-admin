@@ -147,6 +147,7 @@ const isNavOpen = ref(false);
     top: 0;
     left: 0;
     width: 100%;
+    max-width: 100vw;
     z-index: 1000;
 
     &__list {
@@ -161,6 +162,7 @@ const isNavOpen = ref(false);
       gap: 1rem;
       place-items: end;
       width: 100%;
+      max-width: 100vw;
 
       li {
         &:nth-child(1) {
@@ -249,7 +251,7 @@ const isNavOpen = ref(false);
     display: block;
 
     opacity: 1;
-    background-color: rgba(0, 0, 0, 0.65);
+    background-color: rgba(30, 30, 30, 0.65);
     backdrop-filter: blur(10px);
   }
 }

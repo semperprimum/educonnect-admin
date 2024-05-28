@@ -20,7 +20,7 @@ import TimeTableTile from "./components/TimeTableTile.vue";
 const currentRoute = useRoute();
 
 const groupName = mockGroups.filter(
-  (group) => group.id == currentRoute.params.id
+  (group) => group.id == currentRoute.params.id,
 )[0].literals;
 </script>
 

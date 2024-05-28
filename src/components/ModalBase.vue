@@ -1,18 +1,9 @@
 <template>
-  <dialog
-    class="dialog"
-    @click="onClose"
-    ref="dialog"
-  >
-    <div
-      ref="dialogContent"
-      class="dialog-content"
-    >
+  <dialog class="dialog" @click="onClose" ref="dialog">
+    <div ref="dialogContent" class="dialog-content">
       <slot></slot>
-      <button
-        class="close-button"
-        @click="onClose"
-      >
+
+      <button class="close-button" @click="onClose">
         <Xmark />
       </button>
     </div>

@@ -1,25 +1,19 @@
 <template>
-  <div
-    ref="menuContainer"
-    class="menu"
-  >
-    <button
-      @click="toggleMenu"
-      ref="button"
-      class="menu__toggle"
-    >
+  <div ref="menuContainer" class="menu">
+    <button @click="toggleMenu" ref="button" class="menu__toggle">
       <ElipsisVertical />
     </button>
 
-    <div
-      v-if="isMenuVisible"
-      ref="menu"
-      class="menu__main"
-    >
+    <div v-if="isMenuVisible" ref="menu" class="menu__main">
       <button
         v-for="option in options"
         class="menu__option-button"
-        @click="() => option.action()"
+        @click="
+          () => {
+            option.action();
+            toggleMenu();
+          }
+        "
       >
         {{ option.name }}
       </button>
@@ -127,6 +121,8 @@ onBeforeUnmount(() => {
     border-radius: 0.5rem;
     padding: 0.25rem 0.75rem;
     cursor: pointer;
+
+    white-space: nowrap;
 
     &:hover {
       background-color: var(--clr-neutral-600);

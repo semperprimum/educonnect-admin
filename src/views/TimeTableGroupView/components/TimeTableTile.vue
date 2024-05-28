@@ -13,10 +13,7 @@
       >
         <div class="tile__item-group">
           <h4 class="tile__item-title">{{ schedule.name || "Нет пары" }}</h4>
-          <div
-            v-if="schedule.classroom"
-            class="tile__item-classroom"
-          >
+          <div v-if="schedule.classroom" class="tile__item-classroom">
             <span>{{ schedule.classroom }}</span>
           </div>
         </div>
@@ -27,6 +24,12 @@
               name: 'Рассмотреть замены',
               action: () => {
                 openMakeSubstitutionModal();
+              },
+            },
+            {
+              name: 'Изменить предмет',
+              action: () => {
+                openChangeSubjectModal();
               },
             },
           ]"
@@ -42,6 +45,10 @@ import ModalService from "@/services/ModalService.js";
 
 const openMakeSubstitutionModal = () => {
   ModalService.open("MakeSubstitutionModal");
+};
+
+const openChangeSubjectModal = () => {
+  ModalService.open("ChangeSubjectModal");
 };
 
 const mockSchedule = [

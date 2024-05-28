@@ -2,11 +2,7 @@
   <ContainerWithHeading heading="Добрый день, Денис Валентинович!">
     Home
     <div>
-      <Button
-        @click="openModal"
-        danger
-        label="Open Modal"
-      />
+      <Button @click="openModal" danger label="Open Modal" />
     </div>
   </ContainerWithHeading>
 </template>
