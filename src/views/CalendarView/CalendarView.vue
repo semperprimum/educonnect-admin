@@ -4,13 +4,7 @@
       <EventList />
 
       <div class="calendar">
-        <DatePicker
-          :attributes="attributes"
-          v-model.date="date"
-          locale="ru"
-          color="red"
-          :is-dark="true"
-        />
+        <Calendar :date="date" :attributes="attributes" />
 
         <Button
           @click="openCreateEventModal"
@@ -26,7 +20,7 @@
 
 <script lang="ts" setup>
 import ContainerWithHeading from "@/components/ContainerWithHeading.vue";
-import { DatePicker } from "v-calendar";
+import Calendar from "@/components/Calendar.vue";
 import Button from "@/components/ui/Button.vue";
 import Plus from "@/assets/icons/Plus.vue";
 import EventList from "@/views/CalendarView/components/EventList.vue";
@@ -61,44 +55,5 @@ const attributes = [
 .button {
   margin-top: 1rem;
   width: 100%;
-}
-
-.calendar {
-  &:deep(.vc-container) {
-    background-color: var(--clr-neutral-700);
-    border: 1px solid var(--clr-neutral-600);
-    border-radius: 1rem;
-    font-family:
-      "Inter Variable",
-      -apple-system,
-      system-ui,
-      sans-serif;
-  }
-
-  &:deep(.vc-title),
-  &:deep(.vc-arrow),
-  &:deep(.vc-nav-item),
-  &:deep(.vc-nav-title),
-  &:deep(.vc-nav-arrow) {
-    background: transparent;
-  }
-
-  &:deep(.vc-title) {
-    text-transform: capitalize;
-  }
-
-  &:deep(.vc-nav-item),
-  &:deep(.vc-weekday) {
-    color: var(--clr-neutral-300);
-  }
-
-  &:deep(.vc-gray) {
-    --vc-accent-500: var(--clr-neutral-600);
-  }
-
-  &:deep(.vc-popover-content) {
-    background: var(--clr-neutral-600);
-    border: 1px solid var(--clr-neutral-500);
-  }
 }
 </style>
