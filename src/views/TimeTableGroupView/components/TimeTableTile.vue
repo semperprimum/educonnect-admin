@@ -13,9 +13,7 @@
       >
         <div class="tile__item-group">
           <h4 class="tile__item-title">{{ schedule.name || "Нет пары" }}</h4>
-          <div v-if="schedule.classroom" class="tile__item-classroom">
-            <span>{{ schedule.classroom }}</span>
-          </div>
+          <Classroom :classrooms="schedule.classroom" />
         </div>
 
         <ElipsisMenu
@@ -36,6 +34,7 @@
 <script lang="ts" setup>
 import ElipsisMenu from "@/components/ui/ElipsisMenu.vue";
 import ModalService from "@/services/ModalService.js";
+import Classroom from "@/components/Classroom.vue";
 
 const openChangeSubjectModal = () => {
   ModalService.open("ChangeSubjectModal");
@@ -50,22 +49,22 @@ const mockSchedule = [
   {
     id: 2,
     name: "Программирование",
-    classroom: "1308",
+    classroom: ["1308"],
   },
   {
     id: 3,
     name: "Тестирование ПО",
-    classroom: "1406",
+    classroom: ["1412", "1314"],
   },
   {
     id: 4,
     name: "ООП",
-    classroom: "1415",
+    classroom: ["1410"],
   },
   {
     id: 5,
     name: "Социология",
-    classroom: "2414",
+    classroom: ["2414"],
   },
   {
     id: 6,
