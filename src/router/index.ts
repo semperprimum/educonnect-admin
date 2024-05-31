@@ -43,7 +43,8 @@ const router = createRouter({
     },
     {
       path: "/substitutions",
-      component: () => import("@/views/SubstitutionsView/SubstitutionsView.vue")
+      component: () =>
+        import("@/views/SubstitutionsView/SubstitutionsView.vue"),
     },
     {
       path: "/:catchAll(.*)",
