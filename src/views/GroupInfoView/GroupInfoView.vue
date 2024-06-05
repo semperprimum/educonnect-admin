@@ -7,6 +7,8 @@
           id="literals"
           label="Литеры группы"
           placeholder="Литеры"
+          disabled
+          :value="groupName"
         />
         <DropdownGroup
           id="branch"

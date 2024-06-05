@@ -97,8 +97,6 @@ onBeforeUnmount(() => {
   padding: 0.5rem;
   border-radius: 0.35rem;
 
-  mix-blend-mode: color-dodge;
-
   display: none;
 
   &[data-show] {
@@ -109,8 +107,6 @@ onBeforeUnmount(() => {
 
   &__item {
     white-space: nowrap;
-
-    text-shadow: 1px 1px 1px var(--clr-neutral-900);
   }
 }
 </style>

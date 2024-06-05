@@ -5,12 +5,19 @@
 
       <Dropdown :options="options" label="Специальность" />
 
-      <Button @click="router.push('/substitutions')" label="Управление заменами" />
+      <Button
+        @click="router.push('/substitutions')"
+        label="Управление заменами"
+      />
     </div>
 
     <div class="content">
-      <GroupTile v-for="group in mockGroups" :key="group.literals" :group="group"
-        @click="router.push(`/timetable/${group.id}`)" />
+      <GroupTile
+        v-for="group in mockGroups"
+        :key="group.literals"
+        :group="group"
+        @click="router.push(`/timetable/${group.id}`)"
+      />
     </div>
   </ContainerWithHeading>
 </template>

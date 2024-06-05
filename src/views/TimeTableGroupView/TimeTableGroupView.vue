@@ -27,7 +27,7 @@ const groupName = mockGroups.filter(
 <style lang="scss" scoped>
 .container {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(23.5rem, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(25rem, 1fr));
   grid-auto-rows: 1fr;
   min-height: 100%;
   gap: 1rem;

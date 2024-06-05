@@ -1,7 +1,7 @@
 <template>
-  <div class="tile" :style="{ '--accent-color': group.accentColor }">
-    <h2 class="tile__heading">{{ group.literals }}</h2>
-    <p class="tile__students">{{ group.number_of_students }} студентов</p>
+  <div class="tile">
+    <h2 class="tile__heading">{{ group.title }}</h2>
+    <p class="tile__students">{{ group.students_count }} студентов</p>
     <p class="tile__curator">
       <component aria-hidden="true" class="tile__icon" :is="CircleUser" />
       {{ group.curator }}

@@ -32,14 +32,19 @@ import MagnifyingGlass from "@/assets/icons/MagnifyingGlass.vue";
 import Plus from "@/assets/icons/Plus.vue";
 import GroupTile from "@/components/GroupTile.vue";
 
-import mockGroups from "@/views/mockGroups.json";
 import { useRouter } from "vue-router";
 import ModalService from "@/services/ModalService";
 import type { Group } from "@/types";
+import { onMounted, ref } from "vue";
+import { useGroupStore } from "@/stores/group";
 
-const groups = mockGroups as Group[];
-
+const groups: Group[] = ref([]);
+const groupStore = useGroupStore();
 const router = useRouter();
+
+onMounted(async () => {
+  groups.value = await groupStore.getGroups();
+});
 
 const options = [
   {

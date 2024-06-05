@@ -47,10 +47,20 @@ const router = createRouter({
         import("@/views/SubstitutionsView/SubstitutionsView.vue"),
     },
     {
+      path: "/notfound",
+      component: () => import("@/views/404View.vue"),
+    },
+    {
       path: "/:catchAll(.*)",
-      redirect: "/login",
+      redirect: "/notfound",
     },
   ],
+});
+
+router.beforeEach(async (to, _) => {
+  if (!localStorage.getItem("auth-token") && to.name !== "login") {
+    return { name: "login" };
+  }
 });
 
 export default router;

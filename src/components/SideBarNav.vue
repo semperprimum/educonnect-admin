@@ -1,3 +1,33 @@
+<script lang="ts" setup>
+import {
+  House,
+  Users,
+  ListOl,
+  CalendarDays,
+  Logo,
+  User,
+  Bars,
+  Xmark,
+} from "@/assets/icons/";
+import { ref } from "vue";
+import { useMediaQuery } from "@vueuse/core";
+import { useAuthStore } from "@/stores/auth";
+import { useRouter } from "vue-router";
+
+const isMobile = useMediaQuery("(max-width: 48em)");
+const isNavOpen = ref(false);
+const authStore = useAuthStore();
+const router = useRouter();
+
+const logout = async () => {
+  await authStore.logout();
+
+  if (authStore.token) return;
+
+  router.replace("/login");
+};
+</script>
+
 <template>
   <div class="overlay" :class="{ 'overlay-active': isNavOpen }"></div>
   <nav
@@ -63,30 +93,11 @@
           <img src="https://picsum.photos/200" alt="User Profile" />
         </RouterLink>
 
-        <RouterLink class="nav__logout-btn" to="/login">Выход</RouterLink>
+        <button @click="logout" class="nav__logout-btn">Выход</button>
       </li>
     </ul>
   </nav>
 </template>
-
-<script lang="ts" setup>
-import {
-  House,
-  Users,
-  ListOl,
-  CalendarDays,
-  Logo,
-  User,
-  Bars,
-  Xmark,
-} from "@/assets/icons/";
-import { ref } from "vue";
-import { useMediaQuery } from "@vueuse/core";
-
-const isMobile = useMediaQuery("(max-width: 48em)");
-
-const isNavOpen = ref(false);
-</script>
 
 <style scoped lang="scss">
 @media only screen and (max-width: 48em) {
@@ -284,8 +295,11 @@ const isNavOpen = ref(false);
       width: 15.5rem;
 
       .nav__logout-btn {
+        background: none;
+        border: none;
         display: block;
         animation: fadeInFull 150ms ease;
+        cursor: pointer;
       }
 
       .nav__link,

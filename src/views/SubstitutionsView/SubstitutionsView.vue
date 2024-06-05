@@ -27,7 +27,7 @@
         <Accordion big-name name="Ди-20-43к" />
       </div>
       <div class="right">
-        <Calendar :date="new Date()" />
+        <Calendar :date="new Date()" :attributes="attributes" />
         <TimeTableTile />
       </div>
     </div>
@@ -40,6 +40,18 @@ import TimeTableTile from "@/views/SubstitutionsView/components/TimeTableTile.vu
 import Calendar from "@/components/Calendar.vue";
 import Accordion from "@/components/Accordion.vue";
 import Button from "@/components/ui/Button.vue";
+
+const attributes = [
+  {
+    highlight: "gray",
+    dates: [
+      new Date(2024, 5, 7),
+      new Date(2024, 5, 12),
+      new Date(2024, 5, 14),
+      new Date(2024, 5, 20),
+    ],
+  },
+];
 </script>
 
 <style lang="scss" scoped>

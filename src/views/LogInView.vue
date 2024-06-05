@@ -9,9 +9,13 @@
         <span class="heading__span-admin">Admin</span>
       </h1>
 
-      <form @submit.prevent="fakeLogin" class="form">
+      <form @submit.prevent="signIn" class="form">
         <Input placeholder="Логин" v-model="login" />
         <Input placeholder="Пароль" v-model="password" type="password" />
+
+        <span class="error" v-if="authStore.error"
+          >Неверный логин или пароль.</span
+        >
 
         <GradientButton class="button" label="Войти" />
       </form>
@@ -27,14 +31,19 @@ import GradientButton from "@/components/GradientButton.vue";
 import { useRouter } from "vue-router";
 
 import { ref } from "vue";
+import { useAuthStore } from "@/stores/auth";
 
 const router = useRouter();
-
+const authStore = useAuthStore();
 const login = ref("");
 const password = ref("");
 
-const fakeLogin = async () => {
-  await new Promise((resolve) => setTimeout(resolve, 700));
+const signIn = async () => {
+  if (!login.value || !password.value) return;
+
+  await authStore.login({ login: login.value, password: password.value });
+
+  if (!authStore.token) return;
 
   router.replace("/");
 };
@@ -45,6 +54,11 @@ const fakeLogin = async () => {
   display: grid;
   place-content: center;
   height: 100vh;
+}
+
+.error {
+  display: block;
+  color: var(--clr-red-400);
 }
 
 .container {

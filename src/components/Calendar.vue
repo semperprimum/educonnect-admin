@@ -1,7 +1,7 @@
 <template>
   <DatePicker
-    v-model.date="props.date"
-    :attributes="attributes"
+    v-model.date="date"
+    :attributes="props.attributes"
     locale="ru"
     color="red"
     :is-dark="true"
@@ -11,8 +11,9 @@
 <script setup lang="ts">
 import { DatePicker } from "v-calendar";
 
+let date = new Date();
+
 const props = defineProps<{
-  date: Date;
   attributes?: {
     highlight: string;
     dates: Date[];

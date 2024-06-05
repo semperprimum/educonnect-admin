@@ -3,7 +3,7 @@
     <label class="input-group__label" :for="id">{{ label }}</label>
     <Input
       @onChange="(value) => emit('onChange', value)"
-      v-bind="{ id, placeholder, elevated }"
+      v-bind="{ id, placeholder, elevated, disabled, value }"
     />
     <span v-if="error" class="input-group__error">
       {{ error }}
@@ -22,6 +22,8 @@ defineProps<{
   placeholder?: string;
   error?: string;
   elevated?: boolean;
+  disabled?: boolean;
+  value?: string;
 }>();
 </script>
 

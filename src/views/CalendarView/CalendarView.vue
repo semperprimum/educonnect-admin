@@ -4,7 +4,7 @@
       <EventList />
 
       <div class="calendar">
-        <Calendar :date="date" :attributes="attributes" />
+        <Calendar :attributes="attributes" />
 
         <Button
           @click="openCreateEventModal"
@@ -24,10 +24,7 @@ import Calendar from "@/components/Calendar.vue";
 import Button from "@/components/ui/Button.vue";
 import Plus from "@/assets/icons/Plus.vue";
 import EventList from "@/views/CalendarView/components/EventList.vue";
-import { ref } from "vue";
 import ModalService from "@/services/ModalService";
-
-const date = ref(new Date());
 
 const openCreateEventModal = () => {
   ModalService.open("CreateEventModal");
@@ -37,10 +34,10 @@ const attributes = [
   {
     highlight: "gray",
     dates: [
-      new Date(2024, 4, 11),
-      new Date(2024, 4, 12),
-      new Date(2024, 4, 14),
-      new Date(2024, 4, 16),
+      new Date(2024, 5, 7),
+      new Date(2024, 5, 12),
+      new Date(2024, 5, 14),
+      new Date(2024, 5, 20),
     ],
   },
 ];

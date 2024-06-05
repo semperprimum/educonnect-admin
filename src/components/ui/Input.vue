@@ -4,7 +4,13 @@
       :type="type || 'text'"
       :placeholder="placeholder"
       :id="id"
-      @change="onChange"
+      :disabled="disabled"
+      :value="modelValue"
+      @input="
+        (event: Event) => {
+          emit('update:modelValue', (event.target as HTMLInputElement).value);
+        }
+      "
     />
     <component class="trailing" v-if="trailing" :is="trailing" />
   </div>
@@ -13,7 +19,7 @@
 <script lang="ts" setup>
 import type { Component } from "vue";
 
-const emit = defineEmits(["onChange"]);
+const emit = defineEmits(["onChange", "update:modelValue"]);
 
 const onChange = (e: Event) => {
   emit("onChange", (e.target as HTMLInputElement).value);
@@ -25,6 +31,8 @@ defineProps<{
   type?: string;
   trailing?: Component;
   elevated?: boolean;
+  modelValue?: string;
+  disabled?: boolean;
 }>();
 </script>
 
@@ -46,6 +54,10 @@ defineProps<{
   &:focus-within {
     outline: 1px solid var(--clr-brand);
   }
+
+  &:has(input[disabled]) {
+    opacity: 0.5;
+  }
 }
 
 input {
@@ -62,6 +74,10 @@ input {
   font-weight: var(--fw-medium);
 
   outline: none;
+
+  &[disabled] {
+    cursor: not-allowed;
+  }
 }
 
 .trailing {
