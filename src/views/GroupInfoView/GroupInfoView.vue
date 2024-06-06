@@ -1,27 +1,30 @@
 <template>
-  <ContainerWithHeading :heading="'Группы -> ' + groupName">
+  <ContainerWithHeading :heading="'Группы -> ' + groupStore.group?.title">
     <div class="container">
       <div class="info">
-        <InputGroup
-          class="literals-input"
-          id="literals"
-          label="Литеры группы"
-          placeholder="Литеры"
-          disabled
-          :value="groupName"
+        <span class="label">Литеры</span>
+        <Input disabled :model-value="groupStore.group?.title" />
+
+        <span class="label">Специальность</span>
+        <MultiSelect
+          v-model="selectedSpecialization"
+          :options="generalStore.specializations"
+          :allow-empty="false"
+          label="title"
+          track-by="id"
+          @update:modelValue="handleSpecializationChange"
         />
-        <DropdownGroup
-          id="branch"
-          label="Отделение"
-          :options="options"
-          :selected="options[1]"
+
+        <span class="label">Куратор</span>
+        <MultiSelect
+          :options="generalStore.teachers"
+          :allow-empty="false"
+          label="fio"
+          track-by="id"
+          v-model="selectedCurator"
+          @update:modelValue="handleChangeCurator"
         />
-        <DropdownGroup
-          id="curator"
-          label="Куратор"
-          :options="curatorOptions"
-          :selected="curatorOptions[0]"
-        />
+
         <Accordion name="Управление предметами" class="accordion">
           <SubjectControl
             @changeSubject="handleChangeSubject"
@@ -32,7 +35,7 @@
         </Accordion>
       </div>
 
-      <StudentList :groupName="groupName" />
+      <StudentList />
     </div>
   </ContainerWithHeading>
 </template>
@@ -41,18 +44,51 @@
 import ContainerWithHeading from "@/components/ContainerWithHeading.vue";
 import StudentList from "./components/StudentList.vue";
 import SubjectControl from "./components/SubjectControl.vue";
-import InputGroup from "@/components/ui/InputGroup.vue";
-import DropdownGroup from "@/components/ui/DropdownGroup.vue";
-import mockGroups from "@/views/mockGroups.json";
+import Input from "@/components/ui/Input.vue";
 import Accordion from "@/components/Accordion.vue";
 import { useRoute } from "vue-router";
-import { ref } from "vue";
+import { onMounted, ref, type Ref } from "vue";
+import MultiSelect from "vue-multiselect";
+import { useGroupStore } from "@/stores/group";
+import { useGeneralStore } from "@/stores/general";
 
 const currentRoute = useRoute();
+const groupStore = useGroupStore();
+const generalStore = useGeneralStore();
 
-const groupName = mockGroups.filter(
-  (group) => group.id.toString() === currentRoute.params.id,
-)[0].literals;
+let selectedSpecialization: Ref<{ title: string; id: number } | null> =
+  ref(null);
+let selectedCurator: Ref<{ fio: string; id: number } | null> = ref(null);
+
+onMounted(async () => {
+  await groupStore.getGroupInfoById(+currentRoute.params.id);
+
+  if (groupStore.group?.specialization) {
+    selectedSpecialization.value = groupStore.group.specialization;
+  }
+
+  if (groupStore.group?.curator) {
+    selectedCurator.value = groupStore.group.curator;
+  }
+});
+
+const handleSpecializationChange = () => {
+  if (!groupStore.group || !selectedSpecialization.value) return;
+
+  groupStore.updateSpecializationById(
+    +currentRoute.params.id,
+    selectedSpecialization.value.id,
+  );
+};
+
+const handleChangeCurator = () => {
+  if (!groupStore.group || !selectedCurator.value) return;
+
+  groupStore.updateCuratorById(
+    +currentRoute.params.id,
+    selectedCurator.value.id,
+  );
+};
 
 const subjects = ref([
   {
@@ -102,36 +138,6 @@ const handleChangeSubject = ({
   }
   console.log(subjects);
 };
-
-const options = [
-  {
-    name: "все",
-    value: "all",
-  },
-  {
-    name: "программирование",
-    value: "programming",
-  },
-  {
-    name: "дизайн",
-    value: "design",
-  },
-  {
-    name: "туризм",
-    value: "tourism",
-  },
-];
-
-const curatorOptions = [
-  {
-    name: "Гульнар Нурхамитовна",
-    value: "1",
-  },
-  {
-    name: "Денис Валентинович",
-    value: "2",
-  },
-];
 </script>
 
 <style lang="scss" scoped>
@@ -139,6 +145,13 @@ const curatorOptions = [
   width: 25rem;
   display: grid;
   gap: 1rem;
+}
+
+.label {
+  font-size: var(--fs-300);
+  color: var(--clr-neutral-300);
+  font-weight: var(--fw-bold);
+  margin-bottom: -0.5rem;
 }
 
 .container {

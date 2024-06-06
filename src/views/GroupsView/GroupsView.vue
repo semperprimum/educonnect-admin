@@ -14,8 +14,8 @@
 
     <div class="content">
       <GroupTile
-        v-for="group in groups"
-        :key="group.literals"
+        v-for="group in groupStore.groups"
+        :key="group.title"
         :group="group"
         @click="router.push(`/groups/${group.id}`)"
       />
@@ -34,16 +34,14 @@ import GroupTile from "@/components/GroupTile.vue";
 
 import { useRouter } from "vue-router";
 import ModalService from "@/services/ModalService";
-import type { Group } from "@/types";
-import { onMounted, ref } from "vue";
+import { onMounted } from "vue";
 import { useGroupStore } from "@/stores/group";
 
-const groups: Group[] = ref([]);
 const groupStore = useGroupStore();
 const router = useRouter();
 
 onMounted(async () => {
-  groups.value = await groupStore.getGroups();
+  await groupStore.getGroups();
 });
 
 const options = [

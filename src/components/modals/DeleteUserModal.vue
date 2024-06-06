@@ -9,7 +9,7 @@
 
     <div class="button-pair">
       <Button @click="() => onClose()" center elevated label="Отмена" />
-      <Button center danger label="Удалить" />
+      <Button @click="handleSubmit" center danger label="Удалить" />
     </div>
   </ModalBase>
 </template>
@@ -17,17 +17,29 @@
 <script lang="ts" setup>
 import ModalBase from "@/components/ModalBase.vue";
 import Button from "@/components/ui/Button.vue";
+import { useUserStore } from "@/stores/user";
 
-const props = defineProps({
-  onClose: {
-    type: Function,
-    required: true,
-  },
-  name: {
-    type: String,
-    required: true,
-  },
-});
+const userStore = useUserStore();
+
+const props = defineProps<{
+  onClose: () => void;
+  id: number;
+  role: string;
+  name: string;
+}>();
+
+const handleSubmit = async () => {
+  switch (props.role) {
+    case "Student":
+      await userStore.deleteStudent(props.id);
+      break;
+    case "Teacher":
+      await userStore.deleteTeacher(props.id);
+      break;
+  }
+
+  props.onClose();
+};
 </script>
 
 <style lang="scss" scoped>

@@ -1,9 +1,8 @@
 <template>
   <ol class="list">
-    <li v-for="user in users" class="item">
-      <span class="item__name">{{ user.name }}</span>
+    <li v-for="user in userStore.users" class="item">
+      <span class="item__name">{{ user.fio }}</span>
       <span>{{ user.role }}</span>
-      <span>{{ user.group }}</span>
       <ElipsisMenu
         :options="[
           {
@@ -16,7 +15,7 @@
           },
           {
             name: 'Удалить пользователя',
-            action: () => openDeleteUserModal(user.name),
+            action: () => openDeleteUserModal(user.id, user.role, user.fio),
           },
         ]"
       />
@@ -27,15 +26,13 @@
 <script lang="ts" setup>
 import ElipsisMenu from "@/components/ui/ElipsisMenu.vue";
 import ModalService from "@/services/ModalService";
-import type { User } from "@/types";
+import { useUserStore } from "@/stores/user";
 
-const openDeleteUserModal = (name: string) => {
-  ModalService.open("DeleteUserModal", { name });
+const userStore = useUserStore();
+
+const openDeleteUserModal = (id: number, role: string, name: string) => {
+  ModalService.open("DeleteUserModal", { id, role, name });
 };
-
-defineProps<{
-  users: User[];
-}>();
 </script>
 
 <style lang="scss" scoped>
@@ -47,7 +44,7 @@ defineProps<{
   counter-reset: userList;
 
   display: grid;
-  grid-template-columns: auto auto 1fr auto;
+  grid-template-columns: auto 1fr auto;
   column-gap: 2rem;
 }
 
@@ -57,7 +54,7 @@ defineProps<{
   align-items: center;
 
   grid-template-columns: subgrid;
-  grid-column: span 4;
+  grid-column: span 3;
 
   padding-block: 0.75rem;
   padding-inline: 0.5rem;

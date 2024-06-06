@@ -3,71 +3,110 @@
 @import './sr-only.css';
 
 body {
-  background-color : var(--clr-neutral-900);
-  color            : var(--clr-neutral-100);
-  font-family      : "Inter Variable", -apple-system, system-ui, sans-serif;
-  font-size        : var(--fs-200);
-  font-weight      : var(--fw-regular);
+  background-color: var(--clr-neutral-900);
+  color: var(--clr-neutral-100);
+  font-family: "Inter Variable", -apple-system, system-ui, sans-serif;
+  font-size: var(--fs-200);
+  font-weight: var(--fw-regular);
   overflow-x: hidden;
+}
+
+.multiselect {
+  color: var(--clr-neutral-300) !important;
+}
+
+.multiselect__select::before {
+  top: 80% !important;
+}
+
+.multiselect__tags,
+.multiselect__single {
+  background: var(--clr-neutral-700) !important;
+}
+
+.multiselect__tags {
+  border: 1px solid var(--clr-neutral-600) !important;
+  padding: .75rem 2.5rem 0 1rem !important;
+  border-radius: 1rem !important;
+}
+
+.multiselect__input {
+  background-color: var(--clr-neutral-700) !important;
+  caret-color: var(--clr-neutral-100) !important;
+  color: var(--clr-neutral-100) !important;
+
+  &::placeholder {
+    color: white !important;
+  }
+}
+
+.multiselect__single {
+  margin-bottom: .75rem !important;
+  line-height: 1.4 !important;
+}
+
+.multiselect__content-wrapper {
+  background: var(--clr-neutral-700) !important;
+  border: 1px solid var(--clr-neutral-600) !important;
 }
 
 @keyframes appearBlur {
   0% {
-    display : none;
-    opacity : 0;
-    filter  : blur(1.5rem) brightness(1.5);
+    display: none;
+    opacity: 0;
+    filter: blur(1.5rem) brightness(1.5);
   }
 
   1% {
-    display : block;
+    display: block;
   }
 
   100% {
-    opacity : 1;
-    filter  : blur(0) brightness(1);
+    opacity: 1;
+    filter: blur(0) brightness(1);
   }
 }
 
 @keyframes fadeInFull {
   0% {
-    display : none;
-    opacity : 0;
+    display: none;
+    opacity: 0;
   }
 
   1% {
-    display : block;
+    display: block;
   }
 
   100% {
-    opacity : 1;
+    opacity: 1;
   }
 }
 
 @keyframes fadeInHalf {
   0% {
-    display : none;
-    opacity : 0;
+    display: none;
+    opacity: 0;
   }
 
   1% {
-    display : block;
+    display: block;
   }
 
   100% {
-    opacity : 0.5;
+    opacity: 0.5;
   }
 }
 
 @keyframes scaleAppear {
   from {
-    scale   : 0;
-    opacity : 0;
-    filter  : blur(1.5rem) brightness(2);
+    scale: 0;
+    opacity: 0;
+    filter: blur(1.5rem) brightness(2);
   }
 
   to {
-    scale   : 1;
-    opacity : 1;
-    filter  : blur(0) brightness(1);
+    scale: 1;
+    opacity: 1;
+    filter: blur(0) brightness(1);
   }
 }

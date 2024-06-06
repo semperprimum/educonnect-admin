@@ -4,23 +4,30 @@
 
     <ol class="students__list">
       <li
-        v-for="student in students"
-        :key="student.name"
+        v-for="student in groupStore.group?.students"
+        :key="student.fio"
         class="students__item"
       >
         <span class="students__name">
-          {{ student.name }}
+          {{ student.fio }}
         </span>
 
-        <select class="students__subgroup-select" name="subgroup" id="subgroup">
-          <option :selected="student.subgroup === 'a'" value="a">A</option>
-          <option :selected="student.subgroup === 'b'" value="b">Б</option>
+        <select
+          @change="(e) => handleSubgroupChange(e, student.id)"
+          class="students__subgroup-select"
+          name="subgroup"
+          id="subgroup"
+        >
+          <option :selected="student.subgroup === 'A'" value="A">A</option>
+          <option :selected="student.subgroup === 'B'" value="B">Б</option>
         </select>
 
         <button
           class="students__button-remove"
           aria-label="Открепить студента"
-          @click="openUnattachStudentModal(student.name, groupName)"
+          @click="
+            openUnattachStudentModal(student.fio, groupStore.group?.title!)
+          "
         >
           <Xmark aria-hidden="false" />
         </button>
@@ -42,30 +49,12 @@ import Button from "@/components/ui/Button.vue";
 import Plus from "@/assets/icons/Plus.vue";
 import Xmark from "@/assets/icons/Xmark.vue";
 import ModalService from "@/services/ModalService";
+import { useGroupStore } from "@/stores/group";
+import { useRoute } from "vue-router";
 
-defineProps<{
-  groupName: string;
-}>();
+const groupStore = useGroupStore();
 
-const students = [
-  { name: "Айбек Али", subgroup: "a" },
-  { name: "Айрих Алексей", subgroup: "a" },
-  { name: "Алькенов Аян", subgroup: "a" },
-  { name: "Атамбозова Акерке", subgroup: "a" },
-  { name: "Атамурат Темирлан", subgroup: "a" },
-  { name: "Байбурин Марлен", subgroup: "a" },
-  { name: "Башарин Глеб", subgroup: "a" },
-  { name: "Бельц Никита", subgroup: "a" },
-  { name: "Бисен Алмас", subgroup: "b" },
-  { name: "Есеркепов Азамат", subgroup: "b" },
-  { name: "Жукасаев Тамирлан", subgroup: "b" },
-  { name: "Ибраев Альжан", subgroup: "b" },
-  { name: "Камышанская Екатерина", subgroup: "b" },
-  { name: "Кенжебаев Руслан", subgroup: "b" },
-  { name: "Ким Богдан", subgroup: "b" },
-  { name: "Кишибаев Нуржан", subgroup: "b" },
-  { name: "Кишко Ростислав", subgroup: "b" },
-];
+const currentRoute = useRoute();
 
 const openAddStudentModal = () => {
   ModalService.open("AddStudentModal");
@@ -73,6 +62,17 @@ const openAddStudentModal = () => {
 
 const openUnattachStudentModal = (studentName: string, groupName: string) => {
   ModalService.open("UnattachStudentModal", { studentName, groupName });
+};
+
+const handleSubgroupChange = async (event: Event, studentId: number) => {
+  if (!groupStore.group) return;
+  const subgroup = (event.target as HTMLSelectElement).value;
+
+  await groupStore.updateStudentSubgroup(
+    +currentRoute.params.id,
+    studentId,
+    subgroup,
+  );
 };
 </script>
 
@@ -94,7 +94,7 @@ const openUnattachStudentModal = (studentName: string, groupName: string) => {
     margin: 0 0 1rem 0;
     list-style: none;
     border-radius: 1rem;
-    border: 1px solid var(--clr-neutral-500);
+    border: 1px solid var(--clr-neutral-600);
 
     counter-reset: student;
 

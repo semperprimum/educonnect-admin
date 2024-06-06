@@ -7,6 +7,7 @@ import router from "./router";
 import "@fontsource-variable/inter";
 import "@fontsource-variable/nunito";
 import "v-calendar/style.css";
+import "vue-multiselect/dist/vue-multiselect.css";
 import VCalendar from "v-calendar";
 import { createPinia } from "pinia";
 

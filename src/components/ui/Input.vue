@@ -19,11 +19,7 @@
 <script lang="ts" setup>
 import type { Component } from "vue";
 
-const emit = defineEmits(["onChange", "update:modelValue"]);
-
-const onChange = (e: Event) => {
-  emit("onChange", (e.target as HTMLInputElement).value);
-};
+const emit = defineEmits(["update:modelValue"]);
 
 defineProps<{
   placeholder?: string;

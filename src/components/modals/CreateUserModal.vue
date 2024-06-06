@@ -3,59 +3,34 @@
     <h2 class="heading">Создать пользователя</h2>
 
     <form class="form">
-      <InputGroup
-        elevated
-        label="Фамилия"
-        id="lastname"
-        @onChange="(value) => handleInputChange('lastName', value)"
-      />
-      <InputGroup
-        elevated
-        label="Имя"
-        id="name"
-        @onChange="(value) => handleInputChange('name', value)"
-      />
-      <InputGroup
-        elevated
-        label="Отчество"
-        id="patronymic"
-        @onChange="(value) => handleInputChange('patronymic', value)"
-      />
-      <DropdownGroup
-        elevated
-        label="Роль"
-        id="role"
-        :options="roles"
-        @onChange="(value) => handleInputChange('role', value.value)"
+      <span class="label">Имя</span>
+      <Input elevated v-model="formData.name" />
+
+      <span class="label">Фамилия</span>
+      <Input elevated v-model="formData.lastName" />
+
+      <div v-if="formData.role === 'admin' || formData.role === 'teacher'">
+        <span class="label">Отчество</span>
+        <Input elevated v-model="formData.patronymic" />
+      </div>
+
+      <span class="label">Роль</span>
+      <Multiselect
+        v-model="formData.role"
+        :allow-empty="false"
+        :options="['student', 'teacher', 'admin']"
       />
 
-      <Accordion
-        v-if="formData.role === 'professor'"
-        class="subjects"
-        name="Предметы"
-        elevated
-      >
-        <div class="subjects__list">
-          <div v-for="data in formData.subjects" class="subjects__item">
-            <SubjectSelect
-              class="subjects__select"
-              placeholder="Предмет"
-              :options="subjects"
-              :selected="data"
-            />
-            <button class="subjects__remove-button">
-              <Xmark />
-            </button>
-          </div>
-        </div>
-
-        <Button
-          @click.prevent="formData.subjects.push('')"
-          class="subjects__button"
-          label="Добавить предмет"
-          center
+      <div v-if="formData.role === 'teacher'">
+        <span class="label">Предметы</span>
+        <Multiselect
+          v-model="formData.subjects"
+          track-by="id"
+          label="title"
+          multiple
+          :options="generalStore.subjects"
         />
-      </Accordion>
+      </div>
 
       <Button
         class="form__button"
@@ -63,7 +38,11 @@
         center
         label="Создать"
         :trailing="Plus"
-        @click.prevent="() => {}"
+        @click.prevent="
+          () => {
+            handleSubmit();
+          }
+        "
       />
     </form>
   </ModalBase>
@@ -71,16 +50,25 @@
 
 <script lang="ts" setup>
 import ModalBase from "@/components/ModalBase.vue";
-import InputGroup from "@/components/ui/InputGroup.vue";
-import DropdownGroup from "@/components/ui/DropdownGroup.vue";
-import Accordion from "@/components/Accordion.vue";
-import SubjectSelect from "@/views/GroupInfoView/components/SubjectSelect.vue";
+import Input from "../ui/Input.vue";
+import Multiselect from "vue-multiselect";
 import Button from "@/components/ui/Button.vue";
 import Plus from "@/assets/icons/Plus.vue";
-import Xmark from "@/assets/icons/Xmark.vue";
-import { reactive } from "vue";
+import { computed, reactive } from "vue";
+import { useGeneralStore } from "@/stores/general";
+import { useUserStore } from "@/stores/user";
 
-const formData = reactive({
+interface FormData {
+  name: string;
+  lastName: string;
+  patronymic: string;
+  role: string;
+  subjects: { id: number; title: string }[];
+}
+
+const generalStore = useGeneralStore();
+const userStore = useUserStore();
+const formData: FormData = reactive({
   name: "",
   lastName: "",
   patronymic: "",
@@ -88,36 +76,38 @@ const formData = reactive({
   subjects: [],
 });
 
-const handleInputChange = (field, value) => {
-  formData[field] = value;
+const subjectNumArray = computed(() => formData.subjects.map((el) => el.id));
+
+const handleSubmit = async () => {
+  switch (formData.role) {
+    case "student":
+      await userStore.createStudent(formData.name, formData.lastName);
+      break;
+    case "teacher":
+      await userStore.createTeacher(
+        formData.name,
+        formData.lastName,
+        formData.patronymic,
+        subjectNumArray.value,
+      );
+  }
 };
 
-const props = defineProps({
-  onClose: {
-    type: Function,
-    required: true,
-  },
-});
-
-const roles = [
-  { name: "Студент", value: "student" },
-  { name: "Преподаватель", value: "professor" },
-  { name: "Администратор", value: "admin" },
-  { name: "Гл. Администратор", value: "headadmin" },
-];
-
-const subjects = [
-  "Основы Front-End",
-  "Основы Back-End",
-  "Программирование",
-  "Математика",
-  "Казахский Язык",
-];
+defineProps<{
+  onClose: () => void;
+}>();
 </script>
 
 <style lang="scss" scoped>
 .heading {
   font-size: var(--fs-600);
+}
+
+.label {
+  font-size: var(--fs-300);
+  font-weight: var(--fs-bold);
+  color: var(--clr-neutral-300);
+  margin-bottom: -0.5rem;
 }
 
 .form {
