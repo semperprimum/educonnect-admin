@@ -16,14 +16,16 @@
 
       <span class="label">Роль</span>
       <Multiselect
+        class="elevated"
         v-model="formData.role"
         :allow-empty="false"
         :options="['student', 'teacher', 'admin']"
       />
 
       <div v-if="formData.role === 'teacher'">
-        <span class="label">Предметы</span>
+        <span class="label margin">Предметы</span>
         <Multiselect
+          class="elevated"
           v-model="formData.subjects"
           track-by="id"
           label="title"
@@ -72,7 +74,7 @@ const formData: FormData = reactive({
   name: "",
   lastName: "",
   patronymic: "",
-  role: "",
+  role: "student",
   subjects: [],
 });
 
@@ -91,9 +93,11 @@ const handleSubmit = async () => {
         subjectNumArray.value,
       );
   }
+
+  props.onClose();
 };
 
-defineProps<{
+const props = defineProps<{
   onClose: () => void;
 }>();
 </script>
@@ -104,10 +108,15 @@ defineProps<{
 }
 
 .label {
+  display: block;
   font-size: var(--fs-300);
   font-weight: var(--fs-bold);
   color: var(--clr-neutral-300);
   margin-bottom: -0.5rem;
+
+  &.margin {
+    margin-bottom: 0.5rem;
+  }
 }
 
 .form {

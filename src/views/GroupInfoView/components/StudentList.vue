@@ -26,7 +26,11 @@
           class="students__button-remove"
           aria-label="Открепить студента"
           @click="
-            openUnattachStudentModal(student.fio, groupStore.group?.title!)
+            openUnattachStudentModal(
+              student.fio,
+              groupStore.group?.title!,
+              student.id,
+            )
           "
         >
           <Xmark aria-hidden="false" />
@@ -36,7 +40,7 @@
 
     <Button
       center
-      @click="openAddStudentModal"
+      @click.prevent="openAddStudentModal"
       class="students__button"
       label="Добавить студента"
       :trailing="Plus"
@@ -57,11 +61,20 @@ const groupStore = useGroupStore();
 const currentRoute = useRoute();
 
 const openAddStudentModal = () => {
-  ModalService.open("AddStudentModal");
+  ModalService.open("AddStudentModal", { groupId: +currentRoute.params.id });
 };
 
-const openUnattachStudentModal = (studentName: string, groupName: string) => {
-  ModalService.open("UnattachStudentModal", { studentName, groupName });
+const openUnattachStudentModal = (
+  studentName: string,
+  groupName: string,
+  studentId: number,
+) => {
+  ModalService.open("UnattachStudentModal", {
+    groupId: +currentRoute.params.id,
+    groupName,
+    studentName,
+    studentId,
+  });
 };
 
 const handleSubgroupChange = async (event: Event, studentId: number) => {

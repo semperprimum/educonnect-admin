@@ -5,6 +5,7 @@ export interface Group {
   title: string;
   students_count: number;
   curator: string;
+  color: string;
 }
 
 export interface DropdownOption {

@@ -1,5 +1,5 @@
 <template>
-  <ContainerWithHeading heading="Добрый день, Денис Валентинович!">
+  <ContainerWithHeading heading="Добрый вечер, Денис Валентинович!">
     <div class="links-grid">
       <LinkTile
         accent-color="#B3E277"

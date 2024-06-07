@@ -52,7 +52,7 @@ defineProps<{
     right: -5rem;
     bottom: -5rem;
     border-radius: 100vmax;
-    filter: blur(999px);
+    filter: blur(5rem);
     opacity: 0.4;
     z-index: 1;
   }

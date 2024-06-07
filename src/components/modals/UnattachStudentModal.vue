@@ -9,7 +9,7 @@
 
     <div class="button-pair">
       <Button @click="onClose" center elevated label="Отмена" />
-      <Button center danger label="Открепить" />
+      <Button @click.prevent="handleSubmit" center danger label="Открепить" />
     </div>
   </ModalBase>
 </template>
@@ -17,21 +17,23 @@
 <script lang="ts" setup>
 import ModalBase from "@/components/ModalBase.vue";
 import Button from "@/components/ui/Button.vue";
+import { useGroupStore } from "@/stores/group";
 
-const props = defineProps({
-  onClose: {
-    type: Function,
-    required: true,
-  },
-  groupName: {
-    type: String,
-    required: true,
-  },
-  studentName: {
-    type: String,
-    required: true,
-  },
-});
+const groupStore = useGroupStore();
+
+const handleSubmit = async () => {
+  await groupStore.removeStudent(props.groupId, props.studentId);
+
+  props.onClose();
+};
+
+const props = defineProps<{
+  onClose: () => void;
+  groupId: number;
+  studentName: string;
+  studentId: number;
+  groupName: string;
+}>();
 </script>
 
 <style lang="scss" scoped>

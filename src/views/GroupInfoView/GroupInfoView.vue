@@ -1,5 +1,9 @@
 <template>
-  <ContainerWithHeading :heading="'Группы -> ' + groupStore.group?.title">
+  <Spinner v-if="groupStore.isLoading" />
+  <ContainerWithHeading
+    v-else
+    :heading="'Группы -> ' + groupStore.group?.title"
+  >
     <div class="container">
       <div class="info">
         <span class="label">Литеры</span>
@@ -46,6 +50,7 @@ import StudentList from "./components/StudentList.vue";
 import SubjectControl from "./components/SubjectControl.vue";
 import Input from "@/components/ui/Input.vue";
 import Accordion from "@/components/Accordion.vue";
+import Spinner from "@/components/Spinner.vue";
 import { useRoute } from "vue-router";
 import { onMounted, ref, type Ref } from "vue";
 import MultiSelect from "vue-multiselect";

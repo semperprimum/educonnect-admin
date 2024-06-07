@@ -36,8 +36,10 @@ export const useUserStore = defineStore("user", () => {
         { headers },
       );
 
-      if (response.status !== 200) {
+      if (response.status !== 201) {
         throw new Error("Error creating student");
+      } else {
+        fetchAllUsers();
       }
     } catch (e) {
       console.error(e);
@@ -121,8 +123,26 @@ export const useUserStore = defineStore("user", () => {
     }
   };
 
+  const fetchFreeStudents = async (groupId: number) => {
+    try {
+      const response = await axios.get(
+        `${baseUrl}/adminPanel/group/${groupId}/students/freeList`,
+        { headers },
+      );
+
+      if (response.status !== 200) {
+        throw new Error("Error fetching free students");
+      } else {
+        return response.data;
+      }
+    } catch (e) {
+      console.error(e);
+    }
+  };
+
   return {
     fetchAllUsers,
+    fetchFreeStudents,
     createStudent,
     createTeacher,
     addSubjectToTeacher,

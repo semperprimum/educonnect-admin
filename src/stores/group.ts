@@ -11,9 +11,11 @@ export const useGroupStore = defineStore("group", () => {
   const headers = { Authorization: `Bearer ${authStore.token}` };
   const groups: Ref<Group[]> = ref([]);
   const group: Ref<GroupInfo | null> = ref(null);
+  const isLoading: Ref<boolean> = ref(false);
 
   const getGroups = async () => {
     try {
+      isLoading.value = true;
       const response = await axios.get(`${baseUrl}/adminPanel/groupList`, {
         headers,
       });
@@ -25,11 +27,14 @@ export const useGroupStore = defineStore("group", () => {
       }
     } catch (e) {
       console.error(e);
+    } finally {
+      isLoading.value = false;
     }
   };
 
   const getGroupInfoById = async (id: number) => {
     try {
+      isLoading.value = true;
       const [infoResponse, studentsResponse, subjectsResponse] =
         await Promise.all([
           axios.get(`${baseUrl}/adminPanel/group/${id}/getInfo`, { headers }),
@@ -44,6 +49,8 @@ export const useGroupStore = defineStore("group", () => {
       if (group.value) group.value.subjects = subjectsResponse.data.subjects;
     } catch (e) {
       console.error(e);
+    } finally {
+      isLoading.value = false;
     }
   };
 
@@ -96,14 +103,53 @@ export const useGroupStore = defineStore("group", () => {
     }
   };
 
+  const addStudent = async (groupId: number, studentId: number) => {
+    try {
+      const response = await axios.post(
+        `${baseUrl}/adminPanel/group/${groupId}/students/add/${studentId}`,
+        {},
+        { headers },
+      );
+
+      if (response.status !== 200) {
+        throw new Error("Error adding student");
+      } else {
+        await getGroupInfoById(groupId);
+      }
+    } catch (e) {
+      console.error(e);
+    }
+  };
+
+  const removeStudent = async (groupId: number, studentId: number) => {
+    try {
+      const response = await axios.post(
+        `${baseUrl}/adminPanel/group/${groupId}/students/remove/${studentId}`,
+        {},
+        { headers },
+      );
+
+      if (response.status !== 200) {
+        throw new Error("Error adding student");
+      } else {
+        await getGroupInfoById(groupId);
+      }
+    } catch (e) {
+      console.error(e);
+    }
+  };
+
   return {
     getGroups,
     getGroupInfoById,
     groups,
     group,
+    isLoading,
     updateSpecializationById,
     updateCuratorById,
     updateStudentSubgroup,
+    addStudent,
+    removeStudent,
   };
 });
 

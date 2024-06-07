@@ -1,5 +1,5 @@
 <template>
-  <div class="tile">
+  <div class="tile" :style="{ '--accent-color': '#' + group.color }">
     <h2 class="tile__heading">{{ group.title }}</h2>
     <p class="tile__students">{{ group.students_count }} студентов</p>
     <p class="tile__curator">
