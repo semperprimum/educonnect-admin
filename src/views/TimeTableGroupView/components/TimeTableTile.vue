@@ -78,7 +78,7 @@ const mockSchedule = [
 .tile {
   position: relative;
 
-  --clr-accent: #ef4444;
+  --clr-accent: #ef4444a6;
 
   background-color: var(--clr-neutral-700);
   border: 1px solid var(--clr-neutral-600);
@@ -87,7 +87,13 @@ const mockSchedule = [
   z-index: 1;
   overflow: hidden;
 
-  &::before {
+  background: var(--clr-neutral-700)
+    radial-gradient(circle, var(--clr-accent) 0%, var(--clr-neutral-700) 50%);
+  background-size: 40rem 40rem;
+  background-position: bottom -15rem right -15rem;
+  background-repeat: no-repeat;
+
+  /* &::before {
     content: "";
     width: min(25rem, 100%);
     aspect-ratio: 1;
@@ -101,7 +107,7 @@ const mockSchedule = [
 
     bottom: -2rem;
     right: -5rem;
-  }
+  } */
 
   &__header {
     display: flex;

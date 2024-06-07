@@ -24,7 +24,7 @@ defineProps<{
   --accent-color: var(--clr-neutral-500);
 
   position: relative;
-  background-color: var(--clr-neutral-700);
+  // background-color: var(--clr-neutral-700);
   border: 1px solid var(--clr-neutral-600);
   border-radius: 1rem;
   padding: 1rem;
@@ -60,7 +60,13 @@ defineProps<{
     fill: currentColor;
   }
 
-  &::before {
+  background: var(--clr-neutral-700)
+    radial-gradient(circle, var(--accent-color) 0%, var(--clr-neutral-700) 50%);
+  background-size: 20rem 20rem;
+  background-position: center left -7rem;
+  background-repeat: no-repeat;
+
+  /* &::before {
     content: "";
     position: absolute;
     width: 50%;
@@ -74,7 +80,7 @@ defineProps<{
     left: -2rem;
     top: 50%;
     transform: translateY(-50%);
-  }
+  } */
 
   @media only screen and (min-width: 48em) {
     transition:

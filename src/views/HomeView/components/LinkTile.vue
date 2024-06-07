@@ -34,7 +34,6 @@ defineProps<{
 <style lang="scss" scoped>
 .tile {
   position: relative;
-  background-color: var(--clr-neutral-700);
   border: 1px solid var(--clr-neutral-600);
   border-radius: 1rem;
   padding: 1rem;
@@ -43,7 +42,13 @@ defineProps<{
   flex-direction: column;
   justify-content: space-between;
 
-  &::before {
+  background: var(--clr-neutral-700)
+    radial-gradient(var(--clr-accent) 0%, var(--clr-neutral-700) 50%);
+  background-size: 100rem 100rem;
+  background-position: bottom -55rem right -55rem;
+  background-repeat: no-repeat;
+
+  /* &::before {
     content: "";
     height: 100%;
     aspect-ratio: 1;
@@ -55,7 +60,7 @@ defineProps<{
     filter: blur(5rem);
     opacity: 0.4;
     z-index: 1;
-  }
+  } */
 
   &__btn {
     position: relative;
