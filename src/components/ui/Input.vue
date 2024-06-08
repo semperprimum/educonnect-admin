@@ -14,7 +14,9 @@
     />
     <component class="trailing" v-if="trailing" :is="trailing" />
   </div>
-  <ErrorText v-if="error" class="error">{{ error }}</ErrorText>
+  <ErrorText v-if="error" class="error" :class="{ nem: noErrorMargin }">{{
+    error
+  }}</ErrorText>
 </template>
 
 <script lang="ts" setup>
@@ -32,6 +34,7 @@ defineProps<{
   elevated?: boolean;
   modelValue?: string;
   disabled?: boolean;
+  noErrorMargin?: boolean;
 }>();
 </script>
 
@@ -88,5 +91,9 @@ input {
 
 .error {
   margin-top: -0.75rem;
+
+  &.nem {
+    margin-top: 0;
+  }
 }
 </style>

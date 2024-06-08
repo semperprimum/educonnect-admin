@@ -73,6 +73,31 @@ export const useUserStore = defineStore("user", () => {
     }
   };
 
+  const createAdmin = async (
+    firstName: string,
+    lastName: string,
+    patronymic: string,
+    privileges: string[],
+  ) => {
+    const fio = `${lastName} ${firstName} ${patronymic}`;
+
+    try {
+      const response = await axios.post(
+        `${baseUrl}/adminPanel/admins/create`,
+        { fio, privileges },
+        { headers },
+      );
+
+      if (response.status !== 201) {
+        throw new Error("Error creating admin");
+      } else {
+        fetchAllUsers();
+      }
+    } catch (e) {
+      console.error(e);
+    }
+  };
+
   const addSubjectToTeacher = async (teacherId: number, subjectId: number) => {
     try {
       const response = await axios.post(
@@ -123,6 +148,23 @@ export const useUserStore = defineStore("user", () => {
     }
   };
 
+  const deleteAdmin = async (id: number) => {
+    try {
+      const response = await axios.delete(
+        `${baseUrl}/adminPanel/users/${id}/removeAdmin`,
+        { headers },
+      );
+
+      if (response.status !== 200) {
+        throw new Error("Error deleting admin");
+      } else {
+        fetchAllUsers();
+      }
+    } catch (e) {
+      console.error(e);
+    }
+  };
+
   const fetchFreeStudents = async (groupId: number) => {
     try {
       const response = await axios.get(
@@ -145,9 +187,11 @@ export const useUserStore = defineStore("user", () => {
     fetchFreeStudents,
     createStudent,
     createTeacher,
+    createAdmin,
     addSubjectToTeacher,
     deleteStudent,
     deleteTeacher,
+    deleteAdmin,
     users,
   };
 });

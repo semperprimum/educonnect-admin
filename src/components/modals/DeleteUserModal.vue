@@ -36,6 +36,9 @@ const handleSubmit = async () => {
     case "Teacher":
       await userStore.deleteTeacher(props.id);
       break;
+    case "Admin":
+      await userStore.deleteAdmin(props.id);
+      break;
   }
 
   props.onClose();

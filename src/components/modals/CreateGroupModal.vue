@@ -42,7 +42,6 @@
         @color-change="
           (value) => {
             color = value;
-            console.log(color);
           }
         "
       />
@@ -62,7 +61,6 @@ import ErrorText from "@/components/ErrorText.vue";
 import ColorPicker from "@/components/ColorPicker.vue";
 import { useGeneralStore } from "@/stores/general";
 import { useGroupStore } from "@/stores/group";
-
 import { useForm } from "vee-validate";
 import * as yup from "yup";
 

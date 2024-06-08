@@ -77,4 +77,5 @@
 .multiselect__content-wrapper {
   background: var(--clr-neutral-700) !important;
   border: 1px solid var(--clr-neutral-600) !important;
+  border-radius: 1rem !important;
 }
