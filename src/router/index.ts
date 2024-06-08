@@ -24,14 +24,14 @@ const router = createRouter({
       component: () => import("@/views/GroupInfoView/GroupInfoView.vue"),
     },
     {
-      path: "/timetable",
-      name: "timetable",
-      component: () => import("@/views/TimeTableView/TimeTableView.vue"),
+      path: "/schedule",
+      name: "schedule",
+      component: () => import("@/views/ScheduleView/ScheduleView.vue"),
     },
     {
-      path: "/timetable/:id",
+      path: "/schedule/:id",
       component: () =>
-        import("@/views/TimeTableGroupView/TimeTableGroupView.vue"),
+        import("@/views/ScheduleGroupView/ScheduleGroupView.vue"),
     },
     {
       path: "/users",

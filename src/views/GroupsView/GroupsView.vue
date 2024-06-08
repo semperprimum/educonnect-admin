@@ -13,6 +13,7 @@
         label="title"
         class="select"
         :options="generalStore.specializations"
+        :showLabels="false"
       />
 
       <Button

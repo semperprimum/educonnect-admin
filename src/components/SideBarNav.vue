@@ -71,7 +71,7 @@ const logout = async () => {
         </RouterLink>
       </li>
       <li @click="if (isMobile) isNavOpen = false;" class="nav__list-item">
-        <RouterLink to="/timetable" class="nav__link">
+        <RouterLink to="/schedule" class="nav__link">
           <ListOl class="icon" />
           <span>Расписание</span>
         </RouterLink>

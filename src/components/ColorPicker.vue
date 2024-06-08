@@ -6,7 +6,7 @@
       <button
         v-for="color in colors"
         @click.prevent="handleColorSelect(color)"
-        :style="{ '--clr': color }"
+        :style="{ '--clr': '#' + color }"
         :key="color"
         class="picker__color-button"
         :class="{ selected: color === selectedColor }"
@@ -20,37 +20,41 @@ import { ref, onMounted } from "vue";
 
 const selectedColor = ref("");
 
+const emit = defineEmits(["colorChange"]);
+
 const handleColorSelect = (color: string) => {
   selectedColor.value = color;
+  emit("colorChange", selectedColor.value);
 };
 
 onMounted(() => {
   selectedColor.value =
     colors.value[Math.floor(Math.random() * colors.value.length)];
+  emit("colorChange", selectedColor.value);
 });
 
 const colors = ref([
-  "#EF4444",
-  "#F97316",
-  "#EAB308",
-  "#22C55E",
-  "#0EA5E9",
-  "#8B5CF6",
-  "#EC4899",
-  "#F87171",
-  "#FB923C",
-  "#FDE047",
-  "#4ADE80",
-  "#60A5FA",
-  "#C084FC",
-  "#F472B6",
-  "#FCA5A5",
-  "#FDBA74",
-  "#FEF08A",
-  "#86EFAC",
-  "#93C5FD",
-  "#D8B4FE",
-  "#F9A8D4",
+  "EF4444",
+  "F97316",
+  "EAB308",
+  "22C55E",
+  "0EA5E9",
+  "8B5CF6",
+  "EC4899",
+  "F87171",
+  "FB923C",
+  "FDE047",
+  "4ADE80",
+  "60A5FA",
+  "C084FC",
+  "F472B6",
+  "FCA5A5",
+  "FDBA74",
+  "FEF08A",
+  "86EFAC",
+  "93C5FD",
+  "D8B4FE",
+  "F9A8D4",
 ]);
 </script>
 
@@ -60,7 +64,7 @@ const colors = ref([
     display: block;
     color: var(--clr-neutral-300);
     font-weight: 500;
-    font-size: 1.25rem;
+    font-size: var(--fs-300);
     margin-bottom: 0.25rem;
   }
 

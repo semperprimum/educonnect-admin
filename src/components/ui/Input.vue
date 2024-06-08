@@ -14,15 +14,18 @@
     />
     <component class="trailing" v-if="trailing" :is="trailing" />
   </div>
+  <ErrorText v-if="error" class="error">{{ error }}</ErrorText>
 </template>
 
 <script lang="ts" setup>
 import type { Component } from "vue";
+import ErrorText from "@/components/ErrorText.vue";
 
 const emit = defineEmits(["update:modelValue"]);
 
 defineProps<{
   placeholder?: string;
+  error?: string;
   id?: string;
   type?: string;
   trailing?: Component;
@@ -81,5 +84,9 @@ input {
   aspect-ratio: 1;
   margin-right: 1rem;
   fill: var(--clr-neutral-300);
+}
+
+.error {
+  margin-top: -0.75rem;
 }
 </style>

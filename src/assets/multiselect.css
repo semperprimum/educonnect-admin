@@ -9,6 +9,9 @@
 .multiselect__tags,
 .multiselect__single {
   background: var(--clr-neutral-700) !important;
+  font-weight: var(--fw-medium) !important;
+  font-size: var(--fs-200) !important;
+  line-height: 1.4 !important;
 }
 
 .multiselect.elevated {

@@ -1,9 +1,21 @@
 <template>
   <ContainerWithHeading heading="Расписание">
     <div class="filter-bar">
-      <Input placeholder="Поиск" :trailing="MagnifyingGlass" />
+      <Input
+        v-model="searchQuery"
+        placeholder="Поиск"
+        :trailing="MagnifyingGlass"
+      />
 
-      <Dropdown :options="options" label="Специальность" />
+      <Multiselect
+        v-model="selectedDepartment"
+        placeholder="Отделение"
+        track-by="id"
+        label="title"
+        class="select"
+        :options="generalStore.specializations"
+        :showLabels="false"
+      />
 
       <Button
         @click="router.push('/substitutions')"
@@ -13,10 +25,10 @@
 
     <div class="content">
       <GroupTile
-        v-for="group in mockGroups"
+        v-for="group in filteredGroups"
         :key="group.title"
         :group="group"
-        @click="router.push(`/timetable/${group.id}`)"
+        @click="router.push(`/schedule/${group.id}`)"
       />
     </div>
   </ContainerWithHeading>
@@ -24,38 +36,40 @@
 
 <script lang="ts" setup>
 import ContainerWithHeading from "@/components/ContainerWithHeading.vue";
-import Dropdown from "@/components/ui/Dropdown.vue";
+import Multiselect from "vue-multiselect";
 import Input from "@/components/ui/Input.vue";
 import Button from "@/components/ui/Button.vue";
 import MagnifyingGlass from "@/assets/icons/MagnifyingGlass.vue";
 import GroupTile from "@/components/GroupTile.vue";
-
-import mockGroups from "@/views/mockGroups.json";
 import { useRouter } from "vue-router";
+import { computed, ref, type Ref } from "vue";
+import { useGeneralStore } from "@/stores/general";
+import { useGroupStore } from "@/stores/group";
+import { matchSorter } from "match-sorter";
 
 const router = useRouter();
+const groupStore = useGroupStore();
+const generalStore = useGeneralStore();
+const selectedDepartment: Ref<{ id: number; title: string } | null> = ref(null);
+const searchQuery: Ref<string | null> = ref(null);
 
-const options = [
-  {
-    name: "все",
-    value: "all",
-  },
-  {
-    name: "программирование",
-    value: "programming",
-  },
-  {
-    name: "дизайн",
-    value: "design",
-  },
-  {
-    name: "туризм",
-    value: "tourism",
-  },
-];
+const filteredGroups = computed(() => {
+  let groups = groupStore.groups;
+
+  if (searchQuery.value) {
+    groups = matchSorter(groups, searchQuery.value, { keys: ["title"] });
+  }
+
+  return groups;
+});
 </script>
 
 <style lang="scss" scoped>
+.select {
+  max-width: 23rem !important;
+  z-index: 40;
+}
+
 .filter-bar {
   display: flex;
   flex-direction: column;

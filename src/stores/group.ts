@@ -54,6 +54,36 @@ export const useGroupStore = defineStore("group", () => {
     }
   };
 
+  const createGroup = async (
+    title: string,
+    teacherId: number,
+    departmentId: number,
+    color: string,
+  ) => {
+    try {
+      const response = await axios.post(
+        `${baseUrl}/adminPanel/group/create`,
+        {
+          title,
+          departmentId,
+          userTeacherId: teacherId,
+          color,
+        },
+        { headers },
+      );
+
+      if (response.status !== 201) {
+        throw new Error("Error creating group");
+      }
+
+      getGroups();
+
+      return response;
+    } catch (e) {
+      console.error(e);
+    }
+  };
+
   const updateSpecializationById = async (
     groupId: number,
     departmentId: number,
@@ -139,9 +169,33 @@ export const useGroupStore = defineStore("group", () => {
     }
   };
 
+  const checkNameAvailability = async (name: string) => {
+    try {
+      const response = await axios.get(
+        `${baseUrl}/adminPanel/group/checkName`,
+        {
+          params: {
+            name,
+          },
+          headers,
+        },
+      );
+
+      if (response.status === 200 || response.status === 409) {
+        if (response.data.message === "Name not available") return false;
+        else return true;
+      } else {
+        throw new Error("Error checking group name availability");
+      }
+    } catch (e) {
+      console.error(e);
+    }
+  };
+
   return {
     getGroups,
     getGroupInfoById,
+    createGroup,
     groups,
     group,
     isLoading,
@@ -150,6 +204,7 @@ export const useGroupStore = defineStore("group", () => {
     updateStudentSubgroup,
     addStudent,
     removeStudent,
+    checkNameAvailability,
   };
 });
 

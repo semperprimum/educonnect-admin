@@ -1,12 +1,12 @@
 <template>
   <ContainerWithHeading :heading="'Расписание -> ' + groupName">
     <div class="container">
-      <TimeTableTile />
-      <TimeTableTile />
-      <TimeTableTile />
-      <TimeTableTile />
-      <TimeTableTile />
-      <TimeTableTile />
+      <ScheduleTile />
+      <ScheduleTile />
+      <ScheduleTile />
+      <ScheduleTile />
+      <ScheduleTile />
+      <ScheduleTile />
     </div>
   </ContainerWithHeading>
 </template>
@@ -15,13 +15,13 @@
 import ContainerWithHeading from "@/components/ContainerWithHeading.vue";
 import mockGroups from "@/views/mockGroups.json";
 import { useRoute } from "vue-router";
-import TimeTableTile from "./components/TimeTableTile.vue";
+import ScheduleTile from "./components/ScheduleTile.vue";
 
 const currentRoute = useRoute();
 
 const groupName = mockGroups.filter(
   (group) => group.id.toString() == currentRoute.params.id,
-)[0].literals;
+)[0].title;
 </script>
 
 <style lang="scss" scoped>
