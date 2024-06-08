@@ -1,9 +1,19 @@
 <template>
   <ContainerWithHeading heading="Группы">
     <div class="filter-bar">
-      <Input placeholder="Поиск" :trailing="MagnifyingGlass" />
+      <Input
+        v-model="searchQuery"
+        placeholder="Поиск"
+        :trailing="MagnifyingGlass"
+      />
 
-      <Dropdown :options="options" label="Специальность" />
+      <Multiselect
+        v-model="selectedDepartment"
+        track-by="id"
+        label="title"
+        class="select"
+        :options="generalStore.specializations"
+      />
 
       <Button
         label="Создать группу"
@@ -14,7 +24,7 @@
 
     <div class="content">
       <GroupTile
-        v-for="group in groupStore.groups"
+        v-for="group in filteredGroups"
         :key="group.title"
         :group="group"
         @click="router.push(`/groups/${group.id}`)"
@@ -25,50 +35,56 @@
 
 <script setup lang="ts">
 import ContainerWithHeading from "@/components/ContainerWithHeading.vue";
-import Dropdown from "@/components/ui/Dropdown.vue";
+import Multiselect from "vue-multiselect";
 import Input from "@/components/ui/Input.vue";
 import Button from "@/components/ui/Button.vue";
 import MagnifyingGlass from "@/assets/icons/MagnifyingGlass.vue";
 import Plus from "@/assets/icons/Plus.vue";
 import GroupTile from "@/components/GroupTile.vue";
-
 import { useRouter } from "vue-router";
 import ModalService from "@/services/ModalService";
-import { onMounted } from "vue";
+import { computed, onMounted, ref, type Ref } from "vue";
 import { useGroupStore } from "@/stores/group";
+import { useGeneralStore } from "@/stores/general";
+import { matchSorter } from "match-sorter";
 
 const groupStore = useGroupStore();
+const generalStore = useGeneralStore();
 const router = useRouter();
+const selectedDepartment: Ref<{ id: number; title: string } | null> = ref(null);
+const searchQuery: Ref<string | null> = ref(null);
 
 onMounted(async () => {
   await groupStore.getGroups();
 });
 
-const options = [
-  {
-    name: "все",
-    value: "all",
-  },
-  {
-    name: "программирование",
-    value: "programming",
-  },
-  {
-    name: "дизайн",
-    value: "design",
-  },
-  {
-    name: "туризм",
-    value: "tourism",
-  },
-];
-
 const openCreateGroupModal = () => {
   ModalService.open("CreateGroupModal");
 };
+
+const filteredGroups = computed(() => {
+  let groups = groupStore.groups;
+
+  // if (selectedDepartment.value) {
+  //   groups = groups.filter(
+  //     (group) => group.specialization.id === selectedDepartment.value?.id,
+  //   );
+  // }
+
+  if (searchQuery.value) {
+    groups = matchSorter(groups, searchQuery.value, { keys: ["title"] });
+  }
+
+  return groups;
+});
 </script>
 
 <style lang="scss" scoped>
+.select {
+  max-width: 23rem !important;
+  z-index: 40;
+}
+
 .filter-bar {
   display: flex;
   flex-direction: column;

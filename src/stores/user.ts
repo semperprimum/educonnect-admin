@@ -152,7 +152,7 @@ export const useUserStore = defineStore("user", () => {
   };
 });
 
-interface User {
+export interface User {
   id: number;
   fio: string;
   role: string;

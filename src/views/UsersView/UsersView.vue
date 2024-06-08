@@ -2,9 +2,18 @@
   <ContainerWithHeading heading="Пользователи">
     <header class="header">
       <div class="header__left">
-        <Input placeholder="Поиск" :trailing="MagnifyingGlass" />
-        <Dropdown label="Роль" :options="roleOptions" />
-        <Dropdown label="Группа" :options="groupOptions" />
+        <Input
+          v-model="searchQuery"
+          placeholder="Поиск"
+          :trailing="MagnifyingGlass"
+        />
+        <Multiselect
+          v-model="selectedRole"
+          :options="roleOptions"
+          placeholder="Роль"
+          track-by="value"
+          label="title"
+        />
       </div>
 
       <div class="header__right">
@@ -16,26 +25,44 @@
       </div>
     </header>
 
-    <UserList class="user-list" />
+    <UserList :users="filteredUsers" class="user-list" />
   </ContainerWithHeading>
 </template>
 
 <script lang="ts" setup>
 import ContainerWithHeading from "@/components/ContainerWithHeading.vue";
 import Input from "@/components/ui/Input.vue";
-import Dropdown from "@/components/ui/Dropdown.vue";
+import Multiselect from "vue-multiselect";
 import MagnifyingGlass from "@/assets/icons/MagnifyingGlass.vue";
 import Button from "@/components/ui/Button.vue";
 import Plus from "@/assets/icons/Plus.vue";
 import UserList from "./components/UserList.vue";
 import ModalService from "@/services/ModalService";
-import { useUserStore } from "@/stores/user";
-import { onMounted } from "vue";
+import { useUserStore, type User } from "@/stores/user";
+import { computed, onMounted, ref, type ComputedRef, type Ref } from "vue";
+import { matchSorter } from "match-sorter";
 
 const userStore = useUserStore();
+const selectedRole: Ref<{ title: string; value: string } | null> = ref(null);
+const searchQuery: Ref<string | null> = ref(null);
 
 onMounted(async () => {
   await userStore.fetchAllUsers();
+});
+
+const filteredUsers: ComputedRef<User[]> = computed(() => {
+  if (!userStore.users) return [];
+  let users = userStore.users;
+
+  if (selectedRole.value) {
+    users = users.filter((user) => user.role === selectedRole.value?.value);
+  }
+
+  if (searchQuery.value) {
+    users = matchSorter(users, searchQuery.value, { keys: ["fio"] });
+  }
+
+  return users;
 });
 
 const openCreateUserModal = () => {
@@ -43,15 +70,9 @@ const openCreateUserModal = () => {
 };
 
 const roleOptions = [
-  { name: "Гл. Администратор", value: "HEAD_ADMIN" },
-  { name: "Администратор", value: "ADMIN" },
-  { name: "Преподаватель", value: "PROFESSOR" },
-  { name: "Студент", value: "STUDENT" },
-];
-
-const groupOptions = [
-  { name: "П-21-57к", value: "1" },
-  { name: "П-21-57б", value: "2" },
+  { title: "Администратор", value: "Admin" },
+  { title: "Преподаватель", value: "Teacher" },
+  { title: "Студент", value: "Student" },
 ];
 </script>
 

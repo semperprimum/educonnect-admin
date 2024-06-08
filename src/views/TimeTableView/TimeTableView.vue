@@ -14,7 +14,7 @@
     <div class="content">
       <GroupTile
         v-for="group in mockGroups"
-        :key="group.literals"
+        :key="group.title"
         :group="group"
         @click="router.push(`/timetable/${group.id}`)"
       />

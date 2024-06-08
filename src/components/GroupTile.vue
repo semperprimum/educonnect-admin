@@ -29,7 +29,7 @@ defineProps<{
   border-radius: 1rem;
   padding: 1rem;
   overflow: hidden;
-  z-index: 50;
+  z-index: 10;
 
   &__heading {
     font-size: var(--fs-600);

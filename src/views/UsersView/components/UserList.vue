@@ -1,6 +1,6 @@
 <template>
   <ol class="list">
-    <li v-for="user in userStore.users" class="item">
+    <li v-for="user in users" class="item">
       <span class="item__name">{{ user.fio }}</span>
       <span>{{ user.role }}</span>
       <ElipsisMenu
@@ -26,9 +26,11 @@
 <script lang="ts" setup>
 import ElipsisMenu from "@/components/ui/ElipsisMenu.vue";
 import ModalService from "@/services/ModalService";
-import { useUserStore } from "@/stores/user";
+import type { User } from "@/stores/user";
 
-const userStore = useUserStore();
+defineProps<{
+  users: User[];
+}>();
 
 const openDeleteUserModal = (id: number, role: string, name: string) => {
   ModalService.open("DeleteUserModal", { id, role, name });
