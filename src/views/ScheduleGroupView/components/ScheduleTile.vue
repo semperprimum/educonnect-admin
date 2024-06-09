@@ -48,7 +48,7 @@ const mockSchedule = [
   },
   {
     id: 2,
-    name: "Программирование",
+    name: "Программирование Длинное Название",
     classroom: ["1308"],
   },
   {
@@ -158,14 +158,16 @@ const mockSchedule = [
 
     &-group {
       flex: 1;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
+      display: grid;
+      grid-template-columns: 1fr auto;
     }
 
     &-title {
       font-weight: var(--fw-medium);
       font-size: var(--fs-400);
+      text-overflow: ellipsis;
+      white-space: nowrap;
+      overflow: hidden;
 
       &::before {
         counter-increment: schedule;

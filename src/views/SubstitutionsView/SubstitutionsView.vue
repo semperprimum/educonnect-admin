@@ -28,7 +28,7 @@
       </div>
       <div class="right">
         <Calendar :date="new Date()" :attributes="attributes" />
-        <TimeTableTile />
+        <GroupSchedule />
       </div>
     </div>
   </ContainerWithHeading>
@@ -36,7 +36,7 @@
 
 <script lang="ts" setup>
 import ContainerWithHeading from "@/components/ContainerWithHeading.vue";
-import TimeTableTile from "@/views/SubstitutionsView/components/TimeTableTile.vue";
+import GroupSchedule from "@/views/SubstitutionsView/components/GroupSchedule.vue";
 import Calendar from "@/components/Calendar.vue";
 import Accordion from "@/components/Accordion.vue";
 import Button from "@/components/ui/Button.vue";
