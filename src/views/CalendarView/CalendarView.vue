@@ -1,5 +1,5 @@
 <template>
-  <ContainerWithHeading heading="Календарь событий">
+  <ContainerWithHeading :heading="t('event_calendar')">
     <div class="container">
       <EventList />
 
@@ -8,7 +8,7 @@
 
         <Button
           @click="openCreateEventModal"
-          label="Создать событие"
+          :label="t('create_event')"
           :trailing="Plus"
           center
           class="button"
@@ -25,10 +25,13 @@ import Button from "@/components/ui/Button.vue";
 import Plus from "@/assets/icons/Plus.vue";
 import EventList from "@/views/CalendarView/components/EventList.vue";
 import ModalService from "@/services/ModalService";
+import { useI18n } from "vue-i18n";
 
 const openCreateEventModal = () => {
   ModalService.open("CreateEventModal");
 };
+
+const { t } = useI18n();
 
 const attributes = [
   {

@@ -1,5 +1,5 @@
 <template>
-  <ContainerWithHeading heading="Группы">
+  <ContainerWithHeading :heading="t('groups')">
     <div class="filter-bar">
       <Input
         v-model="searchQuery"
@@ -17,7 +17,7 @@
       />
 
       <Button
-        label="Создать группу"
+        :label="t('create_group')"
         :trailing="Plus"
         @click="openCreateGroupModal"
       />
@@ -48,12 +48,14 @@ import { computed, onMounted, ref, type Ref } from "vue";
 import { useGroupStore } from "@/stores/group";
 import { useGeneralStore } from "@/stores/general";
 import { matchSorter } from "match-sorter";
+import { useI18n } from "vue-i18n";
 
 const groupStore = useGroupStore();
 const generalStore = useGeneralStore();
 const router = useRouter();
 const selectedDepartment: Ref<{ id: number; title: string } | null> = ref(null);
 const searchQuery: Ref<string | null> = ref(null);
+const { t } = useI18n();
 
 onMounted(async () => {
   await groupStore.getGroups();

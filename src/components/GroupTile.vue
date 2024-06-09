@@ -1,7 +1,7 @@
 <template>
   <div class="tile" :style="{ '--accent-color': '#' + group.color + 'a6' }">
     <h2 class="tile__heading">{{ group.title }}</h2>
-    <p class="tile__students">{{ group.students_count }} студентов</p>
+    <p class="tile__students">{{ t("students", group.students_count) }}</p>
     <p class="tile__curator">
       <component aria-hidden="true" class="tile__icon" :is="CircleUser" />
       {{ group.curator }}
@@ -12,6 +12,9 @@
 <script lang="ts" setup>
 import CircleUser from "@/assets/icons/CircleUser.vue";
 import type { Group } from "@/types";
+import { useI18n } from "vue-i18n";
+
+const { t } = useI18n();
 
 defineProps<{
   accentColor?: string;

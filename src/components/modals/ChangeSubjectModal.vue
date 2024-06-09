@@ -1,6 +1,6 @@
 <template>
   <ModalBase :onClose="onClose">
-    <h2 class="heading">Изменить предмет</h2>
+    <h2 class="heading">{{ t("change_class") }}</h2>
     <span class="info">Понедельник, 2 пара | Программирование | П-21-57к</span>
 
     <form class="form">
@@ -15,14 +15,14 @@
         elevated
       />
 
-      <Input class="form__input" placeholder="Аудитория" elevated />
+      <Input class="form__input" :placeholder="t('study_room')" elevated />
 
       <Button
         class="form__button"
         @click.prevent="() => {}"
         elevated
         center
-        label="Изменить предмет"
+        :label="t('change_class')"
       />
     </form>
   </ModalBase>
@@ -33,13 +33,13 @@ import ModalBase from "@/components/ModalBase.vue";
 import DropdownGroup from "@/components/ui/DropdownGroup.vue";
 import Input from "@/components/ui/Input.vue";
 import Button from "@/components/ui/Button.vue";
+import { useI18n } from "vue-i18n";
 
-const props = defineProps({
-  onClose: {
-    type: Function,
-    required: true,
-  },
-});
+const { t } = useI18n();
+
+defineProps<{
+  onClose: () => void;
+}>();
 </script>
 
 <style lang="scss" scoped>

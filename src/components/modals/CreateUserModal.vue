@@ -1,16 +1,16 @@
 <template>
   <ModalBase :onClose="onClose">
-    <h2 class="heading">Создать пользователя</h2>
+    <h2 class="heading">{{ t("create_user") }}</h2>
 
     <form @submit="onSubmit" class="form">
-      <span class="label">Имя</span>
+      <span class="label">{{ t("firstName") }}</span>
       <Input :error="errors.name" elevated v-model="name" />
 
-      <span class="label">Фамилия</span>
+      <span class="label">{{ t("lastName") }}</span>
       <Input :error="errors.lastName" elevated v-model="lastName" />
 
       <div v-if="role === 'admin' || role === 'teacher'">
-        <span class="label margin">Отчество</span>
+        <span class="label margin">{{ t("patronymic") }}</span>
         <Input
           no-error-margin
           :error="errors.patronymic"
@@ -19,10 +19,10 @@
         />
       </div>
 
-      <span class="label">Роль</span>
+      <span class="label">{{ t("role") }}</span>
       <Multiselect
         class="elevated"
-        placeholder="Выберите роль"
+        :placeholder="t('choose_role')"
         :showLabels="false"
         v-model="role"
         :allow-empty="false"
@@ -31,10 +31,10 @@
       <ErrorText v-if="errors.role">{{ errors.role }}</ErrorText>
 
       <div v-if="role === 'teacher'">
-        <span class="label margin">Предметы</span>
+        <span class="label margin">{{ t("subjects") }}</span>
         <Multiselect
           class="elevated"
-          placeholder="Выберите предметы"
+          :placeholder="t('choose_subjects')"
           :showLabels="false"
           v-model="subjects"
           track-by="id"
@@ -46,10 +46,10 @@
       </div>
 
       <div v-if="role === 'admin'">
-        <span class="label margin">Привилегии</span>
+        <span class="label margin">{{ t("privileges") }}</span>
         <Multiselect
           class="elevated"
-          placeholder="Выберите привилегии"
+          :placeholder="t('choose_privileges')"
           :showLabels="false"
           v-model="privileges"
           multiple
@@ -67,7 +67,7 @@
         class="form__button"
         elevated
         center
-        label="Создать"
+        :label="t('create')"
         :trailing="Plus"
       />
     </form>
@@ -86,6 +86,9 @@ import { useUserStore } from "@/stores/user";
 import * as yup from "yup";
 import { useForm } from "vee-validate";
 import { computed } from "vue";
+import { useI18n } from "vue-i18n";
+
+const { t } = useI18n();
 
 interface FormData {
   name: string;

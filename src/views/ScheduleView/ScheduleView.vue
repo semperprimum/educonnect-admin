@@ -1,15 +1,15 @@
 <template>
-  <ContainerWithHeading heading="Расписание">
+  <ContainerWithHeading :heading="t('schedule')">
     <div class="filter-bar">
       <Input
         v-model="searchQuery"
-        placeholder="Поиск"
+        :placeholder="t('search')"
         :trailing="MagnifyingGlass"
       />
 
       <Multiselect
         v-model="selectedDepartment"
-        placeholder="Отделение"
+        :placeholder="t('schedule')"
         track-by="id"
         label="title"
         class="select"
@@ -19,7 +19,7 @@
 
       <Button
         @click="router.push('/substitutions')"
-        label="Управление заменами"
+        :label="t('substitutions_control')"
       />
     </div>
 
@@ -46,12 +46,14 @@ import { computed, ref, type Ref } from "vue";
 import { useGeneralStore } from "@/stores/general";
 import { useGroupStore } from "@/stores/group";
 import { matchSorter } from "match-sorter";
+import { useI18n } from "vue-i18n";
 
 const router = useRouter();
 const groupStore = useGroupStore();
 const generalStore = useGeneralStore();
 const selectedDepartment: Ref<{ id: number; title: string } | null> = ref(null);
 const searchQuery: Ref<string | null> = ref(null);
+const { t } = useI18n();
 
 const filteredGroups = computed(() => {
   let groups = groupStore.groups;

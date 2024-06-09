@@ -1,6 +1,6 @@
 <template>
   <div class="picker">
-    <span class="picker__label">Цвет группы</span>
+    <span class="picker__label">{{ t("group_color") }}</span>
 
     <div class="picker__container">
       <button
@@ -17,8 +17,10 @@
 
 <script lang="ts" setup>
 import { ref, onMounted } from "vue";
+import { useI18n } from "vue-i18n";
 
 const selectedColor = ref("");
+const { t } = useI18n();
 
 const emit = defineEmits(["colorChange"]);
 

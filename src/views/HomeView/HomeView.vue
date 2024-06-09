@@ -1,38 +1,38 @@
 <template>
-  <ContainerWithHeading heading="Добрый вечер, Денис Валентинович!">
+  <ContainerWithHeading :heading="t('welcome')">
     <div class="links-grid">
       <LinkTile
         accent-color="#B3E277"
         :icon="Table"
-        title="Управление заменами"
+        :title="t('substitutions_control')"
         class="links-grid__tile"
         to="/substitutions"
       />
       <LinkTile
         accent-color="#F97316"
         :icon="Users"
-        title="Группы"
+        :title="t('groups')"
         class="links-grid__tile"
         to="/groups"
       />
       <LinkTile
         accent-color="var(--clr-red-500)"
         :icon="ListOl"
-        title="Расписание"
+        :title="t('schedule')"
         class="links-grid__tile"
         to="/timetable"
       />
       <LinkTile
         accent-color="#3B82F6"
         :icon="User"
-        title="Пользователи"
+        :title="t('users')"
         class="links-grid__tile"
         to="/users"
       />
       <LinkTile
         accent-color="#EC4899"
         :icon="CalendarDays"
-        title="Календарь"
+        :title="t('calendar')"
         class="links-grid__tile"
         to="calendar"
       />
@@ -44,6 +44,9 @@
 import ContainerWithHeading from "@/components/ContainerWithHeading.vue";
 import LinkTile from "@/views/HomeView/components/LinkTile.vue";
 import { Table, Users, ListOl, User, CalendarDays } from "@/assets/icons";
+import { useI18n } from "vue-i18n";
+
+const { t } = useI18n();
 </script>
 
 <style lang="scss" scoped>

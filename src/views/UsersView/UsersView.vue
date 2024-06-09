@@ -1,16 +1,16 @@
 <template>
-  <ContainerWithHeading heading="Пользователи">
+  <ContainerWithHeading :heading="t('users')">
     <header class="header">
       <div class="header__left">
         <Input
           v-model="searchQuery"
-          placeholder="Поиск"
+          :placeholder="t('search')"
           :trailing="MagnifyingGlass"
         />
         <Multiselect
           v-model="selectedRole"
           :options="roleOptions"
-          placeholder="Роль"
+          :placeholder="t('role')"
           track-by="value"
           label="title"
         />
@@ -19,7 +19,7 @@
       <div class="header__right">
         <Button
           @click="openCreateUserModal"
-          label="Создать пользователя"
+          :label="t('create_user')"
           :trailing="Plus"
         />
       </div>
@@ -41,10 +41,12 @@ import ModalService from "@/services/ModalService";
 import { useUserStore, type User } from "@/stores/user";
 import { computed, onMounted, ref, type ComputedRef, type Ref } from "vue";
 import { matchSorter } from "match-sorter";
+import { useI18n } from "vue-i18n";
 
 const userStore = useUserStore();
 const selectedRole: Ref<{ title: string; value: string } | null> = ref(null);
 const searchQuery: Ref<string | null> = ref(null);
+const { t } = useI18n();
 
 onMounted(async () => {
   await userStore.fetchAllUsers();

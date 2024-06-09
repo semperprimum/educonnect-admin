@@ -1,6 +1,6 @@
 <template>
   <div class="students">
-    <p class="students__label">Список группы</p>
+    <p class="students__label">{{ t("group_list") }}</p>
 
     <ol class="students__list">
       <li
@@ -42,7 +42,7 @@
       center
       @click.prevent="openAddStudentModal"
       class="students__button"
-      label="Добавить студента"
+      :label="t('add_student')"
       :trailing="Plus"
     />
   </div>
@@ -55,10 +55,11 @@ import Xmark from "@/assets/icons/Xmark.vue";
 import ModalService from "@/services/ModalService";
 import { useGroupStore } from "@/stores/group";
 import { useRoute } from "vue-router";
+import { useI18n } from "vue-i18n";
 
 const groupStore = useGroupStore();
-
 const currentRoute = useRoute();
+const { t } = useI18n();
 
 const openAddStudentModal = () => {
   ModalService.open("AddStudentModal", { groupId: +currentRoute.params.id });

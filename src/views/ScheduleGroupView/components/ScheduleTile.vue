@@ -12,17 +12,21 @@
         class="tile__item"
       >
         <div class="tile__item-group">
-          <h4 class="tile__item-title">{{ schedule.name || "Нет пары" }}</h4>
+          <h4 class="tile__item-title">{{ schedule.name || t("no_class") }}</h4>
           <Classroom :classrooms="schedule.classroom" />
         </div>
 
         <ElipsisMenu
           :options="[
             {
-              name: 'Изменить предмет',
+              name: t('change_class'),
               action: () => {
                 openChangeSubjectModal();
               },
+            },
+            {
+              name: t('cancel_class'),
+              action: () => {},
             },
           ]"
         />
@@ -35,10 +39,12 @@
 import ElipsisMenu from "@/components/ui/ElipsisMenu.vue";
 import ModalService from "@/services/ModalService.js";
 import Classroom from "@/components/Classroom.vue";
+import { useI18n } from "vue-i18n";
 
 const openChangeSubjectModal = () => {
   ModalService.open("ChangeSubjectModal");
 };
+const { t } = useI18n();
 
 const mockSchedule = [
   {
@@ -204,23 +210,23 @@ const mockSchedule = [
   }
 
   &:nth-child(2) {
-    --clr-accent: #f97316;
+    --clr-accent: #f97316a6;
   }
 
   &:nth-child(3) {
-    --clr-accent: #eab308;
+    --clr-accent: #eab308a6;
   }
 
   &:nth-child(4) {
-    --clr-accent: #84cc16;
+    --clr-accent: #84cc16a6;
   }
 
   &:nth-child(5) {
-    --clr-accent: #0ea5e9;
+    --clr-accent: #0ea5e9a6;
   }
 
   &:nth-child(6) {
-    --clr-accent: #a855f7;
+    --clr-accent: #a855f7a6;
   }
 }
 </style>

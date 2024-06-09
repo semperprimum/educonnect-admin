@@ -2,14 +2,14 @@
   <Spinner v-if="groupStore.isLoading" />
   <ContainerWithHeading
     v-else
-    :heading="'Группы -> ' + groupStore.group?.title"
+    :heading="t('groups') + ' -> ' + groupStore.group?.title"
   >
     <div class="container">
       <div class="info">
-        <span class="label">Литеры</span>
+        <span class="label">{{ t("literals") }}</span>
         <Input disabled :model-value="groupStore.group?.title" />
 
-        <span class="label">Специальность</span>
+        <span class="label">{{ t("specialty") }}</span>
         <MultiSelect
           v-model="selectedSpecialization"
           :options="generalStore.specializations"
@@ -19,7 +19,7 @@
           @update:modelValue="handleSpecializationChange"
         />
 
-        <span class="label">Куратор</span>
+        <span class="label">{{ t("curator") }}</span>
         <MultiSelect
           :options="generalStore.teachers"
           :allow-empty="false"
@@ -29,7 +29,7 @@
           @update:modelValue="handleChangeCurator"
         />
 
-        <Accordion name="Управление предметами" class="accordion">
+        <Accordion :name="t('subject_control')" class="accordion">
           <SubjectControl
             @changeSubject="handleChangeSubject"
             @addSubject="handleAddSubject"
@@ -56,10 +56,12 @@ import { onMounted, ref, type Ref } from "vue";
 import MultiSelect from "vue-multiselect";
 import { useGroupStore } from "@/stores/group";
 import { useGeneralStore } from "@/stores/general";
+import { useI18n } from "vue-i18n";
 
 const currentRoute = useRoute();
 const groupStore = useGroupStore();
 const generalStore = useGeneralStore();
+const { t } = useI18n();
 
 let selectedSpecialization: Ref<{ title: string; id: number } | null> =
   ref(null);

@@ -2,18 +2,18 @@
   <ModalBase :onClose="onClose">
     <h2 class="heading">Создать группу</h2>
     <form @submit="onSubmit" class="form">
-      <span class="label">Литеры</span>
+      <span class="label">{{ t("literals") }}</span>
       <Input
         :error="errors.title"
         v-model="title"
         elevated
-        placeholder="Литеры группы"
+        :placeholder="t('literals')"
       />
 
-      <span class="label">Специальность</span>
+      <span class="label">{{ t("specialty") }}</span>
       <Multiselect
         v-model="specialization"
-        placeholder="Специальность"
+        :placeholder="t('specialty')"
         class="elevated"
         :options="generalStore.specializations"
         track-by="id"
@@ -24,10 +24,10 @@
         errors.specialization
       }}</ErrorText>
 
-      <span class="label">Куратор</span>
+      <span class="label">{{ t("curator") }}</span>
       <Multiselect
         v-model="curator"
-        placeholder="Куратор"
+        :placeholder="t('curator')"
         class="elevated"
         :options="generalStore.teachers"
         track-by="id"
@@ -46,7 +46,13 @@
         "
       />
 
-      <Button type="submit" center elevated label="Создать" :trailing="Plus" />
+      <Button
+        type="submit"
+        center
+        elevated
+        :label="t('create')"
+        :trailing="Plus"
+      />
     </form>
   </ModalBase>
 </template>
@@ -63,9 +69,11 @@ import { useGeneralStore } from "@/stores/general";
 import { useGroupStore } from "@/stores/group";
 import { useForm } from "vee-validate";
 import * as yup from "yup";
+import { useI18n } from "vue-i18n";
 
 const generalStore = useGeneralStore();
 const groupStore = useGroupStore();
+const { t } = useI18n();
 
 const validationSchema = yup.object({
   title: yup.string().required("Поле обязательно"),

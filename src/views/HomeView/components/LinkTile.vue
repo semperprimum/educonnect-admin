@@ -9,7 +9,7 @@
       elevated
       center
       class="tile__btn"
-      label="Перейти"
+      :label="t('go')"
       :trailing="ArrowRight"
     />
   </div>
@@ -20,8 +20,11 @@ import Button from "@/components/ui/Button.vue";
 import ArrowRight from "@/assets/icons/ArrowRight.vue";
 import type { Component } from "vue";
 import { useRouter } from "vue-router";
+import { useI18n } from "vue-i18n";
 
 const router = useRouter();
+
+const { t } = useI18n();
 
 defineProps<{
   title: string;

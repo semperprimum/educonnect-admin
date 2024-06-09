@@ -13,11 +13,18 @@ import { ref } from "vue";
 import { useMediaQuery } from "@vueuse/core";
 import { useAuthStore } from "@/stores/auth";
 import { useRouter } from "vue-router";
+import { useI18n } from "vue-i18n";
 
 const isMobile = useMediaQuery("(max-width: 48em)");
 const isNavOpen = ref(false);
 const authStore = useAuthStore();
 const router = useRouter();
+const { t, locale } = useI18n();
+
+const switchLanguage = () => {
+  locale.value = locale.value === "ru" ? "kz" : "ru";
+  localStorage.setItem("locale", locale.value);
+};
 
 const logout = async () => {
   await authStore.logout();
@@ -61,39 +68,37 @@ const logout = async () => {
       <li @click="if (isMobile) isNavOpen = false;" class="nav__list-item">
         <RouterLink to="/" class="nav__link">
           <House class="icon" />
-          <span>Главная</span>
+          <span>{{ t("home_page") }}</span>
         </RouterLink>
       </li>
       <li @click="if (isMobile) isNavOpen = false;" class="nav__list-item">
         <RouterLink to="/groups" class="nav__link">
           <Users class="icon" />
-          <span>Группы</span>
+          <span>{{ t("groups") }}</span>
         </RouterLink>
       </li>
       <li @click="if (isMobile) isNavOpen = false;" class="nav__list-item">
         <RouterLink to="/schedule" class="nav__link">
           <ListOl class="icon" />
-          <span>Расписание</span>
+          <span>{{ t("schedule") }}</span>
         </RouterLink>
       </li>
       <li @click="if (isMobile) isNavOpen = false;" class="nav__list-item">
         <RouterLink to="/users" class="nav__link">
           <User class="icon" />
-          <span>Пользователи</span>
+          <span>{{ t("users") }}</span>
         </RouterLink>
       </li>
       <li @click="if (isMobile) isNavOpen = false;" class="nav__list-item">
         <RouterLink to="/calendar" class="nav__link">
           <CalendarDays class="icon" />
-          <span>Календарь</span>
+          <span>{{ t("calendar") }}</span>
         </RouterLink>
       </li>
       <li @click="if (isMobile) isNavOpen = false;" class="nav__image-item">
-        <RouterLink to="/login">
-          <img src="https://picsum.photos/200" alt="User Profile" />
-        </RouterLink>
+        <button @click="switchLanguage" class="language">{{ locale }}</button>
 
-        <button @click="logout" class="nav__logout-btn">Выход</button>
+        <button @click="logout" class="nav__logout-btn">{{ t("exit") }}</button>
       </li>
     </ul>
   </nav>
@@ -355,5 +360,21 @@ const logout = async () => {
     display: block;
     animation: fadeInHalf 150ms ease;
   }
+}
+
+.language {
+  display: block;
+  background: var(--clr-neutral-700);
+  color: var(--clr-neutral-100);
+  border: 1px solid var(--clr-neutral-600);
+  width: 2.5rem;
+  height: 2.5rem;
+  padding: 0.5rem;
+  aspect-ratio: 1;
+  border-radius: 0.5rem;
+  line-height: 1;
+  font-size: var(--fs-300);
+  margin-left: 0.25rem;
+  text-transform: uppercase;
 }
 </style>
