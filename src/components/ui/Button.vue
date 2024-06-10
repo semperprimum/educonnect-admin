@@ -38,6 +38,8 @@ button {
     display: flex;
     align-items: center;
     gap: 0.5rem;
+
+    font-size: var(--fs-200);
   }
 
   @media only screen and (min-width: 48em) {

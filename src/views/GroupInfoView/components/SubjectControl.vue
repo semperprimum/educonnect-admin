@@ -8,15 +8,8 @@
           "
           :options="classes"
           :selected="subject.name"
+          class="subjects__select"
           placeholder="Предмет"
-        />
-        <SubjectSelect
-          @optionChange="
-            (value: string) => changeSubject(subject.id, 'professor', value)
-          "
-          :selected="subject.professor"
-          placeholder="Преподаватель"
-          :options="professors"
         />
         <button
           @click.prevent="deleteSubject(subject.id)"
@@ -89,7 +82,7 @@ const classes = [
 
   &__item {
     display: grid;
-    grid-template-columns: 1fr 1fr auto;
+    grid-template-columns: 1fr auto;
     gap: 0.75rem;
     align-items: center;
   }

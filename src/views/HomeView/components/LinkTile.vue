@@ -69,6 +69,7 @@ defineProps<{
     position: relative;
     z-index: 20;
     mix-blend-mode: color-dodge;
+    text-shadow: 0 0 10px black;
   }
 
   &__icon {

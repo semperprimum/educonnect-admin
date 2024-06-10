@@ -116,15 +116,14 @@ const handleSubgroupChange = async (event: Event, studentId: number) => {
 
     display: grid;
     grid-template-columns: 1fr auto auto;
-
-    width: 25rem;
   }
 
   &__item {
     display: grid;
     grid-template-columns: subgrid;
     grid-column: span 3;
-    gap: 0.5rem;
+    gap: 1rem;
+    align-items: center;
 
     & + & {
       padding-top: 0.5rem;

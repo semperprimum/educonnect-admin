@@ -52,14 +52,20 @@ const { t } = useI18n();
 <style lang="scss" scoped>
 .links-grid {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  grid-template-rows: repeat(2, 1fr);
-  height: 100%;
+  grid-auto-rows: 15rem;
   gap: 1rem;
+}
 
-  &__tile {
-    &:first-child {
-      grid-column: span 2;
+@media only screen and (min-width: 48em) {
+  .links-grid {
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: repeat(2, 1fr);
+    height: 100%;
+
+    &__tile {
+      &:first-child {
+        grid-column: span 2;
+      }
     }
   }
 }

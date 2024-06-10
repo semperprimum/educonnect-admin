@@ -52,6 +52,11 @@ const mockEvents = [
   gap: 1rem;
 
   &__item {
+    @media only screen and (max-width: 48em) {
+      flex-direction: column;
+      align-items: start;
+    }
+
     background-color: var(--clr-neutral-700);
     padding: 1rem;
     border: 1px solid var(--clr-neutral-600);

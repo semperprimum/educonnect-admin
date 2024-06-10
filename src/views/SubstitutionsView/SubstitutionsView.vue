@@ -58,6 +58,10 @@ const attributes = [
 .pair {
   display: flex;
   gap: 1rem;
+
+  @media only screen and (max-width: 48em) {
+    flex-direction: column-reverse;
+  }
 }
 
 .left {
@@ -77,6 +81,7 @@ const attributes = [
   display: flex;
   align-items: center;
   justify-content: space-between;
+  gap: 1rem;
 
   &__professor {
     font-weight: var(--fw-medium);
@@ -94,6 +99,10 @@ const attributes = [
     button {
       border-radius: 100vmax;
     }
+  }
+
+  @media only screen and (max-width: 48em) {
+    flex-direction: column;
   }
 }
 </style>

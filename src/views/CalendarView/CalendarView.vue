@@ -49,7 +49,12 @@ const attributes = [
 <style lang="scss" scoped>
 .container {
   display: flex;
+  flex-direction: column-reverse;
   gap: 1rem;
+
+  @media only screen and (min-width: 48em) {
+    flex-direction: row;
+  }
 }
 
 .button {

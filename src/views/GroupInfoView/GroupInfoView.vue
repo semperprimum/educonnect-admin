@@ -152,6 +152,10 @@ const handleChangeSubject = ({
   width: 25rem;
   display: grid;
   gap: 1rem;
+
+  @media only screen and (max-width: 48em) {
+    width: 20rem;
+  }
 }
 
 .label {
@@ -165,6 +169,11 @@ const handleChangeSubject = ({
   display: flex;
   justify-content: space-between;
   align-items: start;
+  gap: 1rem;
+
+  @media only screen and (max-width: 48em) {
+    flex-direction: column;
+  }
 }
 
 .accordion {

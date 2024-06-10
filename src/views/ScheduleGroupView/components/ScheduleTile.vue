@@ -12,8 +12,12 @@
         class="tile__item"
       >
         <div class="tile__item-group">
-          <h4 class="tile__item-title">{{ schedule.name || t("no_class") }}</h4>
-          <Classroom :classrooms="schedule.classroom" />
+          <h4 class="tile__item-title" :class="{ 'no-class': !schedule.name }">
+            {{ schedule.name || t("no_class") }}
+          </h4>
+          <span v-if="schedule.classroom" class="tile__item-classroom">{{
+            schedule?.classroom.join(" / ")
+          }}</span>
         </div>
 
         <ElipsisMenu
@@ -38,7 +42,6 @@
 <script lang="ts" setup>
 import ElipsisMenu from "@/components/ui/ElipsisMenu.vue";
 import ModalService from "@/services/ModalService.js";
-import Classroom from "@/components/Classroom.vue";
 import { useI18n } from "vue-i18n";
 
 const openChangeSubjectModal = () => {
@@ -179,12 +182,18 @@ const mockSchedule = [
         counter-increment: schedule;
         content: counter(schedule) ". ";
       }
+
+      &.no-class {
+        opacity: 0.65;
+      }
     }
 
     &-classroom {
       display: block;
       font-size: var(--fs-100);
-      width: 3.5rem;
+      font-family: monospace;
+      // width: 3.5rem;
+      padding: 0 0.5rem;
       height: 1.75rem;
       background-color: var(--clr-neutral-600);
       border-radius: 0.25rem;
