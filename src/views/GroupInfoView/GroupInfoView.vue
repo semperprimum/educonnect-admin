@@ -20,6 +20,7 @@
         />
 
         <span class="label">{{ t("curator") }}</span>
+
         <MultiSelect
           :options="generalStore.teachers"
           :allow-empty="false"
@@ -30,12 +31,7 @@
         />
 
         <Accordion :name="t('subject_control')" class="accordion">
-          <SubjectControl
-            @changeSubject="handleChangeSubject"
-            @addSubject="handleAddSubject"
-            @deleteSubject="handleDeleteSubject"
-            :subjects="subjects"
-          />
+          <SubjectControl :subjects="groupStore.group?.subjects!" />
         </Accordion>
       </div>
 
@@ -95,55 +91,6 @@ const handleChangeCurator = () => {
     +currentRoute.params.id,
     selectedCurator.value.id,
   );
-};
-
-const subjects = ref([
-  {
-    id: "1",
-    name: "Верстка Веб-Страниц",
-    professor: "Татьяна Григорьевна",
-  },
-  {
-    id: "2",
-    name: "Основы Front-End",
-    professor: "Денис Валентинович",
-  },
-  {
-    id: "3",
-    name: "Программирование",
-    professor: "Рушан Багдатович",
-  },
-]);
-
-const handleAddSubject = () => {
-  const newSubject = {
-    id: crypto.randomUUID(),
-    name: "",
-    professor: "",
-  };
-
-  subjects.value.push(newSubject);
-};
-
-const handleDeleteSubject = (id: string) => {
-  subjects.value = subjects.value.filter((subject) => subject.id !== id);
-};
-
-const handleChangeSubject = ({
-  id,
-  field,
-  value,
-}: {
-  id: string;
-  field: keyof (typeof subjects.value)[0];
-  value: string;
-}) => {
-  const subject = subjects.value.find((subject) => subject.id === id);
-
-  if (subject) {
-    subject[field] = value;
-  }
-  console.log(subjects);
 };
 </script>
 

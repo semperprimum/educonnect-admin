@@ -51,5 +51,15 @@
         "delete_user": "Пайдаланушыны жою",
         "choose_role": "Рөлді таңдаңыз",
         "choose_subjects": "Пәндерді таңдаңыз",
-        "choose_privileges": "Артықшылықтарды таңдаңыз"
+        "choose_privileges": "Артықшылықтарды таңдаңыз",
+        "good_morning": "Қайырлы таң",
+        "good_afternoon": "Қайырлы күн",
+        "good_evening": "Қайырлы кеш",
+        "monday": "Дүйсенбі",
+        "tuesday": "Сейсенбі",
+        "wednesday": "Сәрсенбі",
+        "thursday": "Бейсенбі",
+        "friday": "Жұма",
+        "saturday": "Сенбі",
+        "class": "сабақ"
 }

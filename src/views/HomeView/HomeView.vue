@@ -1,5 +1,5 @@
 <template>
-  <ContainerWithHeading :heading="t('welcome')">
+  <ContainerWithHeading :heading="getDynamicHello() + '!'">
     <div class="links-grid">
       <LinkTile
         accent-color="#B3E277"
@@ -20,7 +20,7 @@
         :icon="ListOl"
         :title="t('schedule')"
         class="links-grid__tile"
-        to="/timetable"
+        to="/schedule"
       />
       <LinkTile
         accent-color="#3B82F6"
@@ -47,6 +47,19 @@ import { Table, Users, ListOl, User, CalendarDays } from "@/assets/icons";
 import { useI18n } from "vue-i18n";
 
 const { t } = useI18n();
+
+const getDynamicHello = () => {
+  const today = new Date();
+  const currentHour = today.getHours();
+
+  if (currentHour < 12) {
+    return t("good_morning");
+  } else if (currentHour < 18) {
+    return t("good_afternoon");
+  } else {
+    return t("good_evening");
+  }
+};
 </script>
 
 <style lang="scss" scoped>

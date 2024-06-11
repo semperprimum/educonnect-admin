@@ -2,7 +2,7 @@ import axios from "axios";
 import { defineStore } from "pinia";
 import { useAuthStore } from "./auth";
 import { ref, type Ref } from "vue";
-import type { Group } from "@/types";
+import type { Group, ScheduleDay } from "@/types";
 
 const baseUrl = import.meta.env.VITE_API_BASE_URL;
 
@@ -12,6 +12,7 @@ export const useGroupStore = defineStore("group", () => {
   const groups: Ref<Group[]> = ref([]);
   const group: Ref<GroupInfo | null> = ref(null);
   const isLoading: Ref<boolean> = ref(false);
+  const schedule: Ref<ScheduleDay[]> = ref([]);
 
   const getGroups = async () => {
     try {
@@ -192,19 +193,105 @@ export const useGroupStore = defineStore("group", () => {
     }
   };
 
+  const addTeacherSubject = async (
+    groupId: number,
+    teacherSubjectId: number,
+  ) => {
+    try {
+      const response = await axios.post(
+        `${baseUrl}/adminPanel/group/${groupId}/subjects/add`,
+        { teacherSubjectId },
+        { headers },
+      );
+
+      if (response.status !== 201) {
+        throw new Error("Error adding teacher subject to group");
+      } else {
+        await getGroupInfoById(groupId);
+      }
+    } catch (e) {
+      console.error(e);
+    }
+  };
+
+  const removeSubject = async (groupId: number, teacherSubjectId: number) => {
+    try {
+      const response = await axios.delete(
+        `${baseUrl}/adminPanel/group/${groupId}/subjects/remove/${teacherSubjectId}/`,
+        { headers },
+      );
+
+      if (response.status !== 200) {
+        throw new Error("Error removing teacher subject from group");
+      } else {
+        await getGroupInfoById(groupId);
+      }
+    } catch (e) {
+      console.error(e);
+    }
+  };
+
+  const getGroupSchedule = async (groupId: number) => {
+    try {
+      const response = await axios.get(
+        `${baseUrl}/adminPanel/group/${groupId}/schedule/list`,
+        {
+          headers,
+        },
+      );
+
+      if (response.status !== 200) {
+        throw new Error("Error fetching group schedule");
+      } else {
+        schedule.value = response.data.schedule;
+      }
+    } catch (e) {
+      console.error(e);
+    }
+  };
+
+  const changeSchedule = async (
+    groupId: number,
+    date: string,
+    number: number,
+    subjectId: number,
+  ) => {
+    try {
+      const response = await axios.post(
+        `${baseUrl}/adminPanel/group/${groupId}/schedule/change`,
+        { date, number, subjectId },
+        { headers },
+      );
+
+      if (response.status !== 200) {
+        throw new Error("Error changing schedule");
+      } else {
+        await getGroupInfoById(groupId);
+        await getGroupSchedule(groupId);
+      }
+    } catch (e) {
+      console.error(e);
+    }
+  };
+
   return {
-    getGroups,
-    getGroupInfoById,
-    createGroup,
     groups,
     group,
     isLoading,
+    schedule,
+    getGroups,
+    getGroupInfoById,
+    createGroup,
     updateSpecializationById,
     updateCuratorById,
     updateStudentSubgroup,
     addStudent,
     removeStudent,
     checkNameAvailability,
+    addTeacherSubject,
+    removeSubject,
+    getGroupSchedule,
+    changeSchedule,
   };
 });
 
@@ -227,7 +314,7 @@ interface Curator {
   fio: string;
 }
 
-interface Subject {
+export interface Subject {
   id: number;
   subject: {
     id: number;

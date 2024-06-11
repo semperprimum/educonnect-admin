@@ -51,5 +51,15 @@
         "delete_user": "Удалить пользователя",
         "choose_role": "Выберите роль",
         "choose_subjects": "Выберите предметы",
-        "choose_privileges": "Выберите привилегии"
+        "choose_privileges": "Выберите привилегии",
+        "good_morning": "Доброе утро",
+        "good_afternoon": "Добрый день",
+        "good_evening": "Добрый вечер",
+        "monday": "Понедельник",
+        "tuesday": "Вторник",
+        "wednesday": "Среда",
+        "thursday": "Четверг",
+        "friday": "Пятница",
+        "saturday": "Суббота",
+        "class": "пара"
 }

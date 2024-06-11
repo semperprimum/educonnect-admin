@@ -47,6 +47,7 @@ import { useGeneralStore } from "@/stores/general";
 import { useGroupStore } from "@/stores/group";
 import { matchSorter } from "match-sorter";
 import { useI18n } from "vue-i18n";
+import { onMounted } from "vue";
 
 const router = useRouter();
 const groupStore = useGroupStore();
@@ -63,6 +64,10 @@ const filteredGroups = computed(() => {
   }
 
   return groups;
+});
+
+onMounted(async () => {
+  await groupStore.getGroups();
 });
 </script>
 

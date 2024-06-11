@@ -11,6 +11,7 @@ export const useGeneralStore = defineStore("general", () => {
   const specializations: Ref<Specialization[]> = ref([]);
   const teachers: Ref<Teacher[]> = ref([]);
   const subjects: Ref<Subject[]> = ref([]);
+  const teacherSubjects: Ref<TeacherSubject[]> = ref([]);
 
   const fetchSpecializations = async () => {
     try {
@@ -69,13 +70,34 @@ export const useGeneralStore = defineStore("general", () => {
     }
   };
 
+  const fetchTeacherSubjects = async () => {
+    try {
+      const response = await axios.get(
+        `${baseUrl}/adminPanel/subjects/getTeacherSubjectList`,
+        {
+          headers,
+        },
+      );
+
+      if (response.status !== 200) {
+        throw new Error("Teacher subject fetch failed");
+      } else {
+        teacherSubjects.value = response.data;
+      }
+    } catch (e) {
+      console.error(e);
+    }
+  };
+
   return {
     fetchSpecializations,
     fetchTeachers,
     fetchSubjects,
+    fetchTeacherSubjects,
     specializations,
     teachers,
     subjects,
+    teacherSubjects,
   };
 });
 
@@ -92,4 +114,11 @@ interface Teacher {
 interface Subject {
   id: number;
   title: string;
+}
+
+interface TeacherSubject {
+  id: number;
+  userTeacherId: number;
+  teacher: Teacher;
+  subject: Subject;
 }

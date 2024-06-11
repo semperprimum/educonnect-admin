@@ -1,6 +1,7 @@
 import axios from "axios";
 import { defineStore } from "pinia";
 import { ref, type Ref } from "vue";
+import { useRouter } from "vue-router";
 
 const baseUrl = import.meta.env.VITE_API_BASE_URL;
 
@@ -9,6 +10,8 @@ export const useAuthStore = defineStore("auth", () => {
     localStorage.getItem("auth-token") || null,
   );
   const error: Ref<string | null> = ref(null);
+  const headers = { Authorization: `Bearer ${token.value}` };
+  const router = useRouter();
 
   const setToken = (newToken: string | null) => {
     if (newToken) {
@@ -44,7 +47,7 @@ export const useAuthStore = defineStore("auth", () => {
       const response = await axios.post(
         `${baseUrl}/adminPanel/signout`,
         {},
-        { headers: { Authorization: `Bearer ${token.value}` } },
+        { headers },
       );
 
       if (response.status === 200) {
@@ -57,5 +60,20 @@ export const useAuthStore = defineStore("auth", () => {
     }
   };
 
-  return { token, error, login, logout };
+  const checkAuth = async () => {
+    if (!token) return;
+
+    await axios
+      .get(`${baseUrl}/adminPanel/groupList`, {
+        headers,
+      })
+      .catch(async (error) => {
+        if (error.response.status === 401) {
+          setToken(null);
+          router.replace("/login");
+        }
+      });
+  };
+
+  return { token, error, login, logout, checkAuth };
 });

@@ -1,22 +1,25 @@
 <template>
   <div class="tile">
     <div class="tile__header">
-      <h3 class="tile__heading">Понедельник</h3>
-      <span class="tile__date">10.05.24</span>
+      <h3 class="tile__heading">{{ t(schedule.dayOfWeek.toLowerCase()) }}</h3>
+      <span class="tile__date">{{ schedule.date }}</span>
     </div>
 
     <ol class="tile__list">
       <li
-        v-for="schedule in mockSchedule"
-        :key="schedule.id"
+        v-for="subject in schedule.subjects"
+        :key="schedule.date"
         class="tile__item"
       >
         <div class="tile__item-group">
-          <h4 class="tile__item-title" :class="{ 'no-class': !schedule.name }">
-            {{ schedule.name || t("no_class") }}
+          <h4
+            class="tile__item-title"
+            :class="{ 'no-class': !subject.subject }"
+          >
+            {{ subject?.subject || t("no_class") }}
           </h4>
-          <span v-if="schedule.classroom" class="tile__item-classroom">{{
-            schedule?.classroom.join(" / ")
+          <span v-if="subject?.auditorium" class="tile__item-classroom">{{
+            subject?.auditorium
           }}</span>
         </div>
 
@@ -25,7 +28,11 @@
             {
               name: t('change_class'),
               action: () => {
-                openChangeSubjectModal();
+                openChangeSubjectModal(
+                  subject,
+                  schedule.dayOfWeek,
+                  schedule.date,
+                );
               },
             },
             {
@@ -42,45 +49,21 @@
 <script lang="ts" setup>
 import ElipsisMenu from "@/components/ui/ElipsisMenu.vue";
 import ModalService from "@/services/ModalService.js";
+import type { ScheduleDay, Subject } from "@/types";
 import { useI18n } from "vue-i18n";
 
-const openChangeSubjectModal = () => {
-  ModalService.open("ChangeSubjectModal");
+const openChangeSubjectModal = (
+  subject: Subject,
+  dayOfWeek: string,
+  date: string,
+) => {
+  ModalService.open("ChangeSubjectModal", { subject, dayOfWeek, date });
 };
 const { t } = useI18n();
 
-const mockSchedule = [
-  {
-    id: 1,
-    name: null,
-    classroom: null,
-  },
-  {
-    id: 2,
-    name: "Программирование Длинное Название",
-    classroom: ["1308"],
-  },
-  {
-    id: 3,
-    name: "Тестирование ПО",
-    classroom: ["1412", "1314"],
-  },
-  {
-    id: 4,
-    name: "ООП",
-    classroom: ["1410"],
-  },
-  {
-    id: 5,
-    name: "Социология",
-    classroom: ["2414"],
-  },
-  {
-    id: 6,
-    name: null,
-    classroom: null,
-  },
-];
+defineProps<{
+  schedule: ScheduleDay;
+}>();
 </script>
 
 <style lang="scss" scoped>
@@ -101,22 +84,6 @@ const mockSchedule = [
   background-size: 40rem 40rem;
   background-position: bottom -15rem right -15rem;
   background-repeat: no-repeat;
-
-  /* &::before {
-    content: "";
-    width: min(25rem, 100%);
-    aspect-ratio: 1;
-    background-color: var(--clr-accent);
-    position: absolute;
-
-    border-radius: 100vmax;
-    filter: blur(9999px);
-    opacity: 0.4;
-    z-index: -1;
-
-    bottom: -2rem;
-    right: -5rem;
-  } */
 
   &__header {
     display: flex;
