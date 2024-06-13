@@ -75,7 +75,7 @@ const getDynamicHello = () => {
   gap: 1rem;
 }
 
-@media only screen and (min-width: 48em) {
+@media only screen and (min-width: 68.75em) {
   .links-grid {
     grid-template-columns: repeat(3, 1fr);
     grid-template-rows: repeat(2, 1fr);

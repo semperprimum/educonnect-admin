@@ -36,34 +36,35 @@ onMounted(() => {
 // Это нужно для того, чтобы dropdowns в модалке
 // отображались корректно, если количество
 // контента это позволяет.
-const toggleOverflowClass = () => {
-  if (!dialog.value || !dialogContent.value) return;
 
-  const dialogElement = dialog.value;
-  const contentElement = dialogContent.value;
-
-  if (contentElement.scrollHeight > dialogElement.clientHeight) {
-    contentElement.classList.add("overflow-auto");
-  } else {
-    contentElement.classList.remove("overflow-auto");
-  }
-};
-
-let resizeObserver: ResizeObserver | null = null;
-
-onMounted(() => {
-  if (dialogContent.value) {
-    resizeObserver = new ResizeObserver(toggleOverflowClass);
-    resizeObserver.observe(dialogContent.value);
-    toggleOverflowClass();
-  }
-});
-
-onBeforeUnmount(() => {
-  if (resizeObserver && dialogContent.value) {
-    resizeObserver.unobserve(dialogContent.value);
-  }
-});
+// const toggleOverflowClass = () => {
+//   if (!dialog.value || !dialogContent.value) return;
+//
+//   const dialogElement = dialog.value;
+//   const contentElement = dialogContent.value;
+//
+//   if (contentElement.scrollHeight > dialogElement.clientHeight) {
+//     contentElement.classList.add("overflow-auto");
+//   } else {
+//     contentElement.classList.remove("overflow-auto");
+//   }
+// };
+//
+// let resizeObserver: ResizeObserver | null = null;
+//
+// onMounted(() => {
+//   if (dialogContent.value) {
+//     resizeObserver = new ResizeObserver(toggleOverflowClass);
+//     resizeObserver.observe(dialogContent.value);
+//     toggleOverflowClass();
+//   }
+// });
+//
+// onBeforeUnmount(() => {
+//   if (resizeObserver && dialogContent.value) {
+//     resizeObserver.unobserve(dialogContent.value);
+//   }
+// });
 </script>
 
 <style lang="scss" scoped>

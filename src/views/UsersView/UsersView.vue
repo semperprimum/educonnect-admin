@@ -11,6 +11,7 @@
           v-model="selectedRole"
           :options="roleOptions"
           :placeholder="t('role')"
+        :show-labels="false"
           track-by="value"
           label="title"
         />

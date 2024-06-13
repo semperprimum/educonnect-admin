@@ -7,6 +7,7 @@
         v-model="selectedUser"
         track-by="id"
         label="fio"
+        :show-labels="false"
         :options="students"
       />
 

@@ -35,6 +35,7 @@ export interface Subject {
   subgroup?: string;
   number: number;
   dayWeek?: number;
+  auditorium?: number;
 }
 
 export interface SubstitutionRequest {

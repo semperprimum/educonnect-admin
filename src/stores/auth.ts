@@ -1,3 +1,4 @@
+import { computed, type ComputedRef } from "@vue/reactivity";
 import axios from "axios";
 import { defineStore } from "pinia";
 import { ref, type Ref } from "vue";
@@ -23,8 +24,11 @@ export const useAuthStore = defineStore("auth", () => {
     JSON.parse(localStorage.getItem("privileges")) || null,
   );
   const error: Ref<string | null> = ref(null);
-  const headers = { Authorization: `Bearer ${token.value}` };
+  const headers: ComputedRef<{ Authorization: string }> = computed(() => {
+    return { Authorization: `Bearer ${token.value}` };
+  });
   const router = useRouter();
+  const isLoading: Ref<boolean> = ref(false);
 
   const setToken = (newToken: string | null) => {
     if (newToken) {
@@ -48,37 +52,32 @@ export const useAuthStore = defineStore("auth", () => {
 
   const login = async (credentials: { login: string; password: string }) => {
     error.value = null;
+    isLoading.value = true;
     try {
       const response = await axios.post(
         `${baseUrl}/adminPanel/signin`,
         credentials,
       );
 
-      if (response.status === 200) {
-        setToken(response.data.token);
-        setPrivileges(getPrivileges(response.data));
-      } else {
-        throw new Error("Login failed");
-      }
+      setToken(response.data.token);
+      setPrivileges(getPrivileges(response.data));
     } catch (e: any) {
       error.value = e.response?.data?.message || e.message;
+    } finally {
+      isLoading.value = false;
     }
   };
 
   const logout = async () => {
     error.value = null;
     try {
-      const response = await axios.post(
+      await axios.post(
         `${baseUrl}/adminPanel/signout`,
         {},
-        { headers },
+        { headers: headers.value },
       );
 
-      if (response.status === 200) {
-        setToken(null);
-      } else {
-        throw new Error("Logout failed");
-      }
+      setToken(null);
     } catch (e: any) {
       error.value = e.response?.data?.message || e.message;
     }
@@ -89,7 +88,7 @@ export const useAuthStore = defineStore("auth", () => {
 
     await axios
       .get(`${baseUrl}/adminPanel/groupList`, {
-        headers,
+        headers: headers.value,
       })
       .catch(async (error) => {
         if (error.response.status === 401) {
@@ -104,7 +103,16 @@ export const useAuthStore = defineStore("auth", () => {
     return privileges.value?.includes(p);
   };
 
-  return { token, error, privileges, login, logout, checkAuth, checkPrivilege };
+  return {
+    token,
+    error,
+    privileges,
+    isLoading,
+    login,
+    logout,
+    checkAuth,
+    checkPrivilege,
+  };
 });
 
 interface AdminAuth {

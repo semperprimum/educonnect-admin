@@ -20,9 +20,8 @@ const { locale } = useI18n();
 onMounted(async () => {
   locale.value = localStorage.getItem("locale") || "ru";
 
-  await authStore.checkAuth();
-
   if (authStore.token) {
+    await authStore.checkAuth();
     await generalStore.fetchSpecializations();
     await generalStore.fetchTeachers();
     await generalStore.fetchSubjects();

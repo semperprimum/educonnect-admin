@@ -18,7 +18,7 @@
             }}
           </h4>
           <span v-if="subject.subjectId" class="tile__item-classroom">{{
-            1308
+            subject.auditorium
           }}</span>
         </div>
 

@@ -12,8 +12,8 @@ export const useGroupStore = defineStore("group", () => {
   const headers = { Authorization: `Bearer ${authStore.token}` };
   const groups: Ref<Group[]> = ref([]);
   const group: Ref<GroupInfo | null> = ref(null);
-  const isLoading: Ref<boolean> = ref(false);
   const schedule: Ref<GroupSubject[][]> = ref([]);
+  const isLoading: Ref<boolean> = ref(false);
 
   const getGroups = async () => {
     try {

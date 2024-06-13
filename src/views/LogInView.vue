@@ -17,7 +17,11 @@
           >Неверный логин или пароль.</span
         >
 
-        <GradientButton class="button" label="Войти" />
+        <GradientButton
+          :is-loading="authStore.isLoading"
+          class="button"
+          label="Войти"
+        />
       </form>
     </div>
   </main>

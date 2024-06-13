@@ -1,12 +1,14 @@
 <template>
   <button>
-    <span>{{ label }}</span>
+    <span>{{ label }} <Spinner class="spinner" v-if="isLoading" /></span>
   </button>
 </template>
 
 <script lang="ts" setup>
+import Spinner from "@/components/Spinner.vue";
 defineProps<{
   label: string;
+  isLoading?: boolean;
 }>();
 </script>
 
@@ -23,9 +25,19 @@ button {
 
   cursor: pointer;
 
+  /* background: var(--clr-neutral-700)
+    radial-gradient(circle, var(--clr-brand) 0%, var(--clr-neutral-700) 50%);
+  background-size: 20rem 20rem;
+  background-position: center;
+  background-repeat: no-repeat; */
+
   & > span {
     position: relative;
     z-index: 100;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
   }
 
   &::before {
@@ -34,15 +46,20 @@ button {
     left: 50%;
     top: 50%;
     transform: translate(-50%, -50%);
-    width: 50%;
+    width: 100%;
     aspect-ratio: 1;
-    background-color: var(--clr-brand);
+    background-color: transparent;
     border-radius: 100vmax;
     z-index: 0;
-    filter: blur(20rem);
     opacity: 0;
 
     transition: opacity 150ms 75ms ease;
+
+    background: var(--clr-neutral-700)
+      radial-gradient(circle, var(--clr-brand) 0%, var(--clr-neutral-700) 50%);
+    background-size: 25rem 25rem;
+    background-position: center;
+    background-repeat: no-repeat;
   }
 
   &:focus-visible {
@@ -55,5 +72,9 @@ button {
       opacity: 0.65;
     }
   }
+}
+
+.spinner {
+  width: 1rem;
 }
 </style>

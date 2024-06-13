@@ -1,10 +1,11 @@
 <template>
-  <Spinner v-if="groupStore.isLoading" />
   <ContainerWithHeading
-    v-else
-    :heading="t('groups') + ' -> ' + groupStore.group?.title"
+    :heading="t('groups') + ' -> ' + (groupStore.group?.title || '')"
   >
-    <div class="container">
+    <div class="spinner-container" v-if="groupStore.isLoading">
+      <Spinner class="spinner" />
+    </div>
+    <div v-else class="container">
       <div class="info">
         <span class="label">{{ t("literals") }}</span>
         <Input disabled :model-value="groupStore.group?.title" />
@@ -12,8 +13,10 @@
         <span class="label">{{ t("specialty") }}</span>
         <MultiSelect
           v-model="selectedSpecialization"
+          :placeholde="t('specialty')"
           :options="generalStore.specializations"
           :allow-empty="false"
+          :show-labels="false"
           label="title"
           track-by="id"
           @update:modelValue="handleSpecializationChange"
@@ -24,6 +27,8 @@
         <MultiSelect
           :options="generalStore.teachers"
           :allow-empty="false"
+          :placeholde="t('curator')"
+          :show-labels="false"
           label="fio"
           track-by="id"
           v-model="selectedCurator"
@@ -130,5 +135,16 @@ const handleChangeCurator = () => {
 
 .literals-input {
   max-width: 18rem;
+}
+
+.spinner-container {
+  min-height: 80vh;
+  display: grid;
+  place-items: center;
+  width: 100%;
+
+  .spinner {
+    width: 5rem;
+  }
 }
 </style>

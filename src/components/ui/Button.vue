@@ -1,6 +1,8 @@
 <template>
   <button :class="{ center, elevated, danger }">
-    <span>
+    <Spinner class="spinner" v-if="isLoading" />
+
+    <span v-else>
       {{ label }}
       <component
         aria-hidden="true"
@@ -14,6 +16,7 @@
 
 <script lang="ts" setup>
 import { type Component } from "vue";
+import Spinner from "@/components/Spinner.vue";
 
 defineProps<{
   label: string;
@@ -21,6 +24,7 @@ defineProps<{
   danger?: boolean;
   center?: boolean;
   elevated?: boolean;
+  isLoading?: boolean;
 }>();
 </script>
 
@@ -71,5 +75,9 @@ button {
   width: 1rem;
   aspect-ratio: 1;
   fill: currentColor;
+}
+
+.spinner {
+  width: 1rem;
 }
 </style>

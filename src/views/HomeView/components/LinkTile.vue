@@ -46,7 +46,7 @@ defineProps<{
   flex-direction: column;
   justify-content: space-between;
 
-  @media only screen and (min-width: 48em) {
+  @media only screen and (min-width: 68.75em) {
     background: var(--clr-neutral-700)
       radial-gradient(var(--clr-accent) 0%, var(--clr-neutral-700) 50%);
     background-size: 100rem 100rem;

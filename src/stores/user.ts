@@ -201,4 +201,5 @@ export interface User {
   fio: string;
   role: string;
   privilages: string[];
+  login: string;
 }

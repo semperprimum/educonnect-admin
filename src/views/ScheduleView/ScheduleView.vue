@@ -7,15 +7,15 @@
         :trailing="MagnifyingGlass"
       />
 
-      <Multiselect
-        v-model="selectedDepartment"
-        :placeholder="t('specialty')"
-        track-by="id"
-        label="title"
-        class="select"
-        :options="generalStore.specializations"
-        :showLabels="false"
-      />
+      <!-- <Multiselect -->
+      <!--   v-model="selectedDepartment" -->
+      <!--   :placeholder="t('specialty')" -->
+      <!--   track-by="id" -->
+      <!--   label="title" -->
+      <!--   class="select" -->
+      <!--   :options="generalStore.specializations" -->
+      <!--   :showLabels="false" -->
+      <!-- /> -->
 
       <Button
         @click="router.push('/substitutions')"

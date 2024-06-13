@@ -5,8 +5,6 @@
         <div v-if="selectedRequests">
           <Accordion
             v-for="requests in selectedRequests"
-            manual
-            manual-is-open
             big-name
             name="П-21-57к"
           >

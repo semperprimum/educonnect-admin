@@ -7,14 +7,14 @@
         :trailing="MagnifyingGlass"
       />
 
-      <Multiselect
-        v-model="selectedDepartment"
-        track-by="id"
-        label="title"
-        class="select"
-        :options="generalStore.specializations"
-        :showLabels="false"
-      />
+      <!-- <Multiselect -->
+      <!--   v-model="selectedDepartment" -->
+      <!--   track-by="id" -->
+      <!--   label="title" -->
+      <!--   class="select" -->
+      <!--   :options="generalStore.specializations" -->
+      <!--   :showLabels="false" -->
+      <!-- /> -->
 
       <Button
         :label="t('create_group')"

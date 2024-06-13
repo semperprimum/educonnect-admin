@@ -147,13 +147,16 @@ const onSubmit = handleSubmit(async (values) => {
         values.patronymic,
         subjectNumArray.value,
       );
+      break;
     case "admin":
+      console.log("admin selected");
       await userStore.createAdmin(
         values.name,
         values.lastName,
         values.patronymic,
         values.privileges,
       );
+      break;
   }
 
   props.onClose();

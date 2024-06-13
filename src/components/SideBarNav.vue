@@ -172,6 +172,8 @@ const logout = async () => {
     &__logout-btn {
       color: var(--clr-red-400);
       font-weight: var(--fw-bold);
+      background: none;
+      border: none;
     }
 
     &__link {

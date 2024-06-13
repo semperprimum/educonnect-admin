@@ -5,14 +5,16 @@
       <span>{{ user.role }}</span>
       <ElipsisMenu
         :options="[
-          {
-            name: t('change_user'),
-            action: () => console.log('change user'),
-          },
-          {
-            name: t('copy_login'),
-            action: () => console.log('copy login'),
-          },
+          ...(user.login
+            ? [
+                {
+                  name: t('copy_login'),
+                  action: async () => {
+                    await copy(user.login);
+                  },
+                },
+              ]
+            : []),
           {
             name: t('delete_user'),
             action: () => openDeleteUserModal(user.id, user.role, user.fio),
@@ -27,9 +29,11 @@
 import ElipsisMenu from "@/components/ui/ElipsisMenu.vue";
 import ModalService from "@/services/ModalService";
 import type { User } from "@/stores/user";
+import { useClipboard } from "@vueuse/core";
 import { useI18n } from "vue-i18n";
 
 const { t } = useI18n();
+const { copy } = useClipboard();
 
 defineProps<{
   users: User[];
