@@ -22,6 +22,10 @@ defineProps<{
   font-weight: var(--fw-extrabold);
   margin-bottom: 1rem;
   line-height: 1;
+
+  @media only screen and (max-width: 48em) {
+    line-height: 1.3;
+  }
 }
 
 .container {

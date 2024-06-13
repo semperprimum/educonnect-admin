@@ -81,6 +81,10 @@ const colors = ref([
     display: grid;
     grid-template-columns: repeat(7, 1fr);
     gap: 1rem 2rem;
+
+    @media only screen and (max-width: 48em) {
+      grid-template-columns: repeat(4, 1fr);
+    }
   }
 
   &__color-button {

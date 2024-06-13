@@ -38,6 +38,7 @@ defineProps<{
 .tile {
   position: relative;
   border: 1px solid var(--clr-neutral-600);
+  background: var(--clr-neutral-700);
   border-radius: 1rem;
   padding: 1rem;
   overflow: hidden;
@@ -45,11 +46,13 @@ defineProps<{
   flex-direction: column;
   justify-content: space-between;
 
-  background: var(--clr-neutral-700)
-    radial-gradient(var(--clr-accent) 0%, var(--clr-neutral-700) 50%);
-  background-size: 100rem 100rem;
-  background-position: bottom -55rem right -55rem;
-  background-repeat: no-repeat;
+  @media only screen and (min-width: 48em) {
+    background: var(--clr-neutral-700)
+      radial-gradient(var(--clr-accent) 0%, var(--clr-neutral-700) 50%);
+    background-size: 100rem 100rem;
+    background-position: bottom -55rem right -55rem;
+    background-repeat: no-repeat;
+  }
 
   /* &::before {
     content: "";
