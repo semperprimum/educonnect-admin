@@ -1,25 +1,24 @@
 <template>
   <div class="tile">
     <div class="tile__header">
-      <h3 class="tile__heading">{{ t(schedule.dayOfWeek.toLowerCase()) }}</h3>
-      <span class="tile__date">{{ schedule.date }}</span>
+      <h3 class="tile__heading">{{ t(weekDays[index]) }}</h3>
     </div>
 
     <ol class="tile__list">
-      <li
-        v-for="subject in schedule.subjects"
-        :key="schedule.date"
-        class="tile__item"
-      >
+      <li v-for="subject in subjects" class="tile__item">
         <div class="tile__item-group">
           <h4
             class="tile__item-title"
-            :class="{ 'no-class': !subject.subject }"
+            :class="{ 'no-class': !subject.subjectId }"
           >
-            {{ subject?.subject || t("no_class") }}
+            {{
+              subject.subjectId
+                ? getSubjectFromGroup(subject.subjectId)?.subject.title
+                : t("no_class")
+            }}
           </h4>
-          <span v-if="subject?.auditorium" class="tile__item-classroom">{{
-            subject?.auditorium
+          <span v-if="subject.subjectId" class="tile__item-classroom">{{
+            1308
           }}</span>
         </div>
 
@@ -28,17 +27,19 @@
             {
               name: t('change_class'),
               action: () => {
-                openChangeSubjectModal(
-                  subject,
-                  schedule.dayOfWeek,
-                  schedule.date,
-                );
+                openChangeSubjectModal(subject);
               },
             },
-            {
-              name: t('cancel_class'),
-              action: () => {},
-            },
+            ...(subject.subjectId
+              ? [
+                  {
+                    name: t('cancel_class'),
+                    action: () => {
+                      openRemoveSubjectModal(subject);
+                    },
+                  },
+                ]
+              : []),
           ]"
         />
       </li>
@@ -49,20 +50,39 @@
 <script lang="ts" setup>
 import ElipsisMenu from "@/components/ui/ElipsisMenu.vue";
 import ModalService from "@/services/ModalService.js";
-import type { ScheduleDay, Subject } from "@/types";
+import { useGroupStore } from "@/stores/group";
+import type { Subject } from "@/types";
 import { useI18n } from "vue-i18n";
 
-const openChangeSubjectModal = (
-  subject: Subject,
-  dayOfWeek: string,
-  date: string,
-) => {
-  ModalService.open("ChangeSubjectModal", { subject, dayOfWeek, date });
+const groupStore = useGroupStore();
+
+const getSubjectFromGroup = (teacherSubjectId: number) => {
+  if (!groupStore.group) return;
+
+  return groupStore.group.subjects.find((el) => el.id === teacherSubjectId);
 };
+
+const openChangeSubjectModal = (subject: Subject) => {
+  ModalService.open("ChangeSubjectModal", { subject, weekIndex: props.index });
+};
+const openRemoveSubjectModal = (subject: Subject) => {
+  ModalService.open("RemoveSubjectModal", { subject, weekIndex: props.index });
+};
+
 const { t } = useI18n();
 
-defineProps<{
-  schedule: ScheduleDay;
+const weekDays: string[] = [
+  "monday",
+  "tuesday",
+  "wednesday",
+  "thursday",
+  "friday",
+  "saturday",
+];
+
+const props = defineProps<{
+  subjects?: Subject[];
+  index: number;
 }>();
 </script>
 

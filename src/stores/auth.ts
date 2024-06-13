@@ -5,9 +5,22 @@ import { useRouter } from "vue-router";
 
 const baseUrl = import.meta.env.VITE_API_BASE_URL;
 
+const getPrivileges = (user: AdminAuth) => {
+  const result: string[] = [];
+
+  user.user.privileges.forEach((privilege) => {
+    result.push(privilege.privilege);
+  });
+
+  return result;
+};
+
 export const useAuthStore = defineStore("auth", () => {
   const token: Ref<string | null> = ref(
     localStorage.getItem("auth-token") || null,
+  );
+  const privileges: Ref<string[] | null> = ref(
+    JSON.parse(localStorage.getItem("privileges")) || null,
   );
   const error: Ref<string | null> = ref(null);
   const headers = { Authorization: `Bearer ${token.value}` };
@@ -23,6 +36,16 @@ export const useAuthStore = defineStore("auth", () => {
     }
   };
 
+  const setPrivileges = (privilegesArr: string[] | null) => {
+    if (privilegesArr) {
+      localStorage.setItem("privileges", JSON.stringify(privilegesArr));
+      privileges.value = privilegesArr;
+    } else {
+      localStorage.removeItem("privileges");
+      privileges.value = null;
+    }
+  };
+
   const login = async (credentials: { login: string; password: string }) => {
     error.value = null;
     try {
@@ -33,6 +56,7 @@ export const useAuthStore = defineStore("auth", () => {
 
       if (response.status === 200) {
         setToken(response.data.token);
+        setPrivileges(getPrivileges(response.data));
       } else {
         throw new Error("Login failed");
       }
@@ -75,5 +99,23 @@ export const useAuthStore = defineStore("auth", () => {
       });
   };
 
-  return { token, error, login, logout, checkAuth };
+  const checkPrivilege = (p: string) => {
+    if (privileges.value?.includes("SuperAdmin")) return true;
+    return privileges.value?.includes(p);
+  };
+
+  return { token, error, privileges, login, logout, checkAuth, checkPrivilege };
 });
+
+interface AdminAuth {
+  token: string;
+  user: {
+    id: number;
+    login: string;
+    privileges: {
+      id: number;
+      userAdminId: number;
+      privilege: string;
+    }[];
+  };
+}

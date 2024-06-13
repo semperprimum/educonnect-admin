@@ -2,32 +2,49 @@
   <ContainerWithHeading heading="Управление заменами">
     <div class="pair">
       <div class="left">
-        <Accordion manual manual-is-open big-name name="П-21-57к">
-          <div class="request">
-            <div class="request__info">
-              <p class="request__professor">Попов Денис Валентинович</p>
-              <span class="request__details"
-                >1 пара, Основы Front-End, Вся группа</span
-              >
-            </div>
+        <div v-if="selectedRequests">
+          <Accordion
+            v-for="requests in selectedRequests"
+            manual
+            manual-is-open
+            big-name
+            name="П-21-57к"
+          >
+            <div v-for="request in requests" class="request">
+              <div class="request__info">
+                <p class="request__professor">
+                  {{ request.subject.teacher_subject.teacher.fio }}
+                </p>
+                <span class="request__details"
+                  >{{ request.number }} пара, Основы Front-End, Вся группа</span
+                >
+              </div>
 
-            <div class="request__buttons">
-              <Button label="Отклонить" danger />
-              <Button label="Одобрить" elevated />
+              <div class="request__buttons">
+                <Button
+                  @click="onReject(request.id)"
+                  label="Отклонить"
+                  danger
+                />
+                <Button
+                  @click="onApprove(request.id)"
+                  label="Одобрить"
+                  elevated
+                />
+              </div>
             </div>
-          </div>
-        </Accordion>
-        <Accordion big-name name="П-21-56б" />
-        <Accordion big-name name="П-21-55гб" />
-        <Accordion big-name name="Ис-21-45к" />
-        <Accordion big-name name="Ис-21-44б" />
-        <Accordion big-name name="Ис-21-43гб" />
-        <Accordion big-name name="Ди-21-44б" />
-        <Accordion big-name name="Ди-20-43б" />
-        <Accordion big-name name="Ди-20-43к" />
+          </Accordion>
+        </div>
+
+        <div class="no-requests" v-else>
+          <p>Нет запросов</p>
+        </div>
       </div>
       <div class="right">
-        <Calendar :date="new Date()" :attributes="attributes" />
+        <Calendar
+          v-model="selectedDate"
+          :attributes="substitutionStore.highlights ? attributes : undefined"
+        />
         <GroupSchedule />
       </div>
     </div>
@@ -40,18 +57,52 @@ import GroupSchedule from "@/views/SubstitutionsView/components/GroupSchedule.vu
 import Calendar from "@/components/Calendar.vue";
 import Accordion from "@/components/Accordion.vue";
 import Button from "@/components/ui/Button.vue";
+import { onMounted } from "vue";
+import { useSubstitutionStore } from "@/stores/substitution";
+import { ref } from "vue";
+import { watch } from "vue";
+import type { Ref } from "vue";
+import { computed } from "vue";
+import { useGeneralStore } from "@/stores/general";
 
-const attributes = [
-  {
-    highlight: "gray",
-    dates: [
-      new Date(2024, 5, 7),
-      new Date(2024, 5, 12),
-      new Date(2024, 5, 14),
-      new Date(2024, 5, 20),
-    ],
-  },
-];
+const substitutionStore = useSubstitutionStore();
+const generalStore = useGeneralStore();
+
+const selectedDate = ref(new Date());
+const selectedDateIso = computed(
+  () => selectedDate.value.toISOString().split("T")[0],
+);
+const selectedRequests = computed(
+  () => substitutionStore.formattedList[selectedDateIso.value],
+);
+
+const attributes: Ref<[{ highlight: string; dates: Date[] }]> = ref([
+  { highlight: "gray", dates: [] },
+]);
+
+onMounted(async () => {
+  await substitutionStore.fetchRequestsListDateRange();
+  updateAttributes();
+});
+
+const updateAttributes = () => {
+  attributes.value = [
+    {
+      highlight: "gray",
+      dates: substitutionStore.highlights,
+    },
+  ];
+};
+
+watch(() => substitutionStore.highlights, updateAttributes);
+
+const onApprove = async (id: number) => {
+  await substitutionStore.approveSubstitution(id);
+};
+
+const onReject = async (id: number) => {
+  await substitutionStore.rejectSubstitution(id);
+};
 </script>
 
 <style lang="scss" scoped>
@@ -103,6 +154,18 @@ const attributes = [
 
   @media only screen and (max-width: 48em) {
     flex-direction: column;
+  }
+}
+
+.no-requests {
+  height: 100%;
+  display: grid;
+  place-items: center;
+
+  p {
+    color: var(--clr-neutral-300);
+    font-size: var(--fs-500);
+    font-weight: var(--fw-bold);
   }
 }
 </style>

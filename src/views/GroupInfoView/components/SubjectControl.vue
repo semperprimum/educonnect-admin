@@ -64,7 +64,7 @@ const handleSubmit = async () => {
   if (!selectedSubject.value) return;
 
   // check if selected teacherSubject was already added
-  if (props.subjects.find((el) => el.id === selectedSubject.value?.id)) return;
+  // if (props.subjects.find((el) => el.id === selectedSubject.value?.id)) return;
 
   const groupId: number = +currentRoute.params.id;
   const teacherSubjectId: number = selectedSubject.value.id;

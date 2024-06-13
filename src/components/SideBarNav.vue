@@ -71,19 +71,31 @@ const logout = async () => {
           <span>{{ t("home_page") }}</span>
         </RouterLink>
       </li>
-      <li @click="if (isMobile) isNavOpen = false;" class="nav__list-item">
+      <li
+        v-if="authStore.checkPrivilege('GroupManager')"
+        @click="if (isMobile) isNavOpen = false;"
+        class="nav__list-item"
+      >
         <RouterLink to="/groups" class="nav__link">
           <Users class="icon" />
           <span>{{ t("groups") }}</span>
         </RouterLink>
       </li>
-      <li @click="if (isMobile) isNavOpen = false;" class="nav__list-item">
+      <li
+        v-if="authStore.checkPrivilege('ScheduleCoordinator')"
+        @click="if (isMobile) isNavOpen = false;"
+        class="nav__list-item"
+      >
         <RouterLink to="/schedule" class="nav__link">
           <ListOl class="icon" />
           <span>{{ t("schedule") }}</span>
         </RouterLink>
       </li>
-      <li @click="if (isMobile) isNavOpen = false;" class="nav__list-item">
+      <li
+        v-if="authStore.checkPrivilege('SuperAdmin')"
+        @click="if (isMobile) isNavOpen = false;"
+        class="nav__list-item"
+      >
         <RouterLink to="/users" class="nav__link">
           <User class="icon" />
           <span>{{ t("users") }}</span>

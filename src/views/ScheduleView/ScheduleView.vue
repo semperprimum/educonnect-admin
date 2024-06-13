@@ -9,7 +9,7 @@
 
       <Multiselect
         v-model="selectedDepartment"
-        :placeholder="t('schedule')"
+        :placeholder="t('specialty')"
         track-by="id"
         label="title"
         class="select"

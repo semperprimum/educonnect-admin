@@ -1,10 +1,14 @@
 <template>
   <ModalBase :onClose="onClose">
     <h2 class="heading">{{ t("change_class") }}</h2>
-    <!-- <span class="info">Понедельник, 2 пара | Программирование | П-21-57к</span> -->
     <span class="info"
-      >{{ t(dayOfWeek.toLowerCase()) }}, 2 пара | Программирование |
-      П-21-57к</span
+      >{{ t(weekDays[weekIndex]) }}, {{ subject.number }} пара |
+      {{
+        subject.subjectId
+          ? getSubjectFromGroup(subject.subjectId)?.subject.title
+          : "Нет пары"
+      }}
+      | {{ groupStore?.group?.title || "" }}</span
     >
 
     <form @submit.prevent="onSubmit" class="form">
@@ -36,6 +40,12 @@ const { t } = useI18n();
 const groupStore = useGroupStore();
 const selectedTeacherSubject: Ref<GroupSubject | null> = ref(null);
 
+const getSubjectFromGroup = (teacherSubjectId: number) => {
+  if (!groupStore.group) return;
+
+  return groupStore.group.subjects.find((el) => el.id === teacherSubjectId);
+};
+
 const customLabel = (subject: GroupSubject) => {
   return `${subject.subject.title} - ${subject.teacher.fio}`;
 };
@@ -46,7 +56,7 @@ const onSubmit = async () => {
   const groupId = groupStore.group?.id;
   await groupStore.changeSchedule(
     groupId,
-    props.date,
+    props.weekIndex + 1,
     props.subject.number,
     selectedTeacherSubject.value?.id,
   );
@@ -54,11 +64,19 @@ const onSubmit = async () => {
   props.onClose();
 };
 
+const weekDays: string[] = [
+  "monday",
+  "tuesday",
+  "wednesday",
+  "thursday",
+  "friday",
+  "saturday",
+];
+
 const props = defineProps<{
   onClose: () => void;
   subject: Subject;
-  dayOfWeek: string;
-  date: string;
+  weekIndex: number;
 }>();
 </script>
 

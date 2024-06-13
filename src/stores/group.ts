@@ -2,7 +2,8 @@ import axios from "axios";
 import { defineStore } from "pinia";
 import { useAuthStore } from "./auth";
 import { ref, type Ref } from "vue";
-import type { Group, ScheduleDay } from "@/types";
+import type { Group } from "@/types";
+import type { Subject as GroupSubject } from "@/types";
 
 const baseUrl = import.meta.env.VITE_API_BASE_URL;
 
@@ -12,7 +13,7 @@ export const useGroupStore = defineStore("group", () => {
   const groups: Ref<Group[]> = ref([]);
   const group: Ref<GroupInfo | null> = ref(null);
   const isLoading: Ref<boolean> = ref(false);
-  const schedule: Ref<ScheduleDay[]> = ref([]);
+  const schedule: Ref<GroupSubject[][]> = ref([]);
 
   const getGroups = async () => {
     try {
@@ -243,7 +244,7 @@ export const useGroupStore = defineStore("group", () => {
       if (response.status !== 200) {
         throw new Error("Error fetching group schedule");
       } else {
-        schedule.value = response.data.schedule;
+        schedule.value = response.data.data;
       }
     } catch (e) {
       console.error(e);
@@ -252,19 +253,42 @@ export const useGroupStore = defineStore("group", () => {
 
   const changeSchedule = async (
     groupId: number,
-    date: string,
+    dayWeek: number,
     number: number,
     subjectId: number,
   ) => {
     try {
       const response = await axios.post(
         `${baseUrl}/adminPanel/group/${groupId}/schedule/change`,
-        { date, number, subjectId },
+        { dayWeek, number, subjectId },
+        { headers },
+      );
+
+      if (response.status !== 201) {
+        throw new Error("Error changing schedule");
+      } else {
+        await getGroupInfoById(groupId);
+        await getGroupSchedule(groupId);
+      }
+    } catch (e) {
+      console.error(e);
+    }
+  };
+
+  const removeSubjectFromSchedule = async (
+    groupId: number,
+    dayWeek: number,
+    number: number,
+  ) => {
+    try {
+      const response = await axios.post(
+        `${baseUrl}/adminPanel/group/${groupId}/schedule/remove`,
+        { dayWeek, number },
         { headers },
       );
 
       if (response.status !== 200) {
-        throw new Error("Error changing schedule");
+        throw new Error("Error removing subject from schedule");
       } else {
         await getGroupInfoById(groupId);
         await getGroupSchedule(groupId);
@@ -292,6 +316,7 @@ export const useGroupStore = defineStore("group", () => {
     removeSubject,
     getGroupSchedule,
     changeSchedule,
+    removeSubjectFromSchedule,
   };
 });
 

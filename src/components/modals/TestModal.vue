@@ -7,12 +7,9 @@
 <script lang="ts" setup>
 import ModalBase from "@/components/ModalBase.vue";
 
-const props = defineProps({
-  onClose: {
-    type: Function,
-    required: true,
-  },
-});
+defineProps<{
+  onClose: () => void;
+}>();
 </script>
 
 <style lang="scss" scoped></style>

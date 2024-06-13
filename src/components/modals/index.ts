@@ -9,6 +9,7 @@ import MakeSubstitutionModal from "@/components/modals/MakeSubstitutionModal.vue
 import CreateEventModal from "@/components/modals/CreateEventModal.vue";
 import ChangeSubjectModal from "@/components/modals/ChangeSubjectModal.vue";
 import DeleteUserModal from "@/components/modals/DeleteUserModal.vue";
+import RemoveSubjectModal from "@/components/modals/RemoveSubjectModal.vue";
 
 export {
   TestModal,
@@ -22,4 +23,5 @@ export {
   CreateEventModal,
   ChangeSubjectModal,
   DeleteUserModal,
+  RemoveSubjectModal,
 };

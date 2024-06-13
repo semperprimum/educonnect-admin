@@ -2,6 +2,7 @@
   <ContainerWithHeading :heading="getDynamicHello() + '!'">
     <div class="links-grid">
       <LinkTile
+        v-if="authStore.checkPrivilege('Operator')"
         accent-color="#B3E277"
         :icon="Table"
         :title="t('substitutions_control')"
@@ -9,6 +10,7 @@
         to="/substitutions"
       />
       <LinkTile
+        v-if="authStore.checkPrivilege('GroupManager')"
         accent-color="#F97316"
         :icon="Users"
         :title="t('groups')"
@@ -16,6 +18,7 @@
         to="/groups"
       />
       <LinkTile
+        v-if="authStore.checkPrivilege('ScheduleCoordinator')"
         accent-color="var(--clr-red-500)"
         :icon="ListOl"
         :title="t('schedule')"
@@ -23,6 +26,7 @@
         to="/schedule"
       />
       <LinkTile
+        v-if="authStore.checkPrivilege('SuperAdmin')"
         accent-color="#3B82F6"
         :icon="User"
         :title="t('users')"
@@ -45,8 +49,10 @@ import ContainerWithHeading from "@/components/ContainerWithHeading.vue";
 import LinkTile from "@/views/HomeView/components/LinkTile.vue";
 import { Table, Users, ListOl, User, CalendarDays } from "@/assets/icons";
 import { useI18n } from "vue-i18n";
+import { useAuthStore } from "@/stores/auth";
 
 const { t } = useI18n();
+const authStore = useAuthStore();
 
 const getDynamicHello = () => {
   const today = new Date();

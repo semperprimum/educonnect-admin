@@ -28,16 +28,62 @@ export interface User {
   group: string | null;
 }
 
-export interface ScheduleDay {
-  dayOfWeek: string;
-  date: string;
-  subjects: Subject[];
+export interface Subject {
+  id?: number;
+  groupId?: number;
+  subjectId?: number;
+  subgroup?: string;
+  number: number;
+  dayWeek?: number;
 }
 
-export interface Subject {
+export interface SubstitutionRequest {
+  id: number;
+  groupId: number;
+  date: string;
+  subjectId: number;
   number: number;
-  subgroup?: string;
-  subject?: string;
-  teacher?: string;
-  auditorium?: number;
+  subgroup: string;
+  reason: string;
+  subject: SubstitutionSubject;
+  group: SubstitutionGroup;
+}
+
+export interface SubstitutionSubject {
+  id: number;
+  userTeacherId: number;
+  subjectId: number;
+  teacherSubjectId: number;
+  teacher_subject: SubstitutionTeacherSubject;
+}
+
+export interface SubstitutionTeacherSubject {
+  id: number;
+  userTeacherId: number;
+  subjectId: number;
+  teacher: SubstitutionTeacher;
+}
+
+export interface SubstitutionTeacher {
+  id: number;
+  fio: string;
+  auditoriaId: number;
+  auditorium: {
+    id: number;
+    number: number;
+  };
+}
+
+export interface SubstitutionGroup {
+  id: number;
+  title: string;
+  departmentId: number;
+  userTeacherId: number;
+  color: string;
+}
+
+export interface FormattedSubstitutionRequests {
+  [key: string]: {
+    [key: string]: SubstitutionRequest[];
+  };
 }

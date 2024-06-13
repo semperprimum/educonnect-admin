@@ -65,6 +65,7 @@ let selectedCurator: Ref<{ fio: string; id: number } | null> = ref(null);
 
 onMounted(async () => {
   await groupStore.getGroupInfoById(+currentRoute.params.id);
+  await generalStore.fetchTeacherSubjects();
 
   if (groupStore.group?.specialization) {
     selectedSpecialization.value = groupStore.group.specialization;

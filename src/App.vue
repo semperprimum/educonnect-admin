@@ -10,8 +10,8 @@ import ModalWrapper from "@/components/ModalWrapper.vue";
 import AppTemplate from "@/components/AppTemplate.vue";
 import { onMounted } from "vue";
 import { useGeneralStore } from "./stores/general";
-import { useI18n } from "vue-i18n";
 import { useAuthStore } from "./stores/auth";
+import { useI18n } from "vue-i18n";
 
 const generalStore = useGeneralStore();
 const authStore = useAuthStore();
@@ -26,7 +26,6 @@ onMounted(async () => {
     await generalStore.fetchSpecializations();
     await generalStore.fetchTeachers();
     await generalStore.fetchSubjects();
-    await generalStore.fetchTeacherSubjects();
   }
 });
 </script>
